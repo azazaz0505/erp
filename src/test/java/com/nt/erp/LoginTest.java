@@ -1,4 +1,4 @@
-package com.nt.erp.erp;
+package com.nt.erp;
 
 import java.util.List;
 

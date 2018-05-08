@@ -1,6 +1,6 @@
 server:
-  port: 8080
-
+  port: 48080
+  servlet-path: /erp
 spring:
     datasource:
         name: test
@@ -24,8 +24,8 @@ spring:
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
 mybatis:
-  mapper-locations: classpath:com/nt/erp/dao/*.xml
-  type-aliases-package: com.winter.model
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.nt.erp.model
 
 #pagehelper分页插件
 pagehelper:
