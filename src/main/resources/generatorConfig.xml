@@ -48,7 +48,7 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table schema="nrerp" tableName="LOGIN" domainObjectName="Login" enableCountByExample="false"
+        <table schema="nterp" tableName="INFOS" domainObjectName="Info" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
     </context>
