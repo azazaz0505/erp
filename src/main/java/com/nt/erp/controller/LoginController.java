@@ -1,8 +1,12 @@
 package com.nt.erp.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import nari.mip.card.utils.StringEncryptUtil;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.bean.LoginBean;
@@ -46,6 +51,12 @@ public class LoginController {
      
         String name = loginBean.getLoginAccount();
         String passwd = loginBean.getLoginPasswd();
+        
+        passwd = StringEncryptUtil.md5(passwd);
+        
+        //生成唯一主键
+        //String id = UUID.randomUUID().toString().replaceAll("-", "");
+        
         List<Login> list = loginMapper.selectAll();
         Map<String, String> maps = new HashMap<String, String>();
         if(CollectionUtils.isNotEmpty(list))
@@ -81,8 +92,13 @@ public class LoginController {
         
         json.put("retmsg", "成功");
         json.put("retcode", "1");
+        json.put("name", name);
+        json.put("tokenId", StringEncryptUtil.Encrypt(new Date().toString()));
         return json;
     }
+    
+   
+    
 }
 
 

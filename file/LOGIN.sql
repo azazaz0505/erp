@@ -22,6 +22,6 @@ DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `loginaccount` varchar(30) NOT NULL,
   `loginpasswd` varchar(255) DEFAULT NULL,
-  `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
+  `login_uuid` varchar(125),
+  PRIMARY KEY (`loginaccount`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;

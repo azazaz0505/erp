@@ -1,18 +1,18 @@
 package com.nt.erp.model;
 
 public class Login {
-    private Integer id;
+    private String login_uuid;
 
     private String loginaccount;
 
     private String loginpasswd;
 
-    public Integer getId() {
-        return id;
+    public String getId() {
+        return login_uuid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String login_uuid) {
+        this.login_uuid = login_uuid;
     }
 
     public String getLoginaccount() {

@@ -17,12 +17,13 @@ import com.nt.erp.dao.InfoMapper;
 import com.nt.erp.model.Info;
 
 @RestController
+
 public class InfoController {
 
     @Autowired
     private InfoMapper infoMapper;
 
-    @RequestMapping(value = "/info", method = RequestMethod.POST)
+    @RequestMapping(value = "/info", method = RequestMethod.POST,produces = "text/plain; charset=utf-8")
     public JSONObject info(@RequestBody @Validated InfoBean infoBean, BindingResult bindingResult) {
 
         JSONObject json = new JSONObject();
@@ -46,5 +47,6 @@ public class InfoController {
         json.put("retcode", "1");
         return json;
     }
+
 
 }
