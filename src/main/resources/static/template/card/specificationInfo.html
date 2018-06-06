@@ -1,0 +1,177 @@
+<section>
+    <p class="OwnerManage"><span>标准规范</span></p>
+    <div class="row add-search">
+        <form class="col-xs-8" id="configForm">
+            <ul class="list-inline">
+                <li>
+                    <button ng-click="toSearch()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span> 查询
+                    </button>
+                </li>
+            </ul>
+        </form>
+        <div class="col-xs-4 btn-group">
+            <button ng-click="saveOrUpdata(-1)" class="btn btn-primary" style="float: right">
+                <span class="glyphicon glyphicon-plus"></span>添加标准规范
+            </button>
+        </div>
+    </div>
+
+    <!--列表-->
+    <div class="container list-box clearfix">
+        <table class="col-xs-12 table-condensed">
+            <thead>
+            <tr>
+                <th>
+                    <div class="col-xs-1 text-center"><p>序号</p></div>
+                </th>
+                <th>
+                    <div class="col-xs-1 text-center"><p>ID</p></div>
+                </th>
+                <th>
+                    <div class="col-xs-1 text-center"><p>父ID</p></div>
+                </th>
+                <th>
+                    <div class="col-xs-2 text-center"><p>标题</p></div>
+                </th>
+                <th>
+                    <div class="col-xs-2 text-center"><p>内容</p></div>
+                </th>
+                <th>
+                    <div class="col-xs-2 text-center"><p>类型</p></div>
+                </th>
+                <th>
+                    <div class="col-xs-1 text-center"><p>时间</p></div>
+                </th>
+                <th>
+                    <div class="col-xs-1 text-center"><p>操作</p></div>
+                </th>
+            </tr>
+
+            </thead>
+            <tbody class="row" ng-repeat="data in datalist">
+            <tr>
+                <td>{{$index+1}}</td>
+                <td>{{data.uuid}}</td>
+                <td>{{data.parentUuid}}</td>
+                <td>{{data.title}}</td>
+                <td>{{data.content}}</td>
+                <td>{{data.type}}</td>
+                <td>{{data.publishTime}}</td>
+                <td>
+                    <p class="bt-span">
+                        <span title="编辑" ng-click="saveOrUpdata($index)" class="glyphicon glyphicon-pencil"></span>
+                        <span title="查看" ng-click="detail($index)" class="glyphicon glyphicon-list-alt"></span>
+                        <span title="删除" ng-click="deleteData($index)" class="glyphicon glyphicon-remove-circle"></span>
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--分页控件-->
+    <div class="pagination-list">
+        <ul uib-pagination id="pagination" ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage"
+            max-size="maxSize"
+            class="pagination-sm"
+            boundary-links="true" num-pages="numPages"></ul>
+        <pre>页数: {{currentPage}} / {{numPages}}</pre>
+    </div>
+    <!--分页控件结束-->
+    <!--修改配置-->
+    <div class="modal fade" id="configEdit">
+        <div class="col-md-12">
+            <div class="orgDetail-edit">
+                <div class="row">
+                    <div class="col-xs-6">{{title}}</div>
+                    < div class="col-xs-6 text-right bt-span">
+                    <span class="remove" data-dismiss="modal">&times;</span>
+                </div>
+            </div>
+            <div class="orgAdd-body">
+                <input type="hidden" ng-model="sysInfoTemp.sysuuid">
+                <div class="row">
+                    <div class="col-xs-4 text-left t">卡片ID</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="cardid" type="text" name="cardid" ng-model="cardInfoTemp.cardid">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-left t">卡片生成时间</div>
+                    <div class="col-xs-8">
+                        <div class="controls input-append date form_datetime" data-date="2017-07-11T05:25:07Z">
+                            <input class="isDisabled" id="cardtime" type="text" name="cardtime"
+                                   ng-model="cardInfoTemp.cardtime">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4 text-left t">卡片标题</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="cardtitle" type="text" name="cardtitle"
+                               ng-model="cardInfoTemp.cardtitle">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-left t">卡片内容</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="cardcontent" type="text" name="cardcontent"
+                               ng-model="cardInfoTemp.cardcontent">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-left t">卡片图片url</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="cardurl" type="text" name="cardurl"
+                               ng-model="cardInfoTemp.cardurl">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-left t">卡片类型</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="cardtype" type="text" name="cardtype"
+                               ng-model="cardInfoTemp.cardtype">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4 text-left t">卡片所属应用</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="appid" type="text" ng-model="cardInfoTemp.appid">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-4 text-left t">应用包名</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="pkgname" type="text" name="pkgname"
+                               ng-model="cardInfoTemp.pkgname">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-left t">应用入口</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="entryactivity" type="text" name="entryactivity"
+                               ng-model="cardInfoTemp.entryactivity">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 text-left t">关联用户</div>
+                    <div class="col-xs-8">
+                        <input class="isDisabled" id="username" type="text" name="username"
+                               ng-model="cardInfoTemp.username">
+                    </div>
+                </div>
+            </div>
+            <div class="row orgAdd-foot">
+                <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
+                <button id="saveBtn" ng-click="submit()" class="btn  btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--修改配置-->
+</section>

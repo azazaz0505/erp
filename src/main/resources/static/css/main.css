@@ -1,0 +1,550 @@
+/*主要定义公共样式*/
+body {
+	margin: 0;
+	font-family: "Microsoft YaHei";
+}
+
+.hx-mainBody {
+	position: relative;
+	width: 1800px;
+	height: 700px;
+	margin: 0 auto;
+}
+
+.hx-mainBody-header {
+	display: flex;
+	align-items: center;
+	height: 65px;
+	font-size: 22px;
+	/* color: #ffffff; */
+	justify-content: space-between;
+	background-color: #3887dd;
+}
+
+.hx-mainBody-userName {
+	border: none;
+	padding: 0 12px;
+	font-size: 12px;
+}
+
+.hx-mainBody-headerTitleImg {
+	padding-left: 35px;
+	padding-right: 12px;
+}
+
+.hx-mainBody-hr {
+	margin: 0;
+	border-top: 1px solid #d2d2d2;
+	height: 0;
+}
+
+.hx-paletteLeft {
+	width: 200px;
+	height: 850px;
+	border-right: 1px solid #d2d2d2;
+	border-left: 1px solid #d2d2d2;
+	background-color:#1c2226;
+}
+
+.hx-paletteLeft-li {
+	cursor: pointer;
+	border-bottom: 1px solid #d2d2d2;
+}
+
+.hx-paletteItem {
+    /* padding: 0 24px; */ /*为了调整向下箭头的位置故注释掉和hx-paletteName的margin冲突 #d2d2d2*/
+	height: 30px;
+	display: flex;
+	align-items: center;
+    /* border-bottom: 1px solid #d2d2d2; */
+	position: relative;
+	/* background-color: #f1f1f1 */
+}
+
+/*左侧菜单栏的颜色*/
+li a {
+	    display: block;
+	    color: #000;
+	    padding: 8px 16px;
+	    text-decoration: none;
+}
+	
+li a {
+	    text-align: center;
+	    background-color:white;
+	    color:black;
+}
+
+li a:hover {
+	    background-color: #555;
+	    color: white;
+}  
+
+/* li a:last-child {
+    	border-right: 1px solid #bbb;
+    	border-bottom: 1px solid #d2d2d2;
+} */
+	
+ /* li a.active {
+	    background-color: #555;
+	    color: white;
+} */
+	
+.hx-content-padding {
+	padding:0 0 0 45px;
+	color:#b9c7cf;
+}
+
+.hx-palette-Item {
+	height: 42px;
+	padding-left: 55px !important;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #d2d2d2;
+	position: relative
+}
+
+.hx-palette-list {
+	display: none;
+}
+
+.hx-paletteFooter {
+	position: absolute;
+	bottom: -85px;
+	left: 5px;
+	width: 46px;
+	height: 20px;
+	no-repeat: center;
+	background-size: cover;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+	line-height: 18px;
+	background: #1866b1;
+	color: #fff;
+	text-align: right;
+	padding-right: 5px;
+	font-size: 28px;
+	z-index: 9;
+}
+
+.hx-paletteFooter-t {
+	left: 5px;
+	width: 46px;
+	height: 20px;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	line-height: 18px;
+	background: #1866b1;
+	color: #fff;
+	text-align: right;
+	padding-right: 5px;
+	font-size: 28px;
+	z-index: 9;
+}
+/*.hx-paletteFooter-t:after {
+	content:"\25BA";
+}
+.hx-paletteFooter:after {
+	content:"\25C4";
+}*/
+	/*菜单栏是否显示样式*/
+.aside-t {
+	display: none
+}
+
+.hx-paletteInner-t {
+	left: 5px !important;
+	/* width: 1339px !important; */
+	width: 1450px !important;
+	
+}
+
+.home-item-t {
+	width: 209px !important;
+}
+
+.hx-paletteName {
+	/*margin-left: 50px;
+	font-size:15px;
+	*/
+	/* margin-left: 30%; */
+	/* padding:0 5px; */
+	/* font-weight:bold; */
+	font-size:15px;
+	color:#b9c7cf;
+}
+/*右边窗体的样式，注意控制high，避免浏览器出现滚动条*/
+.hx-paletteInner {
+	position: absolute;
+	left: 208px;
+	top: 62px;
+	height: 850px;
+	width: 1550px;
+}
+/*分页页数显示位置控制,visibility:hidden;*/
+.pagination-list pre {
+	position: absolute;
+	left: 0px;
+	bottom: 10px;
+	width: 100%;
+	text-align: right;
+	padding-right: 10px;
+}
+/*分页标签组显示位置控制*/
+.pagination-list ul {
+	position: absolute;
+	right: 0px;
+	bottom: 11px;
+}
+/*右边窗口标题样式*/
+.OwnerManage {
+	height: 42px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0;
+}
+/*首页模块展示样式*/
+.home {
+	width: 100%;
+	height: 510px;
+	border: 1px solid #d2d2d2;
+	border-bottom: none;
+	background-color: #f4f4f4
+}
+
+.home-item-total {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.home-item {
+	width: 212px;
+	height: 210px;
+	background-color: #ffffff;
+	margin: 12px 0 0 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 0 #dbdbdb;
+}
+
+.home-item-num {
+	font-size: 36px;
+	color: #fd8c00;
+	margin: 0;
+}
+
+.home-item-font {
+	font-size: 14px;
+	color: #333333;
+}
+
+#indicatorContainerWrap {
+	position: relative;
+	display: inline-block;
+}
+
+.rad-cntnt {
+	position: absolute;
+	display: table;
+	vertical-align: middle;
+	text-align: center;
+	width: 100%;
+	top: 63%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	font-size: 14px;
+	line-height: 24px;
+}
+/*重写了bootstrap的按钮颜色*/
+.btn-primary {
+	background-color: #4ba3ff !important;
+	border-color: #4ba3ff !important;
+}
+
+.btn-primary:hover {
+	background-color: #2197ef !important;
+	border-color: #3c82cc !important;
+}
+/*列表操作按钮样式*/
+.bt-span {
+	color: #fff;
+	font-size: 12px;
+}
+
+.bt-span span {
+	color: #4ba3ff;
+	width: 20px;
+	text-align: center;
+	margin-right: -3px;
+	cursor: pointer;
+	vertical-align: middle;
+}
+/*.bt-span span:hover {
+	background-color: #4ba3ff;
+	color: #fff;
+}*/
+	/*搜索条件样式*/
+.add-search {
+	margin-bottom: 10px;
+}
+
+.add-search ul input,
+.add-search ul select {
+	font-size: 12px;
+	padding-left: 7px;
+	height: 34px;
+	line-height: 34px;
+	width: 130px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #fff;
+}
+
+.add-search .search-box {
+	border: 1px solid #ccc;
+	border-radius: 30px;
+}
+
+.add-search .search-box > input {
+	font-size: 12px;
+	padding-left: 20px;
+	height: 34px;
+	line-height: 34px;
+	width: 84%;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	-webkit-appearance: none;
+}
+
+.add-search .search-box > span {
+	float: right;
+	font-size: 16px;
+	margin-top: 9px;
+	margin-right: 14px;
+	cursor: pointer;
+	color: #a0a0a0;
+}
+
+.add-search .search-box > span.s {
+	color: #4ba3ff;
+}
+/*不带遮罩的添加窗口的样式*/
+.orgDetail-add {
+	border: 1px solid #4ba3ff;
+	border-radius: 6px;
+	box-shadow: 3px 3px 16px #D2CFD6;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+/*编辑窗口样式*/
+.orgDetail-edit {
+	border: 1px solid #4ba3ff;
+	border-radius: 6px;
+	box-shadow: 3px 3px 16px #D2CFD6;
+	margin-bottom: 20px;
+	overflow: hidden;
+	background-color: white;
+	margin:65px auto;/*设置编辑框为向下65px，左右居中*/
+	width: 600px;
+}
+/*带遮罩的添加窗口的样式*/
+.orgDetail-add-new {
+	border: 1px solid #4ba3ff;
+	border-radius: 6px;
+	box-shadow: 3px 3px 16px #D2CFD6;
+	margin-bottom: 20px;
+	overflow: hidden;
+	background-color: white;
+	position: absolute;
+	/*绝对定位*/
+	top: 100px;
+	left: 226px;
+	min-width: 600px;
+}
+/*使用属性选择器使用同样的div内部样式*/
+div[class^="orgDetail"] > div {
+	padding: 0 40px;
+	background: #fff !important;
+}
+
+div[class^="orgDetail"] > div:first-child {
+	padding: 0 12px 0 12px;
+	background-color: #f5f5f5 !important;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+}
+
+div[class^="orgDetail"] > div:first-child > div:nth-child(1) {
+	font-weight: 700;
+}
+/*编辑框按钮背景色样式*/
+.orgAdd-foot {
+	padding: 10px !important;
+	text-align: center;
+	background-color: #f5f5f5;
+}
+
+.orgAdd-foot button {
+	padding: 5px 20px !important;
+}
+
+.orgAdd-foot button:first-child {
+	margin-right: 10px !important;
+}
+
+.orgAdd-body {
+	overflow-y: auto;
+	padding-top: 30px !important;
+	height: 400px;/*设置编辑展示框高度，超出的则显示滚动条*/
+	font-size: 12px;
+}
+
+.orgAdd-body b {
+	color: #4ba3ff;
+	margin-right: 5px;
+	font-weight: normal;
+}
+
+.orgAdd-body > div {
+	margin-bottom: 20px;
+}
+
+.orgAdd-body > div > div input,
+.orgAdd-body > div > div select {
+	padding: 0 15px;
+}
+
+.orgAdd-body > div > div input[type='text']:focus,
+.orgAdd-body > div > div input[type='password']:focus,
+.orgAdd-body > div > div select:focus {
+	border: 1px solid #4ba3ff !important;
+}
+
+.orgAdd-body > div > div input[type='text'].read {
+	cursor: not-allowed !important;
+}
+
+.orgAdd-body > div > div input[type='text'].read:focus {
+	border: 1px solid #ccc !important;
+}
+
+.orgAdd-body > div > div input[type='text'],
+.orgAdd-body > div > div input[type='password'],
+.orgAdd-body > div > div select {
+	width: 86%;
+	height: 34px;
+	line-height: 34px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.addUser > div > div input[type='text'],
+.addUser > div > div input[type='password'],
+.addUser > div > div select {
+	width: 100%;
+}
+/*列表样式*/
+	/*.list-box {
+	height:380px;
+	position:absolute;*/
+	/*绝对定位，避免出格，防止滚动条完全靠边*/
+	/* left: 0px;*/
+	/*重新定位，避免部分情况左边太靠左*/
+	/* overflow:hidden;
+	overflow-y:auto;
+}*/
+	/*列表样式*/
+.list-box {
+	height: 700px;
+	width: 1550px;
+	position: absolute;
+	/*绝对定位，避免出格，防止滚动条完全靠边*/
+	left: 0px;
+	/*重新定位，避免部分情况左边太靠左*/
+	padding: 0px;
+	overflow: hidden;
+	overflow-y: auto;
+	overflow-x: auto;
+}
+/*th内容不换行*/
+.list-box th {
+	background-color: #e2e7ee !important;
+	word-break: keep-all;
+	white-space: nowrap;
+	border:solid #fff;
+	border-width: 0px 1px 1px 0px;
+}
+
+/*td内容不换行*/
+.list-box td {
+	word-break: keep-all;
+	white-space: nowrap;
+	border: solid #fff;
+	border-width: 0px 1px 1px 0px;
+	max-width: 230px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/*用来将过长的文字显示为...*/
+}
+
+/*鼠标指向后背景色变化*/
+.list-box tr:hover {
+	background-color: #A5D1FF !important;
+}
+/*list隔行变色*/
+.list-box .row:nth-child(2n+1) tr {
+	background-color: #eff5fd;
+}
+
+/*.list-box .hover {
+	background-color: #A5D1FF !important;
+	cursor: pointer;
+}
+.list-box .row {
+	height: 34px;
+	line-height: 34px;
+	border-top: 1px solid #e2e7ee;
+}
+.list-box .row div {
+	padding: 0;
+}
+.list-box .row div p {
+	margin: 0 1px;
+	height: 34px !important;
+	line-height: 34px !important;
+	overflow: hidden;
+}
+.list-box .row div p .g + .g:before {
+	content: ", ";
+}
+.list-box .row:first-child {
+	margin-bottom: 3px;
+	border-top: 1px solid #eff5fd;
+}
+.list-box .row:first-child div {
+	padding: 0;
+}
+.list-box .row:first-child div p {
+	background-color: #e2e7ee !important;
+}
+.list-box .row:last-child {
+	border-bottom: 1px solid #e2e7ee;
+}
+.list-box .row:nth-child(2n+1) div {
+	padding: 0;
+}
+.list-box .row:nth-child(2n+1) div p {
+	background-color: #eff5fd;
+}
+.list-box .row:nth-child(2n+2) div {
+	padding: 0;
+}
+.list-box .row:nth-child(2n+2) div p {
+	background-color: #fff;
+}*/

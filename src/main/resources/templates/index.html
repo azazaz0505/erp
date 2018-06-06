@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>ERP纺织系统</title>
+    <link href="/image/logoimg.png" rel="icon"></link><!--电网logo-->
+
+    <script type="text/javascript" src="/lib/jquery-v3-2-1.js"></script><!--JQuery引入-->
+    <script type="text/javascript" src="/lib/angular-1.5.8.js"></script><!--angularjs引入-->
+    <script type="text/javascript" src="/lib/angular-ui-router.js"></script><!--路由器功能使用-->
+    <script type="text/javascript" src="/lib/angular-ui-bootstrap.js"></script><!--分页功能使用-->
+    <script type="text/javascript" src="/lib/bootStrap/js/bootstrap.js"></script><!--分页功能使用-->
+    <script type="text/javascript" src="/lib/layui/layui.js"></script><!--经典模块化前端框架-->
+    <script type="text/javascript" src="/lib/layer/layer/layer.js"></script><!--弹出层组件-->
+    <script type="text/javascript" src="/lib/jquery-datepair-master/jquery.timepicker.js"></script><!--time选择-->
+    <script type="text/javascript" src="/lib/echarts.js"></script><!--time选择-->
+    <script type="text/javascript" src="/lib/UEditor/ueditor.config.js"></script><!--富文本编辑器-->
+    <script type="text/javascript" src="/lib/UEditor/ueditor.all.min.js"></script><!--富文本编辑器-->
+    <script type="text/javascript" src="/lib/UEditor/lang/zh-cn.js"></script><!--富文本编辑器-->
+    <script type="text/javascript" src="/lib/echarts.js"></script><!--time选择-->
+	<script type="text/javascript" src="/lib/bootStrap/js/bootstrap-datetimepicker.js"></script><!--日期选择-->
+    <script type="text/javascript" src="/lib/bootStrap/js/bootstrap-datetimepicker.zh-CN.js"></script><!--日期选择-->
+    
+    <link href="/lib/bootStrap/css/bootstrap.min.css" rel="stylesheet"></link><!--bootstrap样式-->
+    <link href="/lib/layui/layui.css" rel="stylesheet"></link><!--经典模块化前端框架样式-->
+    <link href="/lib/jquery-datepair-master/jquery.timepicker.css" rel="stylesheet"></link><!--time选择-->
+    <link href="/css/autoMatch.css" rel="stylesheet"></link><!--自动匹配样式-->
+    <link href="/css/main.css" rel="stylesheet"></link><!--主样式-->
+    <link href="/css/settings.css" rel="stylesheet"></link><!--自定义样式设置-->
+	<link href="/lib/bootStrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet"></link><!--bootstrap样式-->
+	<link href="/lib/iconfont/iconfont.css" rel="stylesheet"></link><!--图标字体-->
+	
+
+</head>
+<body ng-controller="index">
+<div class="hx-mainBody">
+    <header class="hx-mainBody-header">
+        <div class="text-left">
+        	<img src="/image/logo.png" class="img-rounded" style="padding:0 0 0 10px "></img>
+            <span style="color:#ffffff">BETTER</span>
+        </div>
+        <div class="text-right">
+            <span style="font-size:15px" class="glyphicon glyphicon-user"></span>
+            <span style="font-size:15px;padding:0 10px 0 0">您好,{{name}}!</span>
+            
+            <button type="button" ng-click="getout()" style="font-size:14px;padding:0 10px;" class="btn btn-default btn-sm">
+            	<span class="glyphicon glyphicon-off"></span> 注消
+            </button>
+            <span>&nbsp;</span>
+        </div>
+    </header>
+    <hr class="hx-mainBody-hr"> </hr>
+    <aside ng-class="{'aside-t':reverse}">
+        <!-- <ul class="list-unstyled hx-paletteLeft" id="hx-list"> -->
+        <ul class="list-unstyled hx-paletteLeft" id="hx-list">
+        
+            <li class="hx-paletteLeft-li">
+            	<p class="hx-paletteItem" data-toggle="collapse" data-parent="#hx-list" href="#collapseOne">
+	            		<span style="padding:8px 5px 0 60px;font-size:23px;color:#b9c7cf" class="iconfont icon-shengchanshebeiguanli"></span>
+	            		<span class="hx-paletteName" >生产</span>
+	            		<span class="glyphicon glyphicon-chevron-down hx-content-padding" ></span> 
+	            </p> 
+				<div id="collapseOne" class="collapse">
+	                <ul>
+	                    <li><a ui-sref="commServiceInfo">裁剪管理</a></li>
+	                    <li><a ui-sref="cardInfo">出错汇总</a></li>    
+	                </ul>
+                </div>
+           </li>
+           
+            <li class="hx-paletteLeft-li">
+                 <!--  <p ui-sref="cardInfo" class="hx-paletteItem">
+                    <span class="hx-paletteName">仓储</span>
+                  </p> -->
+               <p class="hx-paletteItem" data-toggle="collapse" data-parent="#hx-list" href="#collapseTwo">
+               		<span style="padding:8px 5px 0 60px;font-size:23px;color:#b9c7cf" class="iconfont icon-cangchu"></span>
+            		<span class="hx-paletteName">仓储</span>
+            		<span class="glyphicon glyphicon-chevron-down right hx-content-padding"></span>
+            	</p>
+            	<div id="collapseTwo" class="collapse">
+	                <ul>
+	                    <li><a ui-sref="commServiceInfo">库位管理</a></li>
+	                    <li><a ui-sref="cardInfo">面辅料入库</a></li>
+	                    <li><a ui-sref="cardInfo">面辅料出库</a></li>
+	                </ul>
+                </div>
+              
+            </li>
+            
+            <li class="hx-paletteLeft-li">
+                 <!--  <p ui-sref="cardInfo" class="hx-paletteItem">
+                    <span class="hx-paletteName">仓储</span>
+                  </p> -->
+               <p class="hx-paletteItem" data-toggle="collapse" data-parent="#hx-list" href="#collapseThree">
+            		<span style="padding:8px 5px 0 60px;font-size:23px;color:#b9c7cf" class="iconfont icon-caiwu"></span>
+            		<span class="hx-paletteName">财务</span>
+            		<span class="glyphicon glyphicon-chevron-down right hx-content-padding"></span>
+            	</p> 
+            		
+            	<div id="collapseThree" class="collapse">
+	                <ul>
+	                    <li><a ui-sref="cardInfo">资金管理</a></li>
+	                    <li><a ui-sref="cardInfo">供应商往来</a></li>  
+	                </ul>
+                </div>           
+            </li>
+            
+        </ul>
+    </aside>
+    
+    <main class="hx-paletteInner" ng-class="{'hx-paletteInner-t':reverse}">
+         <div ui-view=""></div>
+    </main>
+</div>
+
+<!--菜单导航控制-->
+<script type="text/javascript" src="/js/controller.js"></script>
+
+<!-- 菜单导航 -->
+<script type="text/javascript" src="/js/index.js"></script>
+ 
+<!--卡片信息-->
+<script type="text/javascript" src="/template/card/js/cardInfo.js"></script>
+
+<!--接入服务信息-->
+<script type="text/javascript" src="/template/card/js/commServiceInfo.js"></script>
+
+<!--标准规范-->
+<script type="text/javascript" src="/template/card/js/specificationInfo.js"></script>
+
+<!--标准规范编辑-->
+<script type="text/javascript" src="/template/card/js/editSpecificationInfo.js"></script>
+
+</body>
+</html>

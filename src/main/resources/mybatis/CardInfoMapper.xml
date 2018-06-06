@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nari.mip.card.mapper.CardDao">
+
+    <!--查询卡片信息表-->
+    <select id="getCardInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT
+        T.cardId as "cardId" ,
+        T.cardName as "cardName",
+        T.cardTitle as "cardTitle" ,
+        T.cardContent as "cardContent",
+        'action=download-image'||'&amp;'||'fileid='|| T.cardUrl as "cardUrl",
+        T.appId as "appId",
+        T.pkgName as "pkgName",
+        T.entryActivity as "entryActivity",
+        T.userName as "mipUser",
+        T.cardType as "cardType",
+        T.intentJson as "intentJson" ,
+        T.cardUrl as "cardUrlUncode",
+        T.remark as "reMark",
+        TO_CHAR(T.CARDTIME,'yyyy-mm-dd hh24:mi:ss')AS "cardTime"
+        FROM
+        (
+        SELECT
+        ROWNUM AS rowno,
+        c.*
+         FROM dynamic_card c
+        <where>
+            <![CDATA[ AND ROWNUM <= #{currentPage} * #{count}]]>
+            AND (CARDCONTENT LIKE '%${blurInfo}%' or CARDTITLE LIKE '%${blurInfo}%' or USERNAME LIKE '%${mipuser}%')
+        </where> order by cardupdatetime desc
+        ) T
+        WHERE
+        <![CDATA[ T .rowno > (#{currentPage} -1 ) * #{count}]]>
+    </select>
+    
+    <!--查询接收服务信息表-->
+    <select id="getInsertServiceInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT * FROM T_SERVICE_INFO
+        WHERE 
+        SERVICEID = #{serviceid} AND
+        SERVICENAME = #{servicename} 
+    </select>
+    
+     <!--根据serverceid查询接收服务信息表-->
+    <select id="getServiceNameInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT servicename as "servicename" FROM T_SERVICE_INFO
+        WHERE 
+        SERVICEID = #{serviceid}
+    </select>
+
+    <select id="getCardInfoCount" parameterType="java.util.HashMap" resultType="nari.mip.card.model.Pagination">
+        SELECT COUNT(1) AS "totalItems"
+        FROM
+            dynamic_card
+        where 
+        	CARDCONTENT LIKE '%${blurInfo}%'
+    </select>
+    
+    <delete id ="deleteCardInfo" parameterType="java.util.HashMap" >
+    	DELETE FROM dynamic_card WHERE CARDID=#{cardid}
+    </delete>
+    
+    <update id="updateCardInfo" parameterType="java.util.HashMap">
+    	UPDATE dynamic_card  
+    	SET 
+    		CARDTITLE     = #{cardtitle},
+    		CARDCONTENT   = #{cardcontent},
+    		CARDURL       = #{cardurl},
+    		APPID         = #{appid},
+    		PKGNAME       = #{pkgname},
+    		ENTRYACTIVITY = #{entryactivity},
+    		USERNAME      = #{username},
+    		CARDTYPE      = #{cardtype},
+    		INTENTJSON	  = #{intentjson},
+    		REMARK		  = #{remark},
+    		CARDUPDATETIME = TO_DATE(#{cardupdatetime},'YYYY-MM-DD HH24:MI:SS')
+       	WHERE
+			CARDID        = #{cardid}
+			AND USERNAME = #{mipuser}
+    </update>
+
+	<insert id="setCardInfo" parameterType="java.util.HashMap">
+		insert into dynamic_card
+		(	CARDID,
+			CARDNAME,
+			CARDTITLE,
+			CARDCONTENT,
+			CARDURL,
+			APPID,
+			PKGNAME,
+			ENTRYACTIVITY,
+			USERNAME,
+			CARDTYPE,
+			INTENTJSON,
+			REMARK,
+			CARDTIME,
+			CARDUPDATETIME
+			)values
+		(	#{cardid},
+			#{cardname},
+			#{cardtitle},
+			#{cardcontent},
+			#{cardurl},
+			#{appid},
+			#{pkgname},
+			#{entryactivity},
+			#{username},
+			#{cardtype},
+			#{intentjson},
+			#{remark},
+			to_date(#{cardtime},'YYYY-MM-DD HH24:MI:SS'),
+			to_date(#{cardupdatetime},'YYYY-MM-DD HH24:MI:SS')
+			)
+	</insert>
+	
+	<!-- card的模糊查询 -->
+	<select id="getBlurCardInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		
+		select 
+			 T.cardId as "cardId" ,
+			 T.cardTitle as "cardTitle" ,
+			 T.cardContent as "cardContent",
+			 T.cardUrl as "cardUrl",
+			 T.appId as "appId",
+			 T.pkgName as "pkgName",
+			 T.entryActivity as "entryActivity",
+			 T.userName as "userName",
+			 T.cardType as "cardType",
+			 T.intentJson as "intentJson",
+			 TO_CHAR(T.CARDTIME,'yyyy-mm-dd hh24:mi:ss')AS "cardTime"
+		from 
+			dynamic_card T 
+		where  
+           T.cardcontent like  '%${blurInfo}%'  
+       
+	</select>
+	
+	
+	<!-- 工单根据关联应用id分组查询 -->
+	<select id="getWorkGroupCardInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		      
+      select 
+      	b.appid as "appId",
+      	b.cardtitle as "cardTitle",
+      	b.intentjson as "intentJson",
+      	a.name as "name",
+      	TO_CHAR(max(b.cardupdatetime),'yyyy-mm-dd hh24:mi:ss') as "cardUpdateTime", 
+      	'action=download-image'||'&amp;'||'fileid='|| d.store_path as "store_Path"
+      from 
+      	t_app_info a, dynamic_card b ,t_app_file c,t_media_content d 
+      where a.app_id = b.appid and
+      	a.app_id = c.app_id and
+      	c.file_tid=d.file_tid and 
+      	c.file_type= 1 
+      	group by b.appid ,a.name,d.store_path,b.cardtitle
+       
+	</select>
+	
+	
+	<!-- 手机端点击工单里面的卡片根据卡片ID查询 -->
+	 <select id="getWorkCardInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT
+        	T.cardId as "cardId" ,
+        	T.cardName as "cardName",
+        	T.cardTitle as "cardTitle" ,
+        	T.cardContent as "cardContent",
+        	T.cardUrl as "cardUrl",
+        	T.appId as "appId",
+        	T.pkgName as "pkgName",
+        	T.entryActivity as "entryActivity",
+        	T.userName as "userName",
+        	T.cardType as "cardType",
+        	T.intentJson as "intentJson",
+        	TO_CHAR(T.CARDTIME,'yyyy-mm-dd hh24:mi:ss')AS "cardTime"
+        FROM
+        (
+        SELECT
+        	ROWNUM AS rowno,
+        	c.*
+         FROM dynamic_card c
+        <where>
+            <![CDATA[ AND ROWNUM <= #{currentPage} * #{count}]]>
+            AND APPID = #{appId}
+        </where> order by cardupdatetime desc
+        ) T
+        WHERE
+        <![CDATA[ T .rowno > (#{currentPage} -1 ) * #{count}]]>
+    </select>
+    
+	<!-- 根据应用关联接口查询总记录数 -->
+	<select id="getWorkCardInfoCount" parameterType="java.util.HashMap" resultType="nari.mip.card.model.Pagination">
+        SELECT COUNT(1) AS "totalItems"
+        FROM
+            dynamic_card
+        where 
+        	APPID = #{appId}
+    </select>
+</mapper>
