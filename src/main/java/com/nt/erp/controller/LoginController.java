@@ -1,12 +1,8 @@
 package com.nt.erp.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
-import nari.mip.card.utils.StringEncryptUtil;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -52,7 +48,6 @@ public class LoginController {
         String name = loginBean.getLoginAccount();
         String passwd = loginBean.getLoginPasswd();
         
-        passwd = StringEncryptUtil.md5(passwd);
         
         //生成唯一主键
         //String id = UUID.randomUUID().toString().replaceAll("-", "");
@@ -93,11 +88,26 @@ public class LoginController {
         json.put("retmsg", "成功");
         json.put("retcode", "1");
         json.put("name", name);
-        json.put("tokenId", StringEncryptUtil.Encrypt(new Date().toString()));
         return json;
     }
     
-   
+    @RequestMapping(value = "/iniLogin", method = RequestMethod.GET)
+    public ModelAndView iniLogin() { //ModelAndView
+        ModelAndView mav = new ModelAndView();
+        //LOG.info("欢迎登陆支撑平台");
+        System.out.println("-----------------");
+        mav.setViewName("login");
+        return mav;
+        //return "login";
+    }
+    
+    @RequestMapping(value = "/iniIndex", method = RequestMethod.GET)
+    public ModelAndView iniIndex() {
+        ModelAndView mav = new ModelAndView();
+       // LOG.info("跳转：");
+        mav.setViewName("index");
+        return mav;
+    }
     
 }
 

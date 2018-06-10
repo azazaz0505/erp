@@ -23,7 +23,7 @@ public class InfoController {
     @Autowired
     private InfoMapper infoMapper;
 
-    @RequestMapping(value = "/info", method = RequestMethod.POST,produces = "text/plain; charset=utf-8")
+    @RequestMapping(value = "/info", method = RequestMethod.POST)
     public JSONObject info(@RequestBody @Validated InfoBean infoBean, BindingResult bindingResult) {
 
         JSONObject json = new JSONObject();
