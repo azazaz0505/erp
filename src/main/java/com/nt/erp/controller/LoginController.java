@@ -91,24 +91,6 @@ public class LoginController {
         return json;
     }
     
-    @RequestMapping(value = "/iniLogin", method = RequestMethod.GET)
-    public ModelAndView iniLogin() { //ModelAndView
-        ModelAndView mav = new ModelAndView();
-        //LOG.info("欢迎登陆支撑平台");
-        System.out.println("-----------------");
-        mav.setViewName("login");
-        return mav;
-        //return "login";
-    }
-    
-    @RequestMapping(value = "/iniIndex", method = RequestMethod.GET)
-    public ModelAndView iniIndex() {
-        ModelAndView mav = new ModelAndView();
-       // LOG.info("跳转：");
-        mav.setViewName("index");
-        return mav;
-    }
-    
 }
 
 
