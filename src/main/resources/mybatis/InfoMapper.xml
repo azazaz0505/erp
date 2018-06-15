@@ -26,6 +26,7 @@
     <result column="ssizenumber" property="ssizenumber" jdbcType="INTEGER" />
     <result column="orderdate" property="orderdate" jdbcType="DATE" />
     <result column="stylename" property="stylename" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
     <result column="styleid" property="styleid" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -40,7 +41,7 @@
       xlsizenumber, lsizeleft, lsizemodify, 
       lsizenumber, msizeleft, msizemodify, 
       msizenumber, ssizeleft, ssizemodify, 
-      ssizenumber, orderdate, stylename, 
+      ssizenumber, orderdate, stylename, color,
       styleid)
     values (#{id,jdbcType=INTEGER}, #{totalsizeleft,jdbcType=INTEGER}, #{totalsizemodify,jdbcType=INTEGER}, 
       #{totalsizenumber,jdbcType=INTEGER}, #{xxxlsizeleft,jdbcType=INTEGER}, #{xxxlsizemodify,jdbcType=INTEGER}, 
@@ -49,7 +50,7 @@
       #{xlsizenumber,jdbcType=INTEGER}, #{lsizeleft,jdbcType=INTEGER}, #{lsizemodify,jdbcType=INTEGER}, 
       #{lsizenumber,jdbcType=INTEGER}, #{msizeleft,jdbcType=INTEGER}, #{msizemodify,jdbcType=INTEGER}, 
       #{msizenumber,jdbcType=INTEGER}, #{ssizeleft,jdbcType=INTEGER}, #{ssizemodify,jdbcType=INTEGER}, 
-      #{ssizenumber,jdbcType=INTEGER}, #{orderdate,jdbcType=DATE}, #{stylename,jdbcType=VARCHAR}, 
+      #{ssizenumber,jdbcType=INTEGER}, #{orderdate,jdbcType=DATE}, #{stylename,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR},
       #{styleid,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nt.erp.model.Info" >
@@ -77,6 +78,7 @@
       ssizenumber = #{ssizenumber,jdbcType=INTEGER},
       orderdate = #{orderdate,jdbcType=DATE},
       stylename = #{stylename,jdbcType=VARCHAR},
+      color = #{stylename,jdbcType=VARCHAR},
       styleid = #{styleid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -84,7 +86,7 @@
     select id, totalsizeleft, totalsizemodify, totalsizenumber, xxxlsizeleft, xxxlsizemodify, 
     xxxlsizenumber, xxlsizeleft, xxlsizemodify, xxlsizenumber, xlsizeleft, xlsizemodify, 
     xlsizenumber, lsizeleft, lsizemodify, lsizenumber, msizeleft, msizemodify, msizenumber, 
-    ssizeleft, ssizemodify, ssizenumber, orderdate, stylename, styleid
+    ssizeleft, ssizemodify, ssizenumber, color,orderdate, stylename, styleid
     from infos
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -92,7 +94,7 @@
     select id, totalsizeleft, totalsizemodify, totalsizenumber, xxxlsizeleft, xxxlsizemodify, 
     xxxlsizenumber, xxlsizeleft, xxlsizemodify, xxlsizenumber, 
     xlsizeleft, xlsizemodify, xlsizenumber,lsizeleft, lsizemodify, lsizenumber, 
-    msizeleft, msizemodify, msizenumber, ssizeleft, ssizemodify, ssizenumber, orderdate, stylename, styleid
+    msizeleft, msizemodify, msizenumber, ssizeleft, ssizemodify, ssizenumber,color,orderdate, stylename, styleid
     from infos
   </select>
 </mapper>

@@ -12,19 +12,30 @@ $(function () {
 //                    templateUrl:"views/template/card/cardInfo.html",
 //                    controller:"cardInfo"
 //                })
-                .state("commServiceInfo",{
+                .state("jiancaimanager",{
                     url:"/ss",
-                    templateUrl:"/template/card/commServiceInfo.html",
-                    controller:"commServiceInfo"
+                    templateUrl:"/template/card/jiancaimanager.html",
+                    controller:"jiancaimanager"
                 })
-                .state("cardInfo",{
+                .state("errorhuizong",{
                     url:"/st",
-                    templateUrl:"/template/card/cardInfo.html",
-                    controller:"cardInfo"
+                    templateUrl:"/template/card/errorhuizong.html",
+                    controller:"errorhuizong"
                 })
-                .state("login",{
-                    url:"/",
-                    templateUrl:"/login.html"
+                .state("kuweimanager",{
+                    url:"/kuweimanager",
+                    templateUrl:"/template/card/kuweimanager.html",
+                    controller:"kuweimanager"
+                })
+                .state("mianliaoruku",{
+                    url:"/miaoliaoruku",
+                    templateUrl:"/template/card/mianliaoruku.html",
+                    controller:"miaoliaoruku"
+                })
+                .state("mianliaochuku",{
+                    url:"/mianliaochuku",
+                    templateUrl:"/template/card/mianliaochuku.html",
+                    controller:"mianliaochuku"
                 })
         }]);
         angular.bootstrap(document,['apps']);/*加载样式，分页生效*/

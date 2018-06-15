@@ -11,7 +11,7 @@
     <script type="text/javascript" src="/lib/bootStrap/js/bootstrap.js"></script><!--分页功能使用-->
     <script type="text/javascript" src="/lib/layui/layui.js"></script><!--经典模块化前端框架-->
     <script type="text/javascript" src="/lib/layer/layer/layer.js"></script><!--弹出层组件-->
-    <script type="text/javascript" src="/js/login.js"></script><!--login  js-->
+    <script type="text/javascript" src="/template/card/js/register.js"></script><!--login  js-->
 
     <link href="/lib/bootStrap/css/bootstrap.min.css" rel="stylesheet"></link><!--bootstrap样式-->
     <link href="/lib/layui/layui.css" rel="stylesheet"></link><!--经典模块化前端框架样式-->
@@ -27,17 +27,16 @@
         <input type="hidden" id="J_down"></input>
         <input type="text" placeholder="请输入用户名" class="inputBox" style="margin-top:45px;" id="name"></input>
         <input type="password" placeholder="请输入密码" class="inputBox" style="margin-top: 18px;" id="psd"></input>
-        <div class="checkcode">
+        <!-- <div class="checkcode">
             <input type="text" placeholder="输入验证码" id="J_codetext" class="inputcheckcode"  maxlength="4"></input>
             <canvas class="J_codeimg" id="myCanvas" onclick="createCode()">
                 浏览器不支持验证码,请使用更新的版本
             </canvas>
-        </div>
-        <button class="inputButton" onclick="login()">登 录</button>
+        </div> -->
+        <input type="password" placeholder="请输入确认密码" class="inputBox" style="margin-top: 18px;" id="confirmpsd"></input>
+        <button class="inputButton" onclick="register()">注册</button>
         
-		<div class="register">
-        	<a style="margin-right:50px;color:#2b88e1" href="/template/register.html">注册</a> <span>忘记密码</span>
-        </div>
+		
         
     </div>
 </div>

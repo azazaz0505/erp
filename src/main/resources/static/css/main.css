@@ -5,9 +5,9 @@ body {
 }
 
 .hx-mainBody {
-	position: relative;
+	 position: relative; 
 	width: 1800px;
-	height: 700px;
+	/* height: 700px; */
 	margin: 0 auto;
 }
 
@@ -462,7 +462,7 @@ div[class^="orgDetail"] > div:first-child > div:nth-child(1) {
 	/*列表样式*/
 .list-box {
 	height: 700px;
-	width: 1550px;
+	width: 1593px;
 	position: absolute;
 	/*绝对定位，避免出格，防止滚动条完全靠边*/
 	left: 0px;
@@ -474,7 +474,7 @@ div[class^="orgDetail"] > div:first-child > div:nth-child(1) {
 }
 /*th内容不换行*/
 .list-box th {
-	background-color: #e2e7ee !important;
+	background-color: #4ba3ff !important;
 	word-break: keep-all;
 	white-space: nowrap;
 	border:solid #fff;

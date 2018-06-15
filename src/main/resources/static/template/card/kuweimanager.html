@@ -1,0 +1,322 @@
+
+<section>
+    <p class="OwnerManage">库位管理</p>
+    <div class="row add-search">
+    <form class="form-inline" style="padding-left:15px" role="form">
+    
+	     <!-- <div class="form-group" >
+	        <input  type="text" class="form-control" placeholder="请输入款号" style="width:180px" ng-model="styleid"></input>
+	     </div>
+	     <div class="form-group">
+	         <input  type="text" class="form-control" placeholder="请输入款名" style="width:180px" ng-model="stylename"></input>
+	     </div>
+	     <div class="form-group">
+	        <div class="input-group date" datetimepicker  style="width:180px" id="orderdate">
+	            <input type='text' class="form-control" placeholder="请选择日期" ng-model="orderdate"/>  
+	            <span class="input-group-addon">  
+	                <span class="glyphicon glyphicon-calendar"></span>  
+	            </span>  
+	        </div>
+	    </div>
+	     -->
+	     <!-- <button style="border:none"  data-toggle="modal" data-target="#addKuwei" class="btn btn-info"> -->
+	     <button style="border:none"  ng-click="saveOrUpdataService(-1)" class="btn btn-info">
+	       	新增库位
+	     </button>
+	     
+	     <button style="border:none" ng-click="toDelete()" class="btn btn-danger">
+	                   删除选中项
+	     </button>
+                    
+ </form>
+ </div>   
+    
+  <!--   <div class="row add-search">
+        <form class="col-sm-12" id="configForm">
+
+            <ul class="list-inline" >
+
+                <li>
+                 	<div>
+                    	<input  type="text" placeholder="请输入款号" style="width:180px" ng-model="styleid"></input>
+                    </div>
+                </li>
+                
+                <li>
+                    <input  type="text" placeholder="请输入款名" style="width:180px" ng-model="stylename"></input>
+                </li>
+                
+                <li style="display:inline-block">
+                 
+				<input  placeholder="请选择日期" style="width:180px" type="text" ng-model="orderdate" id="orderdate"></input>
+                	
+                    
+                <div class="input-group date" datetimepicker  style="width:180px" id="orderdate">
+                    <input type='text' class="form-control" ng-model="orderdate"/>  
+                    <span class="input-group-addon">  
+                        <span class="glyphicon glyphicon-calendar"></span>  
+                    </span>  
+                </div> 
+                
+                </li>
+
+                <li style="border:none">
+                    <button ng-click="toSearch()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span> 查询
+                    </button>
+                </li>
+          </ul>
+        </form>
+
+    </div> -->
+
+    <!--列表-->
+    <!-- <div class="container list-box clearfix">
+        <table class="col-sm-12 table-condensed">
+            <thead>
+            <tr>
+                <th>
+                    <div class="col-sm-1 text-center"><p>序号</p></div>
+                </th>
+                <th>
+                    <div class="col-sm-1 text-center"><p>款号</p></div>
+                </th>
+                <th>
+                    <div class="col-sm-1 text-center"><p>颜色</p></div>
+                </th>
+                  
+                <th>
+                    <div class="col-sm-1 text-center"><p>订单时间</p></div>
+                </th>
+                <th>
+                    <div class="col-sm-1 text-center"><p>款名</p></div>
+                </th>
+                <th>
+                    <tr><div class="col-xs-2 text-center"><th><p>S</p></th></div></tr>
+                    <tr><th>dd</th><th>a</th>
+                    
+                    </tr>
+                </th>
+                
+                <th>
+                    <div class="col-sm-1 text-center"><p>M</p></div>
+                </th>
+                
+            </tr>
+
+            </thead>
+            <tbody class="row" ng-repeat="data in datalist">
+            <tr>
+                <td>{{$index+1}}</td>
+                <td>{{data.serviceId}}</td>
+                <td>{{data.serviceName}}</td>
+                
+                <td>{{data.cardContent}}</td>
+                <td>{{data.appId}}</td>
+                <td>{{data.cardType}}</td>
+                
+                <td>
+                    <p class="bt-span">
+                    	<span title="编辑" ng-click="saveOrUpdataService($index)" class="glyphicon glyphicon-pencil"></span>
+                        <span title="查看" ng-click="detail($index)" class="glyphicon glyphicon-list-alt"></span>
+                        <span title="删除" ng-click="deleteData($index)" class="glyphicon glyphicon-remove-circle"></span>
+                        
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div> -->
+    <div class="container list-box clearfix">
+    <table id="tb_report" style="width:100%" >
+        <thead style="heigth:100%" >
+            <tr style="height:30px">
+            	<th class="text-center" style="width:10px"> 
+				<input id="checkAll" name="checkAll" type="checkbox"></th>
+            	<th rowspan="1" class="text-center" style="width:20px">序号</th>
+           		<th rowspan="1" class="text-center" style="width:200px">仓库地址</th>
+           		<th rowspan="1" class="text-center" style="width:100px">仓库名</th>
+           		<th rowspan="1" class="text-center" style="width:20px">库位</th> 
+           		<th rowspan="1" style="width:100px" class="text-center">层次</th>
+           		<th rowspan="1" style="width:100px" class="text-center">容量</th>
+           		<th rowspan="1" style="width:100px" class="text-center">操作</th>
+            </tr>
+        </thead>
+        <tbody class="row" ng-repeat="data in datalist">
+           <!--  <tr>
+                <td>{{$index+1}}</td>
+                <td>{{data.serviceId}}</td>
+                <td>{{data.serviceName}}</td>
+                
+                <td>{{data.cardContent}}</td>
+                <td>{{data.appId}}</td>
+                <td>{{data.cardType}}</td>
+                
+                <td>
+                    <p class="bt-span">
+                    	<span title="编辑" ng-click="saveOrUpdataService($index)" class="glyphicon glyphicon-pencil"></span>
+                        <span title="查看" ng-click="detail($index)" class="glyphicon glyphicon-list-alt"></span>
+                        <span title="删除" ng-click="deleteData($index)" class="glyphicon glyphicon-remove-circle"></span>
+                        
+                    </p>
+                </td>
+            </tr> -->
+            
+            <tr class="text-center">
+            <td><input name="checkbox" type="checkbox" id="one" value="function()"></td>
+            <td>{{$index+1}}</td>
+            <td id="styleid">{{data.styleid}}</td>
+            <td>{{data.color}}</td>
+            <td>{{data.orderdate | date:'yyyy-MM-dd'}}</td>
+            <td>{{data.stylename}}</td>
+            
+            <td>{{data.ssizenumber}}</td>
+            <td>
+                    <p class="bt-span">
+                    	<span title="编辑" ng-click="saveOrUpdataService($index)" class="glyphicon glyphicon-pencil"></span>
+                        <span title="查看" ng-click="detail($index)" class="glyphicon glyphicon-list-alt"></span>
+                        <span title="删除" ng-click="deleteData($index)" class="glyphicon glyphicon-remove-circle"></span>
+                        
+                    </p>
+            </td>
+           
+            </tr>
+            
+            </tbody>
+    </table>
+     </div>
+    <!--分页控件-->
+    <div class="pagination-list">
+        <ul uib-pagination id="pagination" ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage"
+            max-size="maxSize"
+            class="pagination-sm"
+            boundary-links="true" items-per-page="20" num-pages="numPages"></ul>
+        <pre>页数: {{currentPage}} / {{numPages}}</pre>
+    </div>
+    <!--分页控件结束-->
+    <!--修改配置-->
+    <div class="modal fade" id="addKuwei" style="margin-top:180px">
+        <div class="col-xs-12">
+            <div class="orgDetail-edit">
+                <div class="row">
+                    <div class="col-xs-6">{{title}}</div>
+                    <div class="col-xs-6 text-right bt-span">
+                        <span class="remove" data-dismiss="modal">&times;</span>
+                    </div>
+                </div>
+                <div class="orgAdd-body">
+                    <input type="hidden" ng-model="sysInfoTemp.sysuuid">
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库地址:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="cangkuaddress" type="text" name="cangkuaddress" ng-model="ckmanagertmp.cangkuaddress">
+                        </div>
+                       
+                    </div>
+                      
+                    <!--  <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库名</div>
+                        <div class="col-xs-6">
+                        	<div class="controls input-append date form_datetime" data-date="2017-07-11T05:25:07Z">
+                    			<input class="isDisabled"  id="cardtime" type="text" name="cardtime" ng-model="cardInfoTemp.cardtime">
+               				 </div>
+							
+                        </div>
+                    </div> -->
+                    
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库库名:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="cangkuname" type="text" name="cangkuname" ng-model="ckmanagertmp.cangkuname">
+                        </div>
+                    </div>
+                    
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库库位:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="kuwei" type="text" name="kuwei" ng-model="ckmanagertmp.kuwei">
+                        </div>
+                    </div>
+                    
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库层次:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="cengci" type="text" name="cengci" ng-model="ckmanagertmp.cengci">
+                        </div>
+                    </div>
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库容量:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="rongliang" type="text" name="rongliang" ng-model="ckmanagertmp.rongliang">
+                        </div>
+                    </div>
+                    
+                    <!--
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">卡片所属应用</div>
+                        <div class="col-xs-8">
+                            <input class="isDisabled" id="appid" type="text"  ng-model="cardInfoTemp.appid">
+                        </div>
+                    </div>
+                                      
+                    
+                    
+                    <div class="row" >
+                        <div class="col-xs-4 text-left t">应用包名</div>
+                        <div class="col-xs-8">
+                            <input class="isDisabled" id="pkgname" type="text" name="pkgname" ng-model="cardInfoTemp.pkgname">
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-4 text-left t">应用入口</div>
+                        <div class="col-xs-8">
+                            <input class="isDisabled" id="entryactivity" type="text" name="entryactivity" ng-model="cardInfoTemp.entryactivity">
+                        </div>
+                    </div>
+                    
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">服务名称</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="servicename" type="text" name="servicename" ng-model="serviceInfoTemp.servicename">
+                        </div>
+                    </div>
+                    -->
+                </div>
+                <div class="row orgAdd-foot">
+                    <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
+                    <button id="saveBtn" ng-click="submit()" class="btn  btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改配置-->
+    
+    <!-- 删除提示 -->
+    <div class="modal fade" id="delcfmOverhaul" role="dialog" tabindex="-1">
+       <div class="modal-dialog">
+                <div class="modal-content message_align">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 隐藏需要删除的id -->
+                        <input type="hidden" id="deleteHaulId" ng-model="deleteid" />
+                        <p>{{content}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                            data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" aria-hidden="true"
+                           data-dismiss="modal" id="deleteHaulBtn">确认</button>
+                    </div>
+                </div>                    
+        </div>           
+    </div>
+    
+    
+    <!-- 删除提示 -->
+</section>
