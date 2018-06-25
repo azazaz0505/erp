@@ -13,17 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.bean.InfoBean;
-import com.nt.erp.dao.InfoMapper;
-import com.nt.erp.model.Info;
-import com.nt.erp.model.InfoExample;
+import com.nt.erp.dao.KuWeiGuanLiMapper;
+import com.nt.erp.model.KuWeiGuanLi;
+import com.nt.erp.model.KuWeiGuanLiExample;
 
 @RestController
-public class InfoController {
+public class KuWeiGuanLiController {
 
     @Autowired
-    private InfoMapper infoMapper;
+    private KuWeiGuanLiMapper kuWeiGuanLiMapper;
 
-    @RequestMapping(value = "/info", method = RequestMethod.POST)
+    //入参报文需要根据前台需要修改
+    @RequestMapping(value = "/kuWeiGuanLi/select", method = RequestMethod.POST)
     public JSONObject info(@RequestBody @Validated InfoBean infoBean, BindingResult bindingResult) {
 
         JSONObject json = new JSONObject();
@@ -40,8 +41,8 @@ public class InfoController {
         }
 
         // 后续改成按条件查询
-        InfoExample example = new InfoExample();
-        List<Info> list = infoMapper.selectByExample(example);
+        KuWeiGuanLiExample example = new KuWeiGuanLiExample();
+        List<KuWeiGuanLi> list = kuWeiGuanLiMapper.selectByExample(example);
 
         json.put("infos", list);
         json.put("retmsg", "成功");

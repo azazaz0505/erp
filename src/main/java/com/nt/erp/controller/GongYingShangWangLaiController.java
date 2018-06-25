@@ -13,17 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.bean.InfoBean;
-import com.nt.erp.dao.InfoMapper;
-import com.nt.erp.model.Info;
-import com.nt.erp.model.InfoExample;
+import com.nt.erp.dao.GongYingShangWangLaiMapper;
+import com.nt.erp.model.GongYingShangWangLai;
+import com.nt.erp.model.GongYingShangWangLaiExample;
 
 @RestController
-public class InfoController {
+public class GongYingShangWangLaiController {
 
     @Autowired
-    private InfoMapper infoMapper;
+    private GongYingShangWangLaiMapper gongYingShangWangLaiMapper;
 
-    @RequestMapping(value = "/info", method = RequestMethod.POST)
+    //入参报文需要根据前台需要修改
+    @RequestMapping(value = "/gongYingShangWangLai/select", method = RequestMethod.POST)
     public JSONObject info(@RequestBody @Validated InfoBean infoBean, BindingResult bindingResult) {
 
         JSONObject json = new JSONObject();
@@ -39,9 +40,9 @@ public class InfoController {
             return json;
         }
 
-        // 后续改成按条件查询
-        InfoExample example = new InfoExample();
-        List<Info> list = infoMapper.selectByExample(example);
+        // 添加查询条件
+        GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();
+        List<GongYingShangWangLai> list = gongYingShangWangLaiMapper.selectByExample(example);
 
         json.put("infos", list);
         json.put("retmsg", "成功");
