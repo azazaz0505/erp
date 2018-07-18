@@ -45,5 +45,6 @@ CREATE TABLE `infos` (
   `stylename` varchar(255) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `styleid` varchar(255) DEFAULT NULL,
+  `color` varchar(128) DEFAULT null,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
