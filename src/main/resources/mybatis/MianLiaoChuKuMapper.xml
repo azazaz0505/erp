@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nt.erp.dao.MianLiaoChuKuMapper">
+  <resultMap id="BaseResultMap" type="com.nt.erp.model.MianLiaoChuKu">
+    <id column="uuid" jdbcType="INTEGER" property="uuid" />
+    <result column="chukudanhao" jdbcType="INTEGER" property="chukudanhao" />
+    <result column="chuhuocangku" jdbcType="VARCHAR" property="chuhuocangku" />
+    <result column="chukufangshi" jdbcType="VARCHAR" property="chukufangshi" />
+    <result column="chukushijian" jdbcType="TIMESTAMP" property="chukushijian" />
+    <result column="beizhu" jdbcType="VARCHAR" property="beizhu" />
+    <result column="opration" jdbcType="VARCHAR" property="opration" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uuid, chukudanhao, chuhuocangku, chukufangshi, chukushijian, beizhu, opration
+  </sql>
+  <select id="selectByExample" parameterType="com.nt.erp.model.MianLiaoChuKuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mianliaochuku
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mianliaochuku
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mianliaochuku
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nt.erp.model.MianLiaoChuKuExample">
+    delete from mianliaochuku
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nt.erp.model.MianLiaoChuKu">
+    insert into mianliaochuku (uuid, chukudanhao, chuhuocangku, 
+      chukufangshi, chukushijian, beizhu, 
+      opration)
+    values (#{uuid,jdbcType=INTEGER}, #{chukudanhao,jdbcType=INTEGER}, #{chuhuocangku,jdbcType=VARCHAR}, 
+      #{chukufangshi,jdbcType=VARCHAR}, #{chukushijian,jdbcType=TIMESTAMP}, #{beizhu,jdbcType=VARCHAR}, 
+      #{opration,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nt.erp.model.MianLiaoChuKu">
+    insert into mianliaochuku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="chukudanhao != null">
+        chukudanhao,
+      </if>
+      <if test="chuhuocangku != null">
+        chuhuocangku,
+      </if>
+      <if test="chukufangshi != null">
+        chukufangshi,
+      </if>
+      <if test="chukushijian != null">
+        chukushijian,
+      </if>
+      <if test="beizhu != null">
+        beizhu,
+      </if>
+      <if test="opration != null">
+        opration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="chukudanhao != null">
+        #{chukudanhao,jdbcType=INTEGER},
+      </if>
+      <if test="chuhuocangku != null">
+        #{chuhuocangku,jdbcType=VARCHAR},
+      </if>
+      <if test="chukufangshi != null">
+        #{chukufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="chukushijian != null">
+        #{chukushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beizhu != null">
+        #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="opration != null">
+        #{opration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nt.erp.model.MianLiaoChuKuExample" resultType="java.lang.Long">
+    select count(*) from mianliaochuku
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mianliaochuku
+    <set>
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.chukudanhao != null">
+        chukudanhao = #{record.chukudanhao,jdbcType=INTEGER},
+      </if>
+      <if test="record.chuhuocangku != null">
+        chuhuocangku = #{record.chuhuocangku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chukufangshi != null">
+        chukufangshi = #{record.chukufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chukushijian != null">
+        chukushijian = #{record.chukushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.beizhu != null">
+        beizhu = #{record.beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opration != null">
+        opration = #{record.opration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mianliaochuku
+    set uuid = #{record.uuid,jdbcType=INTEGER},
+      chukudanhao = #{record.chukudanhao,jdbcType=INTEGER},
+      chuhuocangku = #{record.chuhuocangku,jdbcType=VARCHAR},
+      chukufangshi = #{record.chukufangshi,jdbcType=VARCHAR},
+      chukushijian = #{record.chukushijian,jdbcType=TIMESTAMP},
+      beizhu = #{record.beizhu,jdbcType=VARCHAR},
+      opration = #{record.opration,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nt.erp.model.MianLiaoChuKu">
+    update mianliaochuku
+    <set>
+      <if test="chukudanhao != null">
+        chukudanhao = #{chukudanhao,jdbcType=INTEGER},
+      </if>
+      <if test="chuhuocangku != null">
+        chuhuocangku = #{chuhuocangku,jdbcType=VARCHAR},
+      </if>
+      <if test="chukufangshi != null">
+        chukufangshi = #{chukufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="chukushijian != null">
+        chukushijian = #{chukushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beizhu != null">
+        beizhu = #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="opration != null">
+        opration = #{opration,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nt.erp.model.MianLiaoChuKu">
+    update mianliaochuku
+    set chukudanhao = #{chukudanhao,jdbcType=INTEGER},
+      chuhuocangku = #{chuhuocangku,jdbcType=VARCHAR},
+      chukufangshi = #{chukufangshi,jdbcType=VARCHAR},
+      chukushijian = #{chukushijian,jdbcType=TIMESTAMP},
+      beizhu = #{beizhu,jdbcType=VARCHAR},
+      opration = #{opration,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into mianliaochuku (uuid, chukudanhao, chuhuocangku, chukufangshi, chukushijian, beizhu, opration)
+    values
+    <foreach collection="list" item="item" separator=",">
+       (#{item.uuid,jdbcType=INTEGER}, #{item.chukudanhao,jdbcType=INTEGER}, #{item.chuhuocangku,jdbcType=VARCHAR}, #{item.chukufangshi,jdbcType=VARCHAR}, #{item.chukushijian,jdbcType=TIMESTAMP}, #{item.beizhu,jdbcType=VARCHAR}, #{item.opration,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into mianliaochuku (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.value}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'uuid' == column.value">
+          #{item.uuid,jdbcType=INTEGER}
+        </if>
+        <if test="'chukudanhao' == column.value">
+          #{item.chukudanhao,jdbcType=INTEGER}
+        </if>
+        <if test="'chuhuocangku' == column.value">
+          #{item.chuhuocangku,jdbcType=VARCHAR}
+        </if>
+        <if test="'chukufangshi' == column.value">
+          #{item.chukufangshi,jdbcType=VARCHAR}
+        </if>
+        <if test="'chukushijian' == column.value">
+          #{item.chukushijian,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'beizhu' == column.value">
+          #{item.beizhu,jdbcType=VARCHAR}
+        </if>
+        <if test="'opration' == column.value">
+          #{item.opration,jdbcType=VARCHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+  <insert id="upsert" parameterType="com.nt.erp.model.MianLiaoChuKu">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into mianliaochuku
+     (uuid, chukudanhao, chuhuocangku, chukufangshi, chukushijian, beizhu, opration) 
+    values
+     (#{uuid,jdbcType=INTEGER}, #{chukudanhao,jdbcType=INTEGER}, #{chuhuocangku,jdbcType=VARCHAR}, #{chukufangshi,jdbcType=VARCHAR}, #{chukushijian,jdbcType=TIMESTAMP}, #{beizhu,jdbcType=VARCHAR}, #{opration,jdbcType=VARCHAR}) 
+    on duplicate key update 
+    uuid = #{uuid,jdbcType=INTEGER}, chukudanhao = #{chukudanhao,jdbcType=INTEGER}, chuhuocangku = #{chuhuocangku,jdbcType=VARCHAR}, chukufangshi = #{chukufangshi,jdbcType=VARCHAR}, chukushijian = #{chukushijian,jdbcType=TIMESTAMP}, beizhu = #{beizhu,jdbcType=VARCHAR}, opration = #{opration,jdbcType=VARCHAR}
+  </insert>
+  <insert id="upsertSelective" parameterType="com.nt.erp.model.MianLiaoChuKu">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into mianliaochuku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="chukudanhao != null">
+        chukudanhao,
+      </if>
+      <if test="chuhuocangku != null">
+        chuhuocangku,
+      </if>
+      <if test="chukufangshi != null">
+        chukufangshi,
+      </if>
+      <if test="chukushijian != null">
+        chukushijian,
+      </if>
+      <if test="beizhu != null">
+        beizhu,
+      </if>
+      <if test="opration != null">
+        opration,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="chukudanhao != null">
+        #{chukudanhao,jdbcType=INTEGER},
+      </if>
+      <if test="chuhuocangku != null">
+        #{chuhuocangku,jdbcType=VARCHAR},
+      </if>
+      <if test="chukufangshi != null">
+        #{chukufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="chukushijian != null">
+        #{chukushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beizhu != null">
+        #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="opration != null">
+        #{opration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="chukudanhao != null">
+        chukudanhao = #{chukudanhao,jdbcType=INTEGER},
+      </if>
+      <if test="chuhuocangku != null">
+        chuhuocangku = #{chuhuocangku,jdbcType=VARCHAR},
+      </if>
+      <if test="chukufangshi != null">
+        chukufangshi = #{chukufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="chukushijian != null">
+        chukushijian = #{chukushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beizhu != null">
+        beizhu = #{beizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="opration != null">
+        opration = #{opration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,34 +1,285 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.nt.erp.dao.LoginMapper" >
-  <resultMap id="BaseResultMap" type="com.nt.erp.model.Login" >
-    <id column="login_uuid" property="login_uuid" jdbcType="VARCHAR" />
-    <result column="loginaccount" property="loginaccount" jdbcType="VARCHAR" />
-    <result column="loginpasswd" property="loginpasswd" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nt.erp.dao.LoginMapper">
+  <resultMap id="BaseResultMap" type="com.nt.erp.model.Login">
+    <id column="loginaccount" jdbcType="VARCHAR" property="loginaccount" />
+    <result column="loginpasswd" jdbcType="VARCHAR" property="loginpasswd" />
+    <result column="login_uuid" jdbcType="VARCHAR" property="loginUuid" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    loginaccount, loginpasswd, login_uuid
+  </sql>
+  <select id="selectByExample" parameterType="com.nt.erp.model.LoginExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from login
+    where loginaccount = #{loginaccount,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from login
-    where id = #{login_uuid,jdbcType=VARCHAR}
+    where loginaccount = #{loginaccount,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.nt.erp.model.Login" >
-    insert into login (login_uuid, loginaccount, loginpasswd
+  <delete id="deleteByExample" parameterType="com.nt.erp.model.LoginExample">
+    delete from login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nt.erp.model.Login">
+    insert into login (loginaccount, loginpasswd, login_uuid
       )
-    values (#{login_uuid,jdbcType=VARCHAR}, #{loginaccount,jdbcType=VARCHAR}, #{loginpasswd,jdbcType=VARCHAR}
+    values (#{loginaccount,jdbcType=VARCHAR}, #{loginpasswd,jdbcType=VARCHAR}, #{loginUuid,jdbcType=VARCHAR}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.nt.erp.model.Login" >
+  <insert id="insertSelective" parameterType="com.nt.erp.model.Login">
+    insert into login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loginaccount != null">
+        loginaccount,
+      </if>
+      <if test="loginpasswd != null">
+        loginpasswd,
+      </if>
+      <if test="loginUuid != null">
+        login_uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loginaccount != null">
+        #{loginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpasswd != null">
+        #{loginpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="loginUuid != null">
+        #{loginUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nt.erp.model.LoginExample" resultType="java.lang.Long">
+    select count(*) from login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
     update login
-    set loginaccount = #{loginaccount,jdbcType=VARCHAR},
-      loginpasswd = #{loginpasswd,jdbcType=VARCHAR}
-    where login_uuid = #{login_uuid,jdbcType=VARCHAR}
+    <set>
+      <if test="record.loginaccount != null">
+        loginaccount = #{record.loginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginpasswd != null">
+        loginpasswd = #{record.loginpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginUuid != null">
+        login_uuid = #{record.loginUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select login_uuid, loginaccount, loginpasswd
-    from login
-    where login_uuid = #{login_uuid,jdbcType=VARCHAR}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select login_uuid, loginaccount, loginpasswd
-    from login
-  </select>
+  <update id="updateByExample" parameterType="map">
+    update login
+    set loginaccount = #{record.loginaccount,jdbcType=VARCHAR},
+      loginpasswd = #{record.loginpasswd,jdbcType=VARCHAR},
+      login_uuid = #{record.loginUuid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nt.erp.model.Login">
+    update login
+    <set>
+      <if test="loginpasswd != null">
+        loginpasswd = #{loginpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="loginUuid != null">
+        login_uuid = #{loginUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where loginaccount = #{loginaccount,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nt.erp.model.Login">
+    update login
+    set loginpasswd = #{loginpasswd,jdbcType=VARCHAR},
+      login_uuid = #{loginUuid,jdbcType=VARCHAR}
+    where loginaccount = #{loginaccount,jdbcType=VARCHAR}
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into login (loginaccount, loginpasswd, login_uuid)
+    values
+    <foreach collection="list" item="item" separator=",">
+       (#{item.loginaccount,jdbcType=VARCHAR}, #{item.loginpasswd,jdbcType=VARCHAR}, #{item.loginUuid,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into login (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.value}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'loginaccount' == column.value">
+          #{item.loginaccount,jdbcType=VARCHAR}
+        </if>
+        <if test="'loginpasswd' == column.value">
+          #{item.loginpasswd,jdbcType=VARCHAR}
+        </if>
+        <if test="'login_uuid' == column.value">
+          #{item.loginUuid,jdbcType=VARCHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+  <insert id="upsert" parameterType="com.nt.erp.model.Login">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into login
+     (loginaccount, loginpasswd, login_uuid) 
+    values
+     (#{loginaccount,jdbcType=VARCHAR}, #{loginpasswd,jdbcType=VARCHAR}, #{loginUuid,jdbcType=VARCHAR}) 
+    on duplicate key update 
+    loginaccount = #{loginaccount,jdbcType=VARCHAR}, loginpasswd = #{loginpasswd,jdbcType=VARCHAR}, login_uuid = #{loginUuid,jdbcType=VARCHAR}
+  </insert>
+  <insert id="upsertSelective" parameterType="com.nt.erp.model.Login">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loginaccount != null">
+        loginaccount,
+      </if>
+      <if test="loginpasswd != null">
+        loginpasswd,
+      </if>
+      <if test="loginUuid != null">
+        login_uuid,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loginaccount != null">
+        #{loginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpasswd != null">
+        #{loginpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="loginUuid != null">
+        #{loginUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="loginaccount != null">
+        loginaccount = #{loginaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpasswd != null">
+        loginpasswd = #{loginpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="loginUuid != null">
+        login_uuid = #{loginUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
 </mapper>

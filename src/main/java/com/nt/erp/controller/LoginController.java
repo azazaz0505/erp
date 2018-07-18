@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.bean.LoginBean;
 import com.nt.erp.dao.LoginMapper;
 import com.nt.erp.model.Login;
+import com.nt.erp.model.LoginExample;
 
 @RestController
 public class LoginController {
@@ -52,7 +52,8 @@ public class LoginController {
         //生成唯一主键
         //String id = UUID.randomUUID().toString().replaceAll("-", "");
         
-        List<Login> list = loginMapper.selectAll();
+        LoginExample example = new LoginExample();
+        List<Login> list = loginMapper.selectByExample(example);
         Map<String, String> maps = new HashMap<String, String>();
         if(CollectionUtils.isNotEmpty(list))
         {

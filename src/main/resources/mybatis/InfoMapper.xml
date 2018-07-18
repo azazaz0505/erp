@@ -1,39 +1,136 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.nt.erp.dao.InfoMapper" >
-  <resultMap id="BaseResultMap" type="com.nt.erp.model.Info" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="totalsizeleft" property="totalsizeleft" jdbcType="INTEGER" />
-    <result column="totalsizemodify" property="totalsizemodify" jdbcType="INTEGER" />
-    <result column="totalsizenumber" property="totalsizenumber" jdbcType="INTEGER" />
-    <result column="xxxlsizeleft" property="xxxlsizeleft" jdbcType="INTEGER" />
-    <result column="xxxlsizemodify" property="xxxlsizemodify" jdbcType="INTEGER" />
-    <result column="xxxlsizenumber" property="xxxlsizenumber" jdbcType="INTEGER" />
-    <result column="xxlsizeleft" property="xxlsizeleft" jdbcType="INTEGER" />
-    <result column="xxlsizemodify" property="xxlsizemodify" jdbcType="INTEGER" />
-    <result column="xxlsizenumber" property="xxlsizenumber" jdbcType="INTEGER" />
-    <result column="xlsizeleft" property="xlsizeleft" jdbcType="INTEGER" />
-    <result column="xlsizemodify" property="xlsizemodify" jdbcType="INTEGER" />
-    <result column="xlsizenumber" property="xlsizenumber" jdbcType="INTEGER" />
-    <result column="lsizeleft" property="lsizeleft" jdbcType="INTEGER" />
-    <result column="lsizemodify" property="lsizemodify" jdbcType="INTEGER" />
-    <result column="lsizenumber" property="lsizenumber" jdbcType="INTEGER" />
-    <result column="msizeleft" property="msizeleft" jdbcType="INTEGER" />
-    <result column="msizemodify" property="msizemodify" jdbcType="INTEGER" />
-    <result column="msizenumber" property="msizenumber" jdbcType="INTEGER" />
-    <result column="ssizeleft" property="ssizeleft" jdbcType="INTEGER" />
-    <result column="ssizemodify" property="ssizemodify" jdbcType="INTEGER" />
-    <result column="ssizenumber" property="ssizenumber" jdbcType="INTEGER" />
-    <result column="orderdate" property="orderdate" jdbcType="DATE" />
-    <result column="stylename" property="stylename" jdbcType="VARCHAR" />
-    <result column="color" property="color" jdbcType="VARCHAR" />
-    <result column="styleid" property="styleid" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nt.erp.dao.InfoMapper">
+  <resultMap id="BaseResultMap" type="com.nt.erp.model.Info">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="totalsizeleft" jdbcType="INTEGER" property="totalsizeleft" />
+    <result column="totalsizemodify" jdbcType="INTEGER" property="totalsizemodify" />
+    <result column="totalsizenumber" jdbcType="INTEGER" property="totalsizenumber" />
+    <result column="xxxlsizeleft" jdbcType="INTEGER" property="xxxlsizeleft" />
+    <result column="xxxlsizemodify" jdbcType="INTEGER" property="xxxlsizemodify" />
+    <result column="xxxlsizenumber" jdbcType="INTEGER" property="xxxlsizenumber" />
+    <result column="xxlsizeleft" jdbcType="INTEGER" property="xxlsizeleft" />
+    <result column="xxlsizemodify" jdbcType="INTEGER" property="xxlsizemodify" />
+    <result column="xxlsizenumber" jdbcType="INTEGER" property="xxlsizenumber" />
+    <result column="xlsizeleft" jdbcType="INTEGER" property="xlsizeleft" />
+    <result column="xlsizemodify" jdbcType="INTEGER" property="xlsizemodify" />
+    <result column="xlsizenumber" jdbcType="INTEGER" property="xlsizenumber" />
+    <result column="lsizeleft" jdbcType="INTEGER" property="lsizeleft" />
+    <result column="lsizemodify" jdbcType="INTEGER" property="lsizemodify" />
+    <result column="lsizenumber" jdbcType="INTEGER" property="lsizenumber" />
+    <result column="msizeleft" jdbcType="INTEGER" property="msizeleft" />
+    <result column="msizemodify" jdbcType="INTEGER" property="msizemodify" />
+    <result column="msizenumber" jdbcType="INTEGER" property="msizenumber" />
+    <result column="ssizeleft" jdbcType="INTEGER" property="ssizeleft" />
+    <result column="ssizemodify" jdbcType="INTEGER" property="ssizemodify" />
+    <result column="ssizenumber" jdbcType="INTEGER" property="ssizenumber" />
+    <result column="orderdate" jdbcType="DATE" property="orderdate" />
+    <result column="stylename" jdbcType="VARCHAR" property="stylename" />
+    <result column="styleid" jdbcType="VARCHAR" property="styleid" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, totalsizeleft, totalsizemodify, totalsizenumber, xxxlsizeleft, xxxlsizemodify, 
+    xxxlsizenumber, xxlsizeleft, xxlsizemodify, xxlsizenumber, xlsizeleft, xlsizemodify, 
+    xlsizenumber, lsizeleft, lsizemodify, lsizenumber, msizeleft, msizemodify, msizenumber, 
+    ssizeleft, ssizemodify, ssizenumber, orderdate, stylename, styleid
+  </sql>
+  <select id="selectByExample" parameterType="com.nt.erp.model.InfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from infos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from infos
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from infos
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.nt.erp.model.Info" >
+  <delete id="deleteByExample" parameterType="com.nt.erp.model.InfoExample">
+    delete from infos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nt.erp.model.Info">
     insert into infos (id, totalsizeleft, totalsizemodify, 
       totalsizenumber, xxxlsizeleft, xxxlsizemodify, 
       xxxlsizenumber, xxlsizeleft, xxlsizemodify, 
@@ -41,7 +138,7 @@
       xlsizenumber, lsizeleft, lsizemodify, 
       lsizenumber, msizeleft, msizemodify, 
       msizenumber, ssizeleft, ssizemodify, 
-      ssizenumber, orderdate, stylename, color,
+      ssizenumber, orderdate, stylename, 
       styleid)
     values (#{id,jdbcType=INTEGER}, #{totalsizeleft,jdbcType=INTEGER}, #{totalsizemodify,jdbcType=INTEGER}, 
       #{totalsizenumber,jdbcType=INTEGER}, #{xxxlsizeleft,jdbcType=INTEGER}, #{xxxlsizemodify,jdbcType=INTEGER}, 
@@ -50,10 +147,365 @@
       #{xlsizenumber,jdbcType=INTEGER}, #{lsizeleft,jdbcType=INTEGER}, #{lsizemodify,jdbcType=INTEGER}, 
       #{lsizenumber,jdbcType=INTEGER}, #{msizeleft,jdbcType=INTEGER}, #{msizemodify,jdbcType=INTEGER}, 
       #{msizenumber,jdbcType=INTEGER}, #{ssizeleft,jdbcType=INTEGER}, #{ssizemodify,jdbcType=INTEGER}, 
-      #{ssizenumber,jdbcType=INTEGER}, #{orderdate,jdbcType=DATE}, #{stylename,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR},
+      #{ssizenumber,jdbcType=INTEGER}, #{orderdate,jdbcType=DATE}, #{stylename,jdbcType=VARCHAR}, 
       #{styleid,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.nt.erp.model.Info" >
+  <insert id="insertSelective" parameterType="com.nt.erp.model.Info">
+    insert into infos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="totalsizeleft != null">
+        totalsizeleft,
+      </if>
+      <if test="totalsizemodify != null">
+        totalsizemodify,
+      </if>
+      <if test="totalsizenumber != null">
+        totalsizenumber,
+      </if>
+      <if test="xxxlsizeleft != null">
+        xxxlsizeleft,
+      </if>
+      <if test="xxxlsizemodify != null">
+        xxxlsizemodify,
+      </if>
+      <if test="xxxlsizenumber != null">
+        xxxlsizenumber,
+      </if>
+      <if test="xxlsizeleft != null">
+        xxlsizeleft,
+      </if>
+      <if test="xxlsizemodify != null">
+        xxlsizemodify,
+      </if>
+      <if test="xxlsizenumber != null">
+        xxlsizenumber,
+      </if>
+      <if test="xlsizeleft != null">
+        xlsizeleft,
+      </if>
+      <if test="xlsizemodify != null">
+        xlsizemodify,
+      </if>
+      <if test="xlsizenumber != null">
+        xlsizenumber,
+      </if>
+      <if test="lsizeleft != null">
+        lsizeleft,
+      </if>
+      <if test="lsizemodify != null">
+        lsizemodify,
+      </if>
+      <if test="lsizenumber != null">
+        lsizenumber,
+      </if>
+      <if test="msizeleft != null">
+        msizeleft,
+      </if>
+      <if test="msizemodify != null">
+        msizemodify,
+      </if>
+      <if test="msizenumber != null">
+        msizenumber,
+      </if>
+      <if test="ssizeleft != null">
+        ssizeleft,
+      </if>
+      <if test="ssizemodify != null">
+        ssizemodify,
+      </if>
+      <if test="ssizenumber != null">
+        ssizenumber,
+      </if>
+      <if test="orderdate != null">
+        orderdate,
+      </if>
+      <if test="stylename != null">
+        stylename,
+      </if>
+      <if test="styleid != null">
+        styleid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizeleft != null">
+        #{totalsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizemodify != null">
+        #{totalsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizenumber != null">
+        #{totalsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizeleft != null">
+        #{xxxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizemodify != null">
+        #{xxxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizenumber != null">
+        #{xxxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizeleft != null">
+        #{xxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizemodify != null">
+        #{xxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizenumber != null">
+        #{xxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizeleft != null">
+        #{xlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizemodify != null">
+        #{xlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizenumber != null">
+        #{xlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="lsizeleft != null">
+        #{lsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="lsizemodify != null">
+        #{lsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="lsizenumber != null">
+        #{lsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="msizeleft != null">
+        #{msizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="msizemodify != null">
+        #{msizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="msizenumber != null">
+        #{msizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="ssizeleft != null">
+        #{ssizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="ssizemodify != null">
+        #{ssizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="ssizenumber != null">
+        #{ssizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=DATE},
+      </if>
+      <if test="stylename != null">
+        #{stylename,jdbcType=VARCHAR},
+      </if>
+      <if test="styleid != null">
+        #{styleid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nt.erp.model.InfoExample" resultType="java.lang.Long">
+    select count(*) from infos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update infos
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalsizeleft != null">
+        totalsizeleft = #{record.totalsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalsizemodify != null">
+        totalsizemodify = #{record.totalsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalsizenumber != null">
+        totalsizenumber = #{record.totalsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.xxxlsizeleft != null">
+        xxxlsizeleft = #{record.xxxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.xxxlsizemodify != null">
+        xxxlsizemodify = #{record.xxxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="record.xxxlsizenumber != null">
+        xxxlsizenumber = #{record.xxxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.xxlsizeleft != null">
+        xxlsizeleft = #{record.xxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.xxlsizemodify != null">
+        xxlsizemodify = #{record.xxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="record.xxlsizenumber != null">
+        xxlsizenumber = #{record.xxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.xlsizeleft != null">
+        xlsizeleft = #{record.xlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.xlsizemodify != null">
+        xlsizemodify = #{record.xlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="record.xlsizenumber != null">
+        xlsizenumber = #{record.xlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.lsizeleft != null">
+        lsizeleft = #{record.lsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.lsizemodify != null">
+        lsizemodify = #{record.lsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="record.lsizenumber != null">
+        lsizenumber = #{record.lsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.msizeleft != null">
+        msizeleft = #{record.msizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.msizemodify != null">
+        msizemodify = #{record.msizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="record.msizenumber != null">
+        msizenumber = #{record.msizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.ssizeleft != null">
+        ssizeleft = #{record.ssizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="record.ssizemodify != null">
+        ssizemodify = #{record.ssizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="record.ssizenumber != null">
+        ssizenumber = #{record.ssizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderdate != null">
+        orderdate = #{record.orderdate,jdbcType=DATE},
+      </if>
+      <if test="record.stylename != null">
+        stylename = #{record.stylename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.styleid != null">
+        styleid = #{record.styleid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update infos
+    set id = #{record.id,jdbcType=INTEGER},
+      totalsizeleft = #{record.totalsizeleft,jdbcType=INTEGER},
+      totalsizemodify = #{record.totalsizemodify,jdbcType=INTEGER},
+      totalsizenumber = #{record.totalsizenumber,jdbcType=INTEGER},
+      xxxlsizeleft = #{record.xxxlsizeleft,jdbcType=INTEGER},
+      xxxlsizemodify = #{record.xxxlsizemodify,jdbcType=INTEGER},
+      xxxlsizenumber = #{record.xxxlsizenumber,jdbcType=INTEGER},
+      xxlsizeleft = #{record.xxlsizeleft,jdbcType=INTEGER},
+      xxlsizemodify = #{record.xxlsizemodify,jdbcType=INTEGER},
+      xxlsizenumber = #{record.xxlsizenumber,jdbcType=INTEGER},
+      xlsizeleft = #{record.xlsizeleft,jdbcType=INTEGER},
+      xlsizemodify = #{record.xlsizemodify,jdbcType=INTEGER},
+      xlsizenumber = #{record.xlsizenumber,jdbcType=INTEGER},
+      lsizeleft = #{record.lsizeleft,jdbcType=INTEGER},
+      lsizemodify = #{record.lsizemodify,jdbcType=INTEGER},
+      lsizenumber = #{record.lsizenumber,jdbcType=INTEGER},
+      msizeleft = #{record.msizeleft,jdbcType=INTEGER},
+      msizemodify = #{record.msizemodify,jdbcType=INTEGER},
+      msizenumber = #{record.msizenumber,jdbcType=INTEGER},
+      ssizeleft = #{record.ssizeleft,jdbcType=INTEGER},
+      ssizemodify = #{record.ssizemodify,jdbcType=INTEGER},
+      ssizenumber = #{record.ssizenumber,jdbcType=INTEGER},
+      orderdate = #{record.orderdate,jdbcType=DATE},
+      stylename = #{record.stylename,jdbcType=VARCHAR},
+      styleid = #{record.styleid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nt.erp.model.Info">
+    update infos
+    <set>
+      <if test="totalsizeleft != null">
+        totalsizeleft = #{totalsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizemodify != null">
+        totalsizemodify = #{totalsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizenumber != null">
+        totalsizenumber = #{totalsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizeleft != null">
+        xxxlsizeleft = #{xxxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizemodify != null">
+        xxxlsizemodify = #{xxxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizenumber != null">
+        xxxlsizenumber = #{xxxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizeleft != null">
+        xxlsizeleft = #{xxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizemodify != null">
+        xxlsizemodify = #{xxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizenumber != null">
+        xxlsizenumber = #{xxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizeleft != null">
+        xlsizeleft = #{xlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizemodify != null">
+        xlsizemodify = #{xlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizenumber != null">
+        xlsizenumber = #{xlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="lsizeleft != null">
+        lsizeleft = #{lsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="lsizemodify != null">
+        lsizemodify = #{lsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="lsizenumber != null">
+        lsizenumber = #{lsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="msizeleft != null">
+        msizeleft = #{msizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="msizemodify != null">
+        msizemodify = #{msizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="msizenumber != null">
+        msizenumber = #{msizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="ssizeleft != null">
+        ssizeleft = #{ssizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="ssizemodify != null">
+        ssizemodify = #{ssizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="ssizenumber != null">
+        ssizenumber = #{ssizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null">
+        orderdate = #{orderdate,jdbcType=DATE},
+      </if>
+      <if test="stylename != null">
+        stylename = #{stylename,jdbcType=VARCHAR},
+      </if>
+      <if test="styleid != null">
+        styleid = #{styleid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nt.erp.model.Info">
     update infos
     set totalsizeleft = #{totalsizeleft,jdbcType=INTEGER},
       totalsizemodify = #{totalsizemodify,jdbcType=INTEGER},
@@ -78,23 +530,367 @@
       ssizenumber = #{ssizenumber,jdbcType=INTEGER},
       orderdate = #{orderdate,jdbcType=DATE},
       stylename = #{stylename,jdbcType=VARCHAR},
-      color = #{stylename,jdbcType=VARCHAR},
       styleid = #{styleid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, totalsizeleft, totalsizemodify, totalsizenumber, xxxlsizeleft, xxxlsizemodify, 
-    xxxlsizenumber, xxlsizeleft, xxlsizemodify, xxlsizenumber, xlsizeleft, xlsizemodify, 
-    xlsizenumber, lsizeleft, lsizemodify, lsizenumber, msizeleft, msizemodify, msizenumber, 
-    ssizeleft, ssizemodify, ssizenumber, color,orderdate, stylename, styleid
-    from infos
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, totalsizeleft, totalsizemodify, totalsizenumber, xxxlsizeleft, xxxlsizemodify, 
-    xxxlsizenumber, xxlsizeleft, xxlsizemodify, xxlsizenumber, 
-    xlsizeleft, xlsizemodify, xlsizenumber,lsizeleft, lsizemodify, lsizenumber, 
-    msizeleft, msizemodify, msizenumber, ssizeleft, ssizemodify, ssizenumber,color,orderdate, stylename, styleid
-    from infos
-  </select>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into infos (id, totalsizeleft, totalsizemodify, totalsizenumber, xxxlsizeleft, xxxlsizemodify, xxxlsizenumber, xxlsizeleft, xxlsizemodify, xxlsizenumber, xlsizeleft, xlsizemodify, xlsizenumber, lsizeleft, lsizemodify, lsizenumber, msizeleft, msizemodify, msizenumber, ssizeleft, ssizemodify, ssizenumber, orderdate, stylename, styleid)
+    values
+    <foreach collection="list" item="item" separator=",">
+       (#{item.id,jdbcType=INTEGER}, #{item.totalsizeleft,jdbcType=INTEGER}, #{item.totalsizemodify,jdbcType=INTEGER}, #{item.totalsizenumber,jdbcType=INTEGER}, #{item.xxxlsizeleft,jdbcType=INTEGER}, #{item.xxxlsizemodify,jdbcType=INTEGER}, #{item.xxxlsizenumber,jdbcType=INTEGER}, #{item.xxlsizeleft,jdbcType=INTEGER}, #{item.xxlsizemodify,jdbcType=INTEGER}, #{item.xxlsizenumber,jdbcType=INTEGER}, #{item.xlsizeleft,jdbcType=INTEGER}, #{item.xlsizemodify,jdbcType=INTEGER}, #{item.xlsizenumber,jdbcType=INTEGER}, #{item.lsizeleft,jdbcType=INTEGER}, #{item.lsizemodify,jdbcType=INTEGER}, #{item.lsizenumber,jdbcType=INTEGER}, #{item.msizeleft,jdbcType=INTEGER}, #{item.msizemodify,jdbcType=INTEGER}, #{item.msizenumber,jdbcType=INTEGER}, #{item.ssizeleft,jdbcType=INTEGER}, #{item.ssizemodify,jdbcType=INTEGER}, #{item.ssizenumber,jdbcType=INTEGER}, #{item.orderdate,jdbcType=DATE}, #{item.stylename,jdbcType=VARCHAR}, #{item.styleid,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into infos (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.value}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id' == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'totalsizeleft' == column.value">
+          #{item.totalsizeleft,jdbcType=INTEGER}
+        </if>
+        <if test="'totalsizemodify' == column.value">
+          #{item.totalsizemodify,jdbcType=INTEGER}
+        </if>
+        <if test="'totalsizenumber' == column.value">
+          #{item.totalsizenumber,jdbcType=INTEGER}
+        </if>
+        <if test="'xxxlsizeleft' == column.value">
+          #{item.xxxlsizeleft,jdbcType=INTEGER}
+        </if>
+        <if test="'xxxlsizemodify' == column.value">
+          #{item.xxxlsizemodify,jdbcType=INTEGER}
+        </if>
+        <if test="'xxxlsizenumber' == column.value">
+          #{item.xxxlsizenumber,jdbcType=INTEGER}
+        </if>
+        <if test="'xxlsizeleft' == column.value">
+          #{item.xxlsizeleft,jdbcType=INTEGER}
+        </if>
+        <if test="'xxlsizemodify' == column.value">
+          #{item.xxlsizemodify,jdbcType=INTEGER}
+        </if>
+        <if test="'xxlsizenumber' == column.value">
+          #{item.xxlsizenumber,jdbcType=INTEGER}
+        </if>
+        <if test="'xlsizeleft' == column.value">
+          #{item.xlsizeleft,jdbcType=INTEGER}
+        </if>
+        <if test="'xlsizemodify' == column.value">
+          #{item.xlsizemodify,jdbcType=INTEGER}
+        </if>
+        <if test="'xlsizenumber' == column.value">
+          #{item.xlsizenumber,jdbcType=INTEGER}
+        </if>
+        <if test="'lsizeleft' == column.value">
+          #{item.lsizeleft,jdbcType=INTEGER}
+        </if>
+        <if test="'lsizemodify' == column.value">
+          #{item.lsizemodify,jdbcType=INTEGER}
+        </if>
+        <if test="'lsizenumber' == column.value">
+          #{item.lsizenumber,jdbcType=INTEGER}
+        </if>
+        <if test="'msizeleft' == column.value">
+          #{item.msizeleft,jdbcType=INTEGER}
+        </if>
+        <if test="'msizemodify' == column.value">
+          #{item.msizemodify,jdbcType=INTEGER}
+        </if>
+        <if test="'msizenumber' == column.value">
+          #{item.msizenumber,jdbcType=INTEGER}
+        </if>
+        <if test="'ssizeleft' == column.value">
+          #{item.ssizeleft,jdbcType=INTEGER}
+        </if>
+        <if test="'ssizemodify' == column.value">
+          #{item.ssizemodify,jdbcType=INTEGER}
+        </if>
+        <if test="'ssizenumber' == column.value">
+          #{item.ssizenumber,jdbcType=INTEGER}
+        </if>
+        <if test="'orderdate' == column.value">
+          #{item.orderdate,jdbcType=DATE}
+        </if>
+        <if test="'stylename' == column.value">
+          #{item.stylename,jdbcType=VARCHAR}
+        </if>
+        <if test="'styleid' == column.value">
+          #{item.styleid,jdbcType=VARCHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+  <insert id="upsert" parameterType="com.nt.erp.model.Info">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into infos
+     (id, totalsizeleft, totalsizemodify, totalsizenumber, xxxlsizeleft, xxxlsizemodify, xxxlsizenumber, xxlsizeleft, xxlsizemodify, xxlsizenumber, xlsizeleft, xlsizemodify, xlsizenumber, lsizeleft, lsizemodify, lsizenumber, msizeleft, msizemodify, msizenumber, ssizeleft, ssizemodify, ssizenumber, orderdate, stylename, styleid) 
+    values
+     (#{id,jdbcType=INTEGER}, #{totalsizeleft,jdbcType=INTEGER}, #{totalsizemodify,jdbcType=INTEGER}, #{totalsizenumber,jdbcType=INTEGER}, #{xxxlsizeleft,jdbcType=INTEGER}, #{xxxlsizemodify,jdbcType=INTEGER}, #{xxxlsizenumber,jdbcType=INTEGER}, #{xxlsizeleft,jdbcType=INTEGER}, #{xxlsizemodify,jdbcType=INTEGER}, #{xxlsizenumber,jdbcType=INTEGER}, #{xlsizeleft,jdbcType=INTEGER}, #{xlsizemodify,jdbcType=INTEGER}, #{xlsizenumber,jdbcType=INTEGER}, #{lsizeleft,jdbcType=INTEGER}, #{lsizemodify,jdbcType=INTEGER}, #{lsizenumber,jdbcType=INTEGER}, #{msizeleft,jdbcType=INTEGER}, #{msizemodify,jdbcType=INTEGER}, #{msizenumber,jdbcType=INTEGER}, #{ssizeleft,jdbcType=INTEGER}, #{ssizemodify,jdbcType=INTEGER}, #{ssizenumber,jdbcType=INTEGER}, #{orderdate,jdbcType=DATE}, #{stylename,jdbcType=VARCHAR}, #{styleid,jdbcType=VARCHAR}) 
+    on duplicate key update 
+    id = #{id,jdbcType=INTEGER}, totalsizeleft = #{totalsizeleft,jdbcType=INTEGER}, totalsizemodify = #{totalsizemodify,jdbcType=INTEGER}, totalsizenumber = #{totalsizenumber,jdbcType=INTEGER}, xxxlsizeleft = #{xxxlsizeleft,jdbcType=INTEGER}, xxxlsizemodify = #{xxxlsizemodify,jdbcType=INTEGER}, xxxlsizenumber = #{xxxlsizenumber,jdbcType=INTEGER}, xxlsizeleft = #{xxlsizeleft,jdbcType=INTEGER}, xxlsizemodify = #{xxlsizemodify,jdbcType=INTEGER}, xxlsizenumber = #{xxlsizenumber,jdbcType=INTEGER}, xlsizeleft = #{xlsizeleft,jdbcType=INTEGER}, xlsizemodify = #{xlsizemodify,jdbcType=INTEGER}, xlsizenumber = #{xlsizenumber,jdbcType=INTEGER}, lsizeleft = #{lsizeleft,jdbcType=INTEGER}, lsizemodify = #{lsizemodify,jdbcType=INTEGER}, lsizenumber = #{lsizenumber,jdbcType=INTEGER}, msizeleft = #{msizeleft,jdbcType=INTEGER}, msizemodify = #{msizemodify,jdbcType=INTEGER}, msizenumber = #{msizenumber,jdbcType=INTEGER}, ssizeleft = #{ssizeleft,jdbcType=INTEGER}, ssizemodify = #{ssizemodify,jdbcType=INTEGER}, ssizenumber = #{ssizenumber,jdbcType=INTEGER}, orderdate = #{orderdate,jdbcType=DATE}, stylename = #{stylename,jdbcType=VARCHAR}, styleid = #{styleid,jdbcType=VARCHAR}
+  </insert>
+  <insert id="upsertSelective" parameterType="com.nt.erp.model.Info">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into infos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="totalsizeleft != null">
+        totalsizeleft,
+      </if>
+      <if test="totalsizemodify != null">
+        totalsizemodify,
+      </if>
+      <if test="totalsizenumber != null">
+        totalsizenumber,
+      </if>
+      <if test="xxxlsizeleft != null">
+        xxxlsizeleft,
+      </if>
+      <if test="xxxlsizemodify != null">
+        xxxlsizemodify,
+      </if>
+      <if test="xxxlsizenumber != null">
+        xxxlsizenumber,
+      </if>
+      <if test="xxlsizeleft != null">
+        xxlsizeleft,
+      </if>
+      <if test="xxlsizemodify != null">
+        xxlsizemodify,
+      </if>
+      <if test="xxlsizenumber != null">
+        xxlsizenumber,
+      </if>
+      <if test="xlsizeleft != null">
+        xlsizeleft,
+      </if>
+      <if test="xlsizemodify != null">
+        xlsizemodify,
+      </if>
+      <if test="xlsizenumber != null">
+        xlsizenumber,
+      </if>
+      <if test="lsizeleft != null">
+        lsizeleft,
+      </if>
+      <if test="lsizemodify != null">
+        lsizemodify,
+      </if>
+      <if test="lsizenumber != null">
+        lsizenumber,
+      </if>
+      <if test="msizeleft != null">
+        msizeleft,
+      </if>
+      <if test="msizemodify != null">
+        msizemodify,
+      </if>
+      <if test="msizenumber != null">
+        msizenumber,
+      </if>
+      <if test="ssizeleft != null">
+        ssizeleft,
+      </if>
+      <if test="ssizemodify != null">
+        ssizemodify,
+      </if>
+      <if test="ssizenumber != null">
+        ssizenumber,
+      </if>
+      <if test="orderdate != null">
+        orderdate,
+      </if>
+      <if test="stylename != null">
+        stylename,
+      </if>
+      <if test="styleid != null">
+        styleid,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizeleft != null">
+        #{totalsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizemodify != null">
+        #{totalsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizenumber != null">
+        #{totalsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizeleft != null">
+        #{xxxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizemodify != null">
+        #{xxxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizenumber != null">
+        #{xxxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizeleft != null">
+        #{xxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizemodify != null">
+        #{xxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizenumber != null">
+        #{xxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizeleft != null">
+        #{xlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizemodify != null">
+        #{xlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizenumber != null">
+        #{xlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="lsizeleft != null">
+        #{lsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="lsizemodify != null">
+        #{lsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="lsizenumber != null">
+        #{lsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="msizeleft != null">
+        #{msizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="msizemodify != null">
+        #{msizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="msizenumber != null">
+        #{msizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="ssizeleft != null">
+        #{ssizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="ssizemodify != null">
+        #{ssizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="ssizenumber != null">
+        #{ssizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=DATE},
+      </if>
+      <if test="stylename != null">
+        #{stylename,jdbcType=VARCHAR},
+      </if>
+      <if test="styleid != null">
+        #{styleid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizeleft != null">
+        totalsizeleft = #{totalsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizemodify != null">
+        totalsizemodify = #{totalsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="totalsizenumber != null">
+        totalsizenumber = #{totalsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizeleft != null">
+        xxxlsizeleft = #{xxxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizemodify != null">
+        xxxlsizemodify = #{xxxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xxxlsizenumber != null">
+        xxxlsizenumber = #{xxxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizeleft != null">
+        xxlsizeleft = #{xxlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizemodify != null">
+        xxlsizemodify = #{xxlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xxlsizenumber != null">
+        xxlsizenumber = #{xxlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizeleft != null">
+        xlsizeleft = #{xlsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizemodify != null">
+        xlsizemodify = #{xlsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="xlsizenumber != null">
+        xlsizenumber = #{xlsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="lsizeleft != null">
+        lsizeleft = #{lsizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="lsizemodify != null">
+        lsizemodify = #{lsizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="lsizenumber != null">
+        lsizenumber = #{lsizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="msizeleft != null">
+        msizeleft = #{msizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="msizemodify != null">
+        msizemodify = #{msizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="msizenumber != null">
+        msizenumber = #{msizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="ssizeleft != null">
+        ssizeleft = #{ssizeleft,jdbcType=INTEGER},
+      </if>
+      <if test="ssizemodify != null">
+        ssizemodify = #{ssizemodify,jdbcType=INTEGER},
+      </if>
+      <if test="ssizenumber != null">
+        ssizenumber = #{ssizenumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null">
+        orderdate = #{orderdate,jdbcType=DATE},
+      </if>
+      <if test="stylename != null">
+        stylename = #{stylename,jdbcType=VARCHAR},
+      </if>
+      <if test="styleid != null">
+        styleid = #{styleid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
 </mapper>
