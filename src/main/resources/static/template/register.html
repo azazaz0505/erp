@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>登录注册</title>
+    <link href="/image/logoimg.png" rel="icon"></link><!--电网logo-->
+    <script type="text/javascript" src="/lib/jquery-v3-2-1.js"></script><!--JQuery引入-->
+    <script type="text/javascript" src="/lib/angular-1.5.8.js"></script><!--angularjs引入-->
+    <script type="text/javascript" src="/lib/angular-ui-router.js"></script><!--路由器功能使用-->
+    <script type="text/javascript" src="/lib/angular-ui-bootstrap.js"></script><!--分页功能使用-->
+    <script type="text/javascript" src="/lib/bootStrap/js/bootstrap.js"></script><!--分页功能使用-->
+    <script type="text/javascript" src="/lib/layui/layui.js"></script><!--经典模块化前端框架-->
+    <script type="text/javascript" src="/lib/layer/layer/layer.js"></script><!--弹出层组件-->
+    <script type="text/javascript" src="/template/card/js/register.js"></script><!--login  js-->
+
+    <link href="/lib/bootStrap/css/bootstrap.min.css" rel="stylesheet"></link><!--bootstrap样式-->
+    <link href="/lib/layui/layui.css" rel="stylesheet"></link><!--经典模块化前端框架样式-->
+    <link href="/css/login.css" rel="stylesheet"></link><!--login样式-->
+</head>
+<body>
+<div class="mainBox">
+    <div class="headTitle">
+        <img src="/image/logo.png"></img>
+        <span class="headTitleName">BETTER</span>
+    </div>
+    <div class="formBox">
+        <input type="hidden" id="J_down"></input>
+        <input type="text" placeholder="请输入用户名" class="inputBox" style="margin-top:45px;" id="name"></input>
+        <input type="password" placeholder="请输入密码" class="inputBox" style="margin-top: 18px;" id="psd"></input>
+        <!-- <div class="checkcode">
+            <input type="text" placeholder="输入验证码" id="J_codetext" class="inputcheckcode"  maxlength="4"></input>
+            <canvas class="J_codeimg" id="myCanvas" onclick="createCode()">
+                浏览器不支持验证码,请使用更新的版本
+            </canvas>
+        </div> -->
+        <input type="password" placeholder="请输入确认密码" class="inputBox" style="margin-top: 18px;" id="confirmpsd"></input>
+        <button class="inputButton" onclick="register()">注册</button>
+        
+		
+        
+    </div>
+</div>
+</body>
+</html>

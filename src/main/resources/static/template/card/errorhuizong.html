@@ -1,0 +1,63 @@
+
+<section>
+   <div class="page-header" style="margin:20px 0 2px;">
+  		<h1>出错汇总</h1>
+	</div>
+    <div>
+        <form class="form-inline" style="padding-top:15px;padding-bottom:15px" role="form">
+                
+                <div class="form-group">
+			        <div class="input-group date"  style="width:180px" id="orderdate">
+			            <input type='text' class="form-control" placeholder="请选择日期" id="datetext"/>  
+			            <span class="input-group-addon">  
+			                <span class="glyphicon glyphicon-calendar"></span>  
+			            </span>  
+			        </div>
+	   		 	</div>
+                
+                <button ng-click="toSearch()" style="border:none" class="btn btn-info">
+	       			<span class="glyphicon glyphicon-search"></span> 查询
+	     		</button>
+              
+        </form>
+    </div>
+
+    <div>
+    <table id="tb_report">
+    </table>
+    </div>
+    <!--修改配置-->
+    <div class="modal fade" id="configEdit">
+        <div class="col-md-12" style="margin-top:180px">
+            <div class="orgDetail-edit">
+                <div class="row">
+                    <div class="col-xs-6">{{title}}</div>
+                    <div class="col-xs-6 text-right bt-span">
+                        <span class="remove" data-dismiss="modal">&times;</span>
+                    </div>
+                </div>
+                <div class="orgAdd-body">
+                    <input type="hidden" ng-model="sysInfoTemp.sysuuid">
+                    <div class="row" >
+                        <div class="col-xs-4 text-left t">服务ID</div>
+                        <div class="col-xs-8">
+                            <input class="isDisabled" id="serviceid" type="text" name="serviceid" ng-model="serviceInfoTemp.serviceid">
+                        </div>
+                    </div>
+                  
+                    <div class="row" >
+                        <div class="col-xs-4 text-left t">服务名称</div>
+                        <div class="col-xs-8">
+                            <input class="isDisabled" id="servicename" type="text" name="servicename" ng-model="serviceInfoTemp.servicename">
+                        </div>
+                    </div>
+                </div>
+                <div class="row orgAdd-foot">
+                    <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
+                    <button id="saveBtn" ng-click="submit()" class="btn  btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改配置-->
+</section>

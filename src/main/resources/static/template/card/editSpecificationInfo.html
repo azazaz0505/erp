@@ -1,0 +1,61 @@
+<section>
+    <p class="OwnerManage"><span>编辑 / 标准规范</span></p>
+    <div class="row add-search" id="configEdit">
+        <div class="col-md-12">
+            <div class="orgAdd-body">
+                <div class="row">
+                    <div class="col-xs-2 text-left t">ID</div>
+                    <div class="col-xs-4">
+                        <input class="isDisabled" id="uuid" type="text" name="uuid"
+                               ng-model="dataTemp.uuid">
+                    </div>
+                    <div class="col-xs-2 text-left t">父ID</div>
+                    <div class="col-xs-4">
+                        <input class="isDisabled" id="parentUuid" type="text" name="parentUuid"
+                               ng-model="dataTemp.parentUuid">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 text-left t">标题</div>
+                    <div class="col-xs-4">
+                        <input class="isDisabled" id="title" type="text" name="title"
+                               ng-model="dataTemp.title">
+                    </div>
+                    <div class="col-xs-2 text-left t">图标</div>
+                    <div class="col-xs-4">
+                        <input class="isDisabled" id="content" type="text" name="content"
+                               ng-model="dataTemp.content">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 text-left t">类型</div>
+                    <div class="col-xs-4">
+                        <input class="isDisabled" id="type" type="text" name="type"
+                               ng-model="dataTemp.type">
+                    </div>
+                    <div class="col-xs-2 text-left t">时间</div>
+                    <div class="col-xs-4">
+                        <div class="controls input-append date form_datetime" data-date="2017-07-11T05:25:07Z">
+                            <input class="isDisabled" id="cardtime" type="text" name="publishTime"
+                                   ng-model="dataTemp.publishTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 text-left t">类型</div>
+                    <div class="col-xs-10">
+                        <script id="editor" name="editor" type="text/plain">
+                        </script>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+                        <button id="saveBtn" ng-click="submit()" class="btn  btn-primary">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改配置-->
+</section>

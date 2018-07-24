@@ -1,0 +1,187 @@
+
+<section>
+    <!-- <p class="OwnerManage">裁剪管理</p> -->
+    <div class="page-header" style="margin:20px 0 2px;">
+  		<h1>剪裁管理</h1>
+	</div>
+    <div>
+    <form class="form-inline" style="padding-top:15px;padding-bottom:15px" role="form" >
+    
+	     <div class="form-group" >
+	        <input  type="text" class="form-control" placeholder="请输入款号" style="width:180px" id="styleid"></input>
+	     </div>
+	     <div class="form-group">
+	         <input  type="text" class="form-control" placeholder="请输入款名" style="width:180px" id="stylename"></input>
+	     </div>
+	     <div class="form-group">
+	        <div class="input-group date"  style="width:180px" id="orderdate">
+	            <input type='text' class="form-control" placeholder="请选择日期" id="datetext"/>  
+	            <span class="input-group-addon">  
+	                <span class="glyphicon glyphicon-calendar"></span>  
+	            </span>  
+	        </div>
+	    </div>
+	    
+	     <button  ng-click="toSearch()" style="border:none" class="btn btn-info">
+	       <span class="glyphicon glyphicon-search"></span> 查询
+	     </button>
+                    
+	 </form>
+ </div>   
+    
+    <div>
+    <table id="tb_report" >
+        <thead>
+            <tr style="height:10px">
+            	<th data-formatter="operateFormatter" rowspan="2" class="text-center" data-valign="middle" data-halign="center" style="width:10px">序号</th>
+           		<th data-field="styleid" rowspan="2" class="text-center" data-valign="middle" data-halign="center"  style="width:30px">款号</th>
+           		<th data-field="color"  rowspan="2" class="text-center" data-valign="middle" data-halign="center" style="width:10px">颜色</th>
+           		<th data-field="orderdate" data-formatter="formatedate" rowspan="2" class="text-center" data-valign="middle" data-halign="center" style="width:20px">订单时间</th> 
+           		<th data-field="stylename" rowspan="2" class="text-center" style="width:200px" data-valign="middle" data-halign="center">款名</th>
+           		<th colspan="3" rowspan="1" class="text-center">S</th>
+           		<th colspan="3" rowspan="1" class="text-center">M</th>
+           		<th colspan="3" rowspan="1" class="text-center">L</th>
+           		<th colspan="3" rowspan="1" class="text-center">XL</th>
+           		<th colspan="3" rowspan="1" class="text-center">XXL</th>
+           		<th colspan="3" rowspan="1" class="text-center">XXXL</th>
+           		<th colspan="3" rowspan="1" class="text-center">合计</th>
+            </tr>
+           
+			<tr>
+				<th rowspan="1" data-field="ssizenumber" style="width:30px"class="text-center">
+           			<span class="iconfont icon-ico-order"></span>
+           		</th>
+           		<th rowspan="1" data-field="ssizemodify" style="width:30px" class="text-center">
+           			<span class="iconfont icon-icon_zhengque"></span>
+           		</th>
+           		<th rowspan="1" data-field="ssizeleft" style="width:30px" class="text-center">
+           			<i class="iconfont icon-icon_cuowu"></i>
+           		</th>
+           		
+           		<th  rowspan="1" data-field="msizenumber" style="width:30px" class="text-center" >
+           			<div ><i class="iconfont icon-ico-order"></i></div>
+           		</th>
+           		<th  rowspan="1" data-field="msizemodify" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-icon_zhengque"></i></div>
+           		</th>
+           		<th  rowspan="1" data-field="msizeleft" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-icon_cuowu"></i></div>
+           		</th>
+           		
+           		<th  rowspan="1" data-field="lsizenumber" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-ico-order"></i></div>
+           		</th>
+           		<th  rowspan="1" data-field="lsizemodify" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-icon_zhengque"></i></div>
+           		</th>
+           		<th  rowspan="1" data-field="lsizeleft" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-icon_cuowu"></i></div>
+           		</th>
+           		
+           		<th  rowspan="1" data-field="xlsizenumber" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-ico-order"></i></div>
+           		</th>
+           		<th  rowspan="1" data-field="xlsizemodify" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-icon_zhengque"></i></div>
+           		</th>
+           		<th  rowspan="1" data-field="xlsizeleft" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-icon_cuowu"></i></div>
+           		</th>
+           		
+           		<th  rowspan="1" data-field="xxlsizenumber" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-ico-order"></i></div>
+           		</th>
+           		<th  rowspan="1" data-field="xxlsizemodify" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-icon_zhengque"></i></div>
+           		</th>
+           		<th rowspan="1" data-field="xxlsizeleft" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-icon_cuowu"></i></div>
+           		</th>
+           		
+           		<th rowspan="1" data-field="xxxlsizenumber" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-ico-order"></i></div>
+           		</th>
+           		<th rowspan="1" data-field="xxxlsizemodify" style="width:30px" class="text-center" >
+           			<div class="cell"><i class="iconfont icon-icon_zhengque"></i></div>
+           		</th>
+           		<th rowspan="1" data-field="xxxlsizeleft" style="width:30px" class="text-center" >
+           			<div class="cell"><i class="iconfont icon-icon_cuowu"></i></div>
+           		</th>
+           		
+           		<th rowspan="1" data-field="totalsizenumber" style="width:30px" class="text-center" >
+           			<div><i class="iconfont icon-ico-order"></i></div>
+           		</th>
+           		<th rowspan="1" data-field="totalsizemodify" style="width:30px" class="text-center" >
+           			<div class="cell"><i class="iconfont icon-icon_zhengque"></i></div>
+           		</th>
+           		<th rowspan="1" data-field="totalsizeleft" style="width:30px" class="text-center" >
+           			<div class="cell"><i class="iconfont icon-icon_cuowu"></i></div>
+           		</th>
+           		
+			</tr>
+        </thead>
+     
+    </table>
+    </div>
+    <script>
+    	 //查询获取的数据序号递增
+	    function operateFormatter(value,row,index) {
+	        return index+1;
+	    } 
+    	//格式化后台的日期，把时间转为日期格式
+	     function formatedate(value,row,index){
+		    var date = new Date(value);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+	        Y = date.getFullYear() + '-';
+	        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+	        D = date.getDate() + ' ';
+	        /*h = date.getHours() + ':';
+	        m = date.getMinutes() + ':';
+	        s = date.getSeconds();*/
+	        return Y+M+D;
+    	}  
+        
+   </script>
+    <!--  </div> -->
+    <!--分页控件-->
+    <!-- <div class="pagination-list">
+        <ul uib-pagination id="pagination" ng-change="pageChanged()" total-items="totalItems" ng-model="currentPage"
+            max-size="maxSize"
+            class="pagination-sm"
+            boundary-links="true" items-per-page="20" num-pages="numPages"></ul>
+        <pre>页数: {{currentPage}} / {{numPages}}</pre>
+    </div> -->
+    <!--分页控件结束-->
+    <!--修改配置-->
+    <div class="modal fade" id="configEdit">
+        <div class="col-md-12" style="margin-top:180px">
+            <div class="orgDetail-edit">
+                <div class="row">
+                    <div class="col-xs-6">{{title}}</div>
+                    <div class="col-xs-6 text-right bt-span">
+                        <span class="remove" data-dismiss="modal">&times;</span>
+                    </div>
+                </div>
+                <div class="orgAdd-body">
+                    <input type="hidden" ng-model="sysInfoTemp.sysuuid">
+                    <div class="row" >
+                        <div class="col-xs-4 text-left t">服务ID</div>
+                        <div class="col-xs-8">
+                            <input class="isDisabled" id="serviceid" type="text" name="serviceid" ng-model="serviceInfoTemp.serviceid">
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-4 text-left t">服务名称</div>
+                        <div class="col-xs-8">
+                            <input class="isDisabled" id="servicename" type="text" name="servicename" ng-model="serviceInfoTemp.servicename">
+                        </div>
+                    </div>
+                </div>
+                <div class="row orgAdd-foot">
+                    <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
+                    <button id="saveBtn" ng-click="submit()" class="btn  btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改配置-->
+</section>

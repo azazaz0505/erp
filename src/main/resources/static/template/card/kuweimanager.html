@@ -1,0 +1,106 @@
+
+<section>
+    <div class="page-header" style="margin:20px 0 2px;">
+  		<h1>库位管理</h1>
+	</div>
+    <div>
+    <form class="form-inline" style="padding-top:15px;padding-bottom:15px" role="form">
+	     <button style="border:none"  onclick="saveOrUpdataKuWei(-1)" class="btn btn-info">
+	       	新增库位
+	     </button>
+	     
+	     <button style="border:none" onclick="deleteSelectKuweis()" class="btn btn-danger">
+	                   删除选中项
+	     </button>
+                    
+ </form>
+ </div>   
+	
+	<!-- 通过bootstraptable加载数据 -->
+	<div>
+    <table id="tb_report">
+    </table>
+    </div>
+    <!--修改配置-->
+    <div class="modal fade" id="addKuwei">
+        <div class="col-xs-12" style="margin-top:180px">
+            <div class="orgDetail-edit">
+                <div class="row">
+                    <div class="col-xs-6"><p id="content"></p></div>
+                    <div class="col-xs-6 text-right bt-span">
+                        <span class="remove" data-dismiss="modal">&times;</span>
+                    </div>
+                </div>
+                <div class="orgAdd-body">
+                    <input type="hidden" ng-model="sysInfoTemp.sysuuid">
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库地址:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="cangkuaddress" type="text" name="cangkuaddress">
+                        </div>
+                       
+                    </div>
+
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库库名:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="cangkuname" type="text" name="cangkuname" ng-model="ckmanagertmp.cangkuname">
+                        </div>
+                    </div>
+                    
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库库位:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="kuwei" type="text" name="kuwei">
+                        </div>
+                    </div>
+                    
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库层次:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="cengci" type="text" name="cengci">
+                        </div>
+                    </div>
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库容量:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="rongliang" type="text" name="rongliang">
+                        </div>
+                    </div>
+                </div>
+                <div class="row orgAdd-foot">
+                    <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
+                    <button id="saveBtn" ng-click="submit()" class="btn  btn-info">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改配置-->
+    
+    <!-- 删除提示 -->
+    <div class="modal fade" id="delcfmOverhaul" role="dialog" tabindex="-1">
+       <div class="modal-dialog">
+                <div class="modal-content message_align">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="deletekuweicontent"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                            data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-info" aria-hidden="true"
+                           data-dismiss="modal" id="deleteHaulBtn" onclick="deleteHaulBtn()">确认</button>
+                    </div>
+                </div>                    
+        </div>           
+    </div>
+    
+    
+    <!-- 删除提示 -->
+</section>

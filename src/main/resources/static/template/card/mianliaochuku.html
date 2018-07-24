@@ -1,0 +1,100 @@
+
+<section>
+    <div class="page-header" style="margin:20px 0 2px;">
+  		<h1>面料出库</h1>
+	</div>
+    <div>
+    <form class="form-inline" style="padding-top:15px;padding-bottom:15px" role="form">
+
+	     <button style="border:none"  onclick="saveOrUpdataService(-1)" class="btn btn-info">
+	       	新增出库单
+	     </button>
+	     
+	     <button style="border:none" onclick="deletemianliaos()" class="btn btn-danger">
+	                   删除选中项
+	     </button>
+                    
+ </form>
+ </div>  
+  
+ 	<div>
+	    <table id="tb_report">   
+	    </table>
+   </div>
+   
+    <!--修改配置-->
+    <div class="modal fade" id="addChuKu">
+        <div class="col-xs-12" style="margin-top:180px">
+            <div class="orgDetail-edit">
+                <div class="row">
+                    <div class="col-xs-6"><p id="chuKuTitle"></div>
+                    <div class="col-xs-6 text-right bt-span">
+                        <span class="remove" data-dismiss="modal">&times;</span>
+                    </div>
+                </div>
+                <div class="orgAdd-body">
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">出库单号:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="chukudanhao" type="text" name="chukudanhao">
+                        </div>
+                       
+                    </div>
+ 
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">出货仓库:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="chuhuocangku" type="text" name="chuhuocangku">
+                        </div>
+                    </div>
+                    
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">出库方式:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="chukufangshi" type="text" name="chukufangshi">
+                        </div>
+                    </div>
+                    
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">备注:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="beizhu" type="text" name="beizhu">
+                        </div>
+                    </div>
+                </div>
+                <div class="row orgAdd-foot">
+                    <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
+                    <button id="saveBtn" onclick="submit()" class="btn  btn-info">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改配置-->
+    
+    <!-- 删除提示 -->
+    <div class="modal fade" id="delcfmOverhaul" role="dialog" tabindex="-1">
+       <div class="modal-dialog">
+                <div class="modal-content message_align">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="deletetishicontent"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                            data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-info" aria-hidden="true"
+                         data-dismiss="modal" id="deleteHaulBtn" onclick="deleteHaulBtn()">确认</button>
+                    </div>
+                </div>                    
+        </div>           
+    </div>
+    
+    
+    <!-- 删除提示 -->
+</section>
