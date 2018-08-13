@@ -4,12 +4,25 @@
     <meta charset="UTF-8"></meta>
     <title>ERP纺织系统</title>
     <link href="/image/logoimg.png" rel="icon"></link><!--电网logo-->
-
-    <script type="text/javascript" src="/lib/jquery-v3-2-1.js"></script><!--JQuery引入-->
+    
+	<link href="/lib/bootStrap/css/bootstrap.min.css" rel="stylesheet"></link><!--bootstrap样式-->
+    <link href="/lib/bootStrap/css/bootstrap-theme.min.css" rel="stylesheet"></link><!--bootstrap样式-->
+    <link href="/lib/bootStrap/css/bootstrap-table.css" rel="stylesheet"></link><!--bootstrap-table样式-->
+    <link href="/lib/bootStrap/css/bootstrap-table.min.css" rel="stylesheet"></link><!--bootstrap-table样式-->
+    
+    <script type="text/javascript" src="/lib/jquery-1.11.1/jquery.js"></script><!--JQuery引入-->
+    <script type="text/javascript" src="/lib/jquery-1.11.1/jquery.min.js"></script><!--JQuery引入-->
     <script type="text/javascript" src="/lib/angular-1.5.8.js"></script><!--angularjs引入-->
     <script type="text/javascript" src="/lib/angular-ui-router.js"></script><!--路由器功能使用-->
     <script type="text/javascript" src="/lib/angular-ui-bootstrap.js"></script><!--分页功能使用-->
     <script type="text/javascript" src="/lib/bootStrap/js/bootstrap.js"></script><!--分页功能使用-->
+    <script type="text/javascript" src="/lib/bootStrap/js/bootstrap-table.js"></script><!--bootstrap table-->
+    <script type="text/javascript" src="/lib/bootStrap/js/bootstrap-table-export.js"> </script><!-- 导出 -->
+    <script type="text/javascript" src="/lib/bootStrap/js/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="/lib/bootStrap/js/bootstrap.min.js"></script>
+  
+    <script type="text/javascript" src="/lib/bootStrap/js/tableExport.js"></script><!-- 导出 -->
+    <script type="text/javascript" src="/lib/bootStrap/js/tableExport.min.js"></script><!-- 导出 -->
     <script type="text/javascript" src="/lib/layui/layui.js"></script><!--经典模块化前端框架-->
     <script type="text/javascript" src="/lib/layer/layer/layer.js"></script><!--弹出层组件-->
     <script type="text/javascript" src="/lib/jquery-datepair-master/jquery.timepicker.js"></script><!--time选择-->
@@ -21,7 +34,8 @@
 	<script type="text/javascript" src="/lib/bootStrap/js/bootstrap-datetimepicker.js"></script><!--日期选择-->
     <script type="text/javascript" src="/lib/bootStrap/js/bootstrap-datetimepicker.zh-CN.js"></script><!--日期选择-->
     
-    <link href="/lib/bootStrap/css/bootstrap.min.css" rel="stylesheet"></link><!--bootstrap样式-->
+    
+    
     <link href="/lib/layui/layui.css" rel="stylesheet"></link><!--经典模块化前端框架样式-->
     <link href="/lib/jquery-datepair-master/jquery.timepicker.css" rel="stylesheet"></link><!--time选择-->
     <link href="/css/autoMatch.css" rel="stylesheet"></link><!--自动匹配样式-->
@@ -52,7 +66,7 @@
     <hr class="hx-mainBody-hr"> </hr>
     <aside ng-class="{'aside-t':reverse}">
         <!-- <ul class="list-unstyled hx-paletteLeft" id="hx-list"> -->
-        <ul class="list-unstyled hx-paletteLeft" id="hx-list">
+        <ul class="list-group hx-paletteLeft" id="hx-list">
         
             <li class="hx-paletteLeft-li">
             	<p class="hx-paletteItem" data-toggle="collapse" data-parent="#hx-list" href="#collapseOne">
@@ -99,8 +113,8 @@
             		
             	<div id="collapseThree" class="collapse">
 	                <ul>
-	                    <li><a ui-sref="cardInfo">资金管理</a></li>
-	                    <li><a ui-sref="cardInfo">供应商往来</a></li>  
+	                    <li><a ui-sref="zichanmanager">资金管理</a></li>
+	                    <li><a ui-sref="gyswanglai">供应商往来</a></li>  
 	                </ul>
                 </div>           
             </li>
@@ -131,6 +145,18 @@
 
 <!--库位管理-->
 <script type="text/javascript" src="/template/card/js/kuweimanager.js"></script>
+
+<!--面料出库-->
+<script type="text/javascript" src="/template/card/js/mianliaochuku.js"></script>
+
+<!--面料入库-->
+<script type="text/javascript" src="/template/card/js/mianliaoruku.js"></script>
+
+<!--资产管理-->
+<script type="text/javascript" src="/template/card/js/zichanmanager.js"></script>
+
+<!--供应商往来-->
+<script type="text/javascript" src="/template/card/js/gyswanglai.js"></script>
 
 <!--标准规范-->
 <script type="text/javascript" src="/template/card/js/specificationInfo.js"></script>
