@@ -40,7 +40,7 @@ public class MianLiaoChuKuController {
             return json;
         }
 
-        // 后续改成按条件查询
+        // 在此添加条件查询
         MianLiaoChuKuExample example = new MianLiaoChuKuExample();
         List<MianLiaoChuKu> list = mianLiaoChuKuMapper.selectByExample(example);
 

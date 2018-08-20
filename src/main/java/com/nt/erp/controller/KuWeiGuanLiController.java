@@ -40,7 +40,7 @@ public class KuWeiGuanLiController {
             return json;
         }
 
-        // 后续改成按条件查询
+        // 在此添加条件查询
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
         List<KuWeiGuanLi> list = kuWeiGuanLiMapper.selectByExample(example);
 

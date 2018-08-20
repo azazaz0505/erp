@@ -40,7 +40,7 @@ public class GongYingShangWangLaiController {
             return json;
         }
 
-        // 添加查询条件
+        // 在此添加查询条件
         GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();
         List<GongYingShangWangLai> list = gongYingShangWangLaiMapper.selectByExample(example);
 

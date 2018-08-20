@@ -40,7 +40,7 @@ public class ZiChanGuanLiMapperController {
             return json;
         }
 
-        // 后续改成按条件查询
+        // 在此添加条件查询
         ZiChanGuanLiExample example = new ZiChanGuanLiExample();
         List<ZiChanGuanLi> list = ziChanGuanLiMapper.selectByExample(example);
 

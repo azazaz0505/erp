@@ -39,7 +39,7 @@ public class InfoController {
             return json;
         }
 
-        // 后续改成按条件查询
+        // 在此添加条件查询
         InfoExample example = new InfoExample();
         List<Info> list = infoMapper.selectByExample(example);
 
