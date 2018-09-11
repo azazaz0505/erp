@@ -42,9 +42,11 @@ public class ZiChanGuanLiMapperController {
 
         // 在此添加条件查询
         ZiChanGuanLiExample example = new ZiChanGuanLiExample();
-        List<ZiChanGuanLi> list = ziChanGuanLiMapper.selectByExample(example);
-
-        json.put("infos", list);
+        List<ZiChanGuanLi> rows = ziChanGuanLiMapper.selectByExample(example);
+        long total = ziChanGuanLiMapper.countByExample(example);
+        
+        json.put("rows", rows);
+        json.put("total", total);
         json.put("retmsg", "成功");
         json.put("retcode", "1");
         return json;

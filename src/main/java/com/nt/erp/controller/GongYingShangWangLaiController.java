@@ -42,9 +42,10 @@ public class GongYingShangWangLaiController {
 
         // 在此添加查询条件
         GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();
-        List<GongYingShangWangLai> list = gongYingShangWangLaiMapper.selectByExample(example);
-
-        json.put("infos", list);
+        List<GongYingShangWangLai> rows = gongYingShangWangLaiMapper.selectByExample(example);
+        long total = gongYingShangWangLaiMapper.countByExample(example);
+        json.put("rows", rows);
+        json.put("total", total);
         json.put("retmsg", "成功");
         json.put("retcode", "1");
         return json;

@@ -41,9 +41,11 @@ public class InfoController {
 
         // 在此添加条件查询
         InfoExample example = new InfoExample();
-        List<Info> list = infoMapper.selectByExample(example);
+        List<Info> rows = infoMapper.selectByExample(example);
+        long total = infoMapper.countByExample(example);
 
-        json.put("infos", list);
+        json.put("rows", rows);
+        json.put("total", total);
         json.put("retmsg", "成功");
         json.put("retcode", "1");
         return json;

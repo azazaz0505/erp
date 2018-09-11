@@ -42,9 +42,11 @@ public class KuWeiGuanLiController {
 
         // 在此添加条件查询
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
-        List<KuWeiGuanLi> list = kuWeiGuanLiMapper.selectByExample(example);
-
-        json.put("infos", list);
+        List<KuWeiGuanLi> rows = kuWeiGuanLiMapper.selectByExample(example);
+        long total = kuWeiGuanLiMapper.countByExample(example);
+        
+        json.put("rows", rows);
+        json.put("total", total);
         json.put("retmsg", "成功");
         json.put("retcode", "1");
         return json;

@@ -42,9 +42,11 @@ public class MianLiaoRuKuMapperController {
 
         // 在此添加条件查询
         MianLiaoRuKuExample example = new MianLiaoRuKuExample();
-        List<MianLiaoRuKu> list = mianLiaoRuKuMapper.selectByExample(example);
-
-        json.put("infos", list);
+        List<MianLiaoRuKu> rows = mianLiaoRuKuMapper.selectByExample(example);
+        long total = mianLiaoRuKuMapper.countByExample(example);
+        json.put("rows", rows);
+        json.put("total", total);
+        
         json.put("retmsg", "成功");
         json.put("retcode", "1");
         return json;
