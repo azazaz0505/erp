@@ -25,3 +25,5 @@ CREATE TABLE `login` (
   `login_uuid` varchar(125),
   PRIMARY KEY (`loginaccount`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+INSERT INTO `login` VALUES ('admin', 'WVdSdGFXND0=', '111');
+INSERT INTO `login` VALUES ('guest', 'WjNWbGMzUT0=', null);
