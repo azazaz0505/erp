@@ -1,18 +1,18 @@
 package com.nt.erp.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nt.erp.bean.InfoBean;
 import com.nt.erp.dao.GongYingShangWangLaiMapper;
 import com.nt.erp.model.GongYingShangWangLai;
 import com.nt.erp.model.GongYingShangWangLaiExample;
@@ -25,20 +25,9 @@ public class GongYingShangWangLaiController {
 
     //入参报文需要根据前台需要修改
     @RequestMapping(value = "/gongYingShangWangLai/select", method = RequestMethod.POST)
-    public JSONObject info(@RequestBody @Validated InfoBean infoBean, BindingResult bindingResult) {
+    public JSONObject info(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
 
         JSONObject json = new JSONObject();
-        if (bindingResult.hasErrors()) {
-            StringBuilder sb = new StringBuilder();
-            for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                sb.append(fieldError.getDefaultMessage()).append(" ");
-            }
-
-            json.put("retmsg", sb.toString());
-            json.put("retcode", "0");
-
-            return json;
-        }
 
         // 在此添加查询条件
         GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();
