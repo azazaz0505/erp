@@ -52,6 +52,8 @@ public class Info {
     private String stylename;
 
     private String styleid;
+    
+    private String color;
 
     public Integer getId() {
         return id;
@@ -288,7 +290,15 @@ public class Info {
         return sb.toString();
     }
 
-    /**
+    public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	/**
      * 这是Mybatis Generator拓展插件生成的类(请勿删除).
      * This class corresponds to the database table infos
      *
