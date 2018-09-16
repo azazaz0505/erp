@@ -86,32 +86,10 @@
                         </div>
                     </div>
                                       
-                    <!--
-                    
-                    <div class="row" >
-                        <div class="col-xs-4 text-left t">应用包名</div>
-                        <div class="col-xs-8">
-                            <input class="isDisabled" id="pkgname" type="text" name="pkgname" ng-model="cardInfoTemp.pkgname">
-                        </div>
-                    </div>
-                    <div class="row" >
-                        <div class="col-xs-4 text-left t">应用入口</div>
-                        <div class="col-xs-8">
-                            <input class="isDisabled" id="entryactivity" type="text" name="entryactivity" ng-model="cardInfoTemp.entryactivity">
-                        </div>
-                    </div>
-                    
-                    <div class="row" >
-                        <div class="col-xs-4 text-right" style="padding-top:7px">服务名称</div>
-                        <div class="col-xs-6">
-                            <input class="isDisabled" id="servicename" type="text" name="servicename" ng-model="serviceInfoTemp.servicename">
-                        </div>
-                    </div>
-                    -->
                 </div>
                 <div class="row orgAdd-foot">
                     <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
-                    <button id="saveBtn" onclick="submit()" class="btn  btn-info">保存</button>
+                    <button id="saveBtn" onclick="submitZiChan()" data-dismiss="modal" class="btn  btn-info">保存</button>
                 </div>
             </div>
         </div>
@@ -136,7 +114,7 @@
                         <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消</button>
                         <button type="button" class="btn btn-info" aria-hidden="true"
-                          data-dismiss="modal"  id="deleteHaulBtn" onclick="deleteHaulBtn()">确认</button>
+                          data-dismiss="modal"  id="deleteZiChanBtn" onclick="deleteZiChanBtn()">确认</button>
                     </div>
                 </div>                    
         </div>           

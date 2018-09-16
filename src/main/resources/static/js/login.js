@@ -46,7 +46,7 @@ function login() {
         },
         success: function (data) {
             if (null != data.retcode && "1" == data.retcode) {
-                sessionStorage.setItem("tokenId", data.tokenId);
+                //sessionStorage.setItem("tokenId", data.tokenId);
                 sessionStorage.setItem("name", data.name);
                 window.location.href = "iniIndex";
             } else {

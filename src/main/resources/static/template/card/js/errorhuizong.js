@@ -11,18 +11,13 @@ platform.controller('errorhuizong', ['$scope', '$rootScope', '$http', '$window',
         $scope.serviceModes = [{id: 0, name: '穿透模式'}, {id: 1, name: '代理模式'}];
         $scope.isCaches = [{id: 0, name: '不缓存'}, {id: 1, name: '缓存'}];
 
-        /*分页初始化参数设置*/
-        $scope.maxSize;//显示页码的个数
-        //$scope.totalItems = 45;//列表条数
-        $scope.currentPage = 1;//当前正在显示的页数
-
         /*点击查询按钮*/
         $scope.toSearch = function () {
         	var opt = {
         	        url: $rootScope.apiHome + '/info',
         	        silent: true,
         	        query:{
-        	        	 //orderdate:$("#datetext").val()
+        	        	 orderdate:$("#datetext").val()
         	        }
         	    };
 
@@ -50,7 +45,7 @@ platform.controller('errorhuizong', ['$scope', '$rootScope', '$http', '$window',
         //先销毁表格  
         $('#tb_report').bootstrapTable('destroy'); 
         $("#tb_report").bootstrapTable({ // 对应table标签的id
-            url: $rootScope.apiHome + '/info',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
+            url: $rootScope.apiHome + '/errorcollect',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
             method: "post",                     //使用get请求到服务器获取数据,post大小写有区别
             dataType: "json",
             locale: 'zh-CN',
@@ -140,30 +135,16 @@ platform.controller('errorhuizong', ['$scope', '$rootScope', '$http', '$window',
                     valign: 'middle',
                     width: 150,
                 },
-               /* {
-                	title:'操作',
-                	align: 'center',
-                    valign: 'middle',
-                	width: 150,
-                	formatter:function(value, row, index){
-                		var result = "";
-                		result = '<p class="bt-span">'
-                    	+ '<span title="编辑" ng-click="saveOrUpdataService(\''+index+'\')" class="glyphicon glyphicon-pencil"></span>'
-                        + '<span title="查看" ng-click="detail(\''+index+'\')" class="glyphicon glyphicon-list-alt"></span>'
-                        + '<span title="删除" ng-click="deleteData(\''+index+'\')" class="glyphicon glyphicon-remove-circle"></span> </p>';
-                		return result;
-                	},
-                },*/
               ],
             onLoadSuccess: function(){  //加载成功时执行
             	console.info("数据加载 成功！");
             },
             onLoadError: function(){  //加载失败时执行
                  // console.info("加载数据失败");
-            	layer.msg('加载数据失败', {
+            	/*layer.msg('加载数据失败', {
                     time: 1000,
                     icon: 0
-                });
+                });*/
             }
 
       });
@@ -174,59 +155,6 @@ platform.controller('errorhuizong', ['$scope', '$rootScope', '$http', '$window',
     }]
 );
 
-
-
-function initServiceInfo($scope, index) {
-    $scope.serviceInfoTemp.serviceid = (null == index || -1 == index) ? null : $scope.datalist[index].serviceId;
-//    $scope.cardInfoTemp.cardtitle = (null == index || -1 == index) ? null : $scope.datalist[index].cardTitle;
-//    $scope.cardInfoTemp.cardcontent = (null == index || -1 == index) ? null : $scope.datalist[index].cardContent;
-//    $scope.cardInfoTemp.cardurl = (null == index || -1 == index) ? null : $scope.datalist[index].cardUrl;
-//    $scope.cardInfoTemp.appid = (null == index || -1 == index) ? null : $scope.datalist[index].appId;
-//    $scope.cardInfoTemp.pkgname = (null == index || -1 == index) ? null : $scope.datalist[index].pkgName;
-//    $scope.cardInfoTemp.entryactivity= (null == index || -1 == index) ? null : $scope.datalist[index].entryActivity;
-    $scope.serviceInfoTemp.servicename = (null == index || -1 == index) ? null : $scope.datalist[index].serviceName;
-//    $scope.cardInfoTemp.cardtype = (null == index || -1 == index) ? null : $scope.datalist[index].cardType;
-//    $scope.cardInfoTemp.cardtime = (null == index || -1 == index) ? null : $scope.datalist[index].cardTime;
-    
-    
-    
-    
-}
-
-
-
-/*新的查询剪裁管理数据*/
-function getServiceInfoList($rootScope, $scope) {
-    var data = {
-        "currentPage":$scope.currentPage,
-        "orderdate":$scope.orderdate,
-        "count":"20"
-    };
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: $rootScope.apiHome + '/info',
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(data),
-        async: false,
-        error: function (request) {
-            layer.msg('请求失败', {
-                time: 1000,
-                icon: 0
-            });
-        },
-        success: function (data) {
-            $scope.datalist = data.infos;
-            //$scope.totalItems = data.pagination.totalItems;
-            //$scope.numPages = data.pagination.totalPage;
-            //$scope.numPages = 1;
-            //$scope.currentPage = $scope.currentPage;
-        }
-    });
-    //查询时隐藏弹出窗口
-    $('#configEdit').modal('hide');
-}
 
 /*启用/禁用弹窗内的控件*/
 function isDisabled(disabled) {

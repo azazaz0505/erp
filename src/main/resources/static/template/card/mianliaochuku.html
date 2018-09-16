@@ -6,11 +6,11 @@
     <div>
     <form class="form-inline" style="padding-top:15px;padding-bottom:15px" role="form">
 
-	     <button style="border:none"  onclick="saveOrUpdataService(-1)" class="btn btn-info">
+	     <button style="border:none"  onclick="saveOrUpdataChuKu(-1)" class="btn btn-info">
 	       	新增出库单
 	     </button>
 	     
-	     <button style="border:none" onclick="deletemianliaos()" class="btn btn-danger">
+	     <button style="border:none" onclick="deleteChuKus()" class="btn btn-danger">
 	                   删除选中项
 	     </button>
                     
@@ -64,7 +64,7 @@
                 </div>
                 <div class="row orgAdd-foot">
                     <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
-                    <button id="saveBtn" onclick="submit()" class="btn  btn-info">保存</button>
+                    <button id="saveBtn" onclick="submitChuKu()" data-dismiss="modal" class="btn  btn-info">保存</button>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
     <!--修改配置-->
     
     <!-- 删除提示 -->
-    <div class="modal fade" id="delcfmOverhaul" role="dialog" tabindex="-1">
+    <div class="modal fade" id="delChuKuTiShi" role="dialog" tabindex="-1">
        <div class="modal-dialog">
                 <div class="modal-content message_align">
                     <div class="modal-header">
@@ -89,7 +89,7 @@
                         <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消</button>
                         <button type="button" class="btn btn-info" aria-hidden="true"
-                         data-dismiss="modal" id="deleteHaulBtn" onclick="deleteHaulBtn()">确认</button>
+                         data-dismiss="modal" id="deleteChuKuBtn" onclick="deleteChuKuBtn()">确认</button>
                     </div>
                 </div>                    
         </div>           

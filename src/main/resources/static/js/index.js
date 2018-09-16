@@ -42,10 +42,10 @@ platform.controller('index', ['$scope', '$rootScope', '$http', '$window', '$loca
     // $rootScope.apiHome = "http://localhost:8080/gateway/";
     $rootScope.apiHome = "";
 
-     if (null == sessionStorage.getItem("tokenId")) {
+    /* if (null == sessionStorage.getItem("tokenId")) {
          console.log("未登录");
          window.location.href = "iniLogin";
-     }
+     }*/
 
     $scope.name = sessionStorage.getItem("name");
 

@@ -1,40 +1,15 @@
 platform.controller('kuweimanager', ['$scope', '$rootScope', '$http', '$window',
     function ($scope, $rootScope, $http, $window) {
         $window.scroll(0, 0);
-      
-        /*点击修改按钮，如果是新增则新增，否则修改*/
-        $scope.submit = function () {
-            // 先收集数据
-            var data =
-                {
-                    "cangkuaddress": $scope.ckmanagertmp.cangkuaddress,
-                    "kuwei": $scope.ckmanagertmp.kuwei,
-                    "cengci": $scope.ckmanagertmp.cengci,
-                    "rongliang": $scope.ckmanagertmp.rongliang,
-                    "cangkuname": $scope.ckmanagertmp.cangkuname
 
-                };
-            if (null == idx || idx == -1) {
-                //新增数据
-                saveServiceInfo($rootScope, $scope, data);
-                return;
-            }
-            //更新数据
-            updateServiceInfo($rootScope, $scope, data);
-        };
-        
-      
- 
         //加载进来子界面隐藏
         $("#addKuwei").modal({show:false});
-        $("#delcfmOverhaul").modal({show:false});
+        $("#delKuWeiTiShi").modal({show:false});
 
-        
-        
         //先销毁表格  
         $('#tb_report').bootstrapTable('destroy'); 
         $("#tb_report").bootstrapTable({ // 对应table标签的id
-            url: $rootScope.apiHome + '/info',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
+            url: $rootScope.apiHome + '/kuWeiGuanLi/select',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
             method: "post",                     //使用get请求到服务器获取数据,post大小写有区别
             dataType: "json",
             locale: 'zh-CN',
@@ -78,14 +53,20 @@ platform.controller('kuweimanager', ['$scope', '$rootScope', '$http', '$window',
                     { 
                   	  return index + 1;
                     } 
-                  },  
+                  },
+                  { 
+                	  field: 'uuid', 
+                      width: 80, 
+                      align: "center", 
+                      visible:false, 
+                    },
                   {
-                      field: 'styleid', // 返回json数据中的name 
+                      field: 'address', // 返回json数据中的name 
                       title: '仓库地址', // 表格表头显示文字  
                       align: 'center', // 左右居中
                       valign: 'middle', // 上下居中                   
                   }, {
-                      field: 'orderdate',
+                      field: 'name',
                       title: '仓库名',   
                       align: 'center',
                       valign: 'middle',
@@ -103,16 +84,16 @@ platform.controller('kuweimanager', ['$scope', '$rootScope', '$http', '$window',
                       
                   },
                   {
-                      field: 'stylename',
+                      field: 'level',
                       title: '库位',  
                       align: 'center',
                       valign: 'middle',
                   },{
-                      field: 'styleid',
+                      field: 'capacity',
                       title: '层次',          
                       align: 'center',
                       valign: 'middle',
-                      formatter: function (value, row, index){ // 单元格格式化函数
+                      /*formatter: function (value, row, index){ // 单元格格式化函数
                           var text = '-';
                           if (value == 1) {
                               text = "交易成功";
@@ -120,9 +101,9 @@ platform.controller('kuweimanager', ['$scope', '$rootScope', '$http', '$window',
                               text = "交易失败";
                           } 
                           return text;
-                      }
+                      }*/
                   }, {
-                  	field: 'stylename',
+                  	field: 'operation',
                       title: '容量',  
                       align: 'center',
                       valign: 'middle',
@@ -166,43 +147,40 @@ function initkuwei(index) {
     $scope.ckmanagertmp.cengci  = (null == index || -1 == index) ? null : $scope.datalist[index].stylename;
     $scope.ckmanagertmp.rongliang  = (null == index || -1 == index) ? null : $scope.datalist[index].ssizenumber;*/
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];//获取该行的数据集
-	$('#cangkuaddress').val((null == index || -1 == index) ? null:rowdata.styleid);
+	$('#cangkuaddress').val((null == index || -1 == index) ? null:rowdata.address);
 
 }
 
 var checkids = [];
-
+var idxkwgl= 0;
 //点击提示删除框的确认按钮
 //$("#deleteHaulBtn").click(function() {
-function deleteHaulBtn(){
+function deleteKWBtn(){
 	var data =
     {
         //"serviceid": $scope.deleteid,
-         "tt": checkids
+         "uuids": checkids
     };
-	
-	//deleteServiceInfo($rootScope, $scope , data);
-	
+	deleteKuWeiInfo(data);	
 };
 
 //删除选中的行
 //$('#deleteSelectKuweis').click(function (){
 function deleteSelectKuweis(){
-	checkids=[];
-	
+	 checkids=[]; //初始化数组
 	 var rows = $("#tb_report").bootstrapTable('getSelections');
 	              for (var i = 0; i < rows.length; i++) {
-	            	  checkids[i]= rows[i].color;
+	            	  checkids[i]= rows[i].uuid;
 	              }
 	if(checkids.length<=0){        		
 		$('#deletekuweicontent').text('请选择要删除的记录！');
-		$("#deleteHaulBtn").hide();
+		$("#deleteKWBtn").hide();
 	}else{
 		$('#deletekuweicontent').text('您确认要删除信息吗？');
-		$("#deleteHaulBtn").show();
+		$("#deleteKWBtn").show();
 	}
 	
-	$("#delcfmOverhaul").modal({
+	$("#delKuWeiTiShi").modal({
 	        backdrop : 'static',
 	        keyboard : false
 	    });
@@ -210,9 +188,9 @@ function deleteSelectKuweis(){
 
 //点击修改或者新增
 function saveOrUpdataKuWei(index) {
-    // 开启所有禁用的input输入框
+	
+    //开启所有禁用的input输入框
     isDisabled(false);
-    //关闭卡片生成时间的输入框
    
     // 显示模块窗口，并且禁用点击外面关闭窗口
     $('#addKuwei').modal({
@@ -226,7 +204,8 @@ function saveOrUpdataKuWei(index) {
     	$('#content').text('添加库位');
     	$("saveBtn").show();
         //如果是添加则置空各输入框
-        initkuwei(index);
+        //initkuwei(index);
+    	idxkwgl = index;
         return;
     }
     $('#content').text('编辑库位');
@@ -235,26 +214,50 @@ function saveOrUpdataKuWei(index) {
     //将选中行的数据在下面的模态窗口中展示出来
     initkuwei(index);
 
-    //选中行的索引赋值给全局变量idx
-    idx = index;
+    //选中行的索引赋值给全局变量idxkwgl
+    idxkwgl = index;
 };
+
+
+/*点击确认按钮*/
+//$scope.submit = function () {
+function submit() {
+    // 先收集数据
+    var data =
+        {
+    		 "cangkuaddress": $("#cangkuaddress").val(),
+             "kuwei": $("#kuwei").val(),
+             "cengci": $("#cengci").val(),
+             "rongliang": $("#rongliang").val(),
+             "cangkuname": $("#cangkuname").val()
+        };
+    if (null == idxkwgl || idxkwgl == -1) {
+        //新增数据
+    	saveKuWeiInfo(data);
+        return;
+    }
+    //更新数据
+    updateKuWeiInfo(data);
+};
+
+
 
 //删除某一条
 //$scope.deleteData = function ($index) {
 function deleteKuWei(index) {
 	$("#deletekuweicontent").text("您确认要删除该条信息吗？");
-	$("#deleteHaulBtn").show();
-	$("#delcfmOverhaul").modal({
+	$("#deleteKWBtn").show();
+	$("#delKuWeiTiShi").modal({
 	        backdrop : 'static',
 	        keyboard : false
 	    });
 	checkids=[];
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];
-	checkids= rowdata.styleid;
+	checkids= rowdata.uuid;
 	/*var data = {
-		"styleid" : rowdata.styleid
+		"uuids" : checkids
 	};*/
-	//deleteServiceInfo(data);
+	//deleteKuWeiInfo(data);
 };
 
 
@@ -275,10 +278,10 @@ function detailKuWei(index){
 };
 
 /*插入单条数据*/
-function saveServiceInfo($rootScope, $scope, data) {
+function saveKuWeiInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/setServiceInfo',
+        url: '/kuWeiGuanLi/add',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -291,7 +294,8 @@ function saveServiceInfo($rootScope, $scope, data) {
         },
         success: function (data) {
             if (null != data && null != data.retcode && 1 == data.retcode) {
-                getServiceInfoList($rootScope, $scope);
+                //getServiceInfoList($rootScope, $scope);
+            	$('#tb_report').bootstrapTable('refresh');
                 layer.msg('添加成功', {
                     time: 1000,
                     icon: 0
@@ -307,10 +311,10 @@ function saveServiceInfo($rootScope, $scope, data) {
 }
 
 /*更新数据*/
-function updateServiceInfo($rootScope, $scope, data) {
+function updateKuWeiInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/updateServiceInfo',
+        url: '/kuWeiGuanLi/update',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -324,8 +328,9 @@ function updateServiceInfo($rootScope, $scope, data) {
         success: function (data) {
             if (null != data && null != data.retcode && 1 == data.retcode) {
                 // 数据更新成功后查询，因为涉及到值转换，需要查询
-                getServiceInfoList($rootScope, $scope);
-                $('#configEdit').modal('hide');
+                //getServiceInfoList($rootScope, $scope);
+            	$('#tb_report').bootstrapTable('refresh');
+                //$('#configEdit').modal('hide');
                 layer.msg('更新成功', {
                     time: 1000,
                     icon: 0
@@ -340,11 +345,11 @@ function updateServiceInfo($rootScope, $scope, data) {
     });
 }
 
-/*删除信息*/
-function deleteServiceInfo($rootScope, $scope, data) {
+/*确认删除*/
+function deleteKuWeiInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/deleteServiceInfo',
+        url: '/kuWeiGuanLi/delete',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -362,7 +367,8 @@ function deleteServiceInfo($rootScope, $scope, data) {
                     icon: 0
                 });
                 // 查询数据，因为有分页存在所以需要重新分页
-                getServiceInfoList($rootScope, $scope);
+                //getServiceInfoList($rootScope, $scope);
+                $('#tb_report').bootstrapTable('refresh');
                 return;
             }
             layer.msg('删除失败', {

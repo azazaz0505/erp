@@ -11,10 +11,6 @@ platform.controller('jiancaimanager', ['$scope', '$rootScope', '$http', '$window
         $scope.serviceModes = [{id: 0, name: '穿透模式'}, {id: 1, name: '代理模式'}];
         $scope.isCaches = [{id: 0, name: '不缓存'}, {id: 1, name: '缓存'}];
 
-        /*分页初始化参数设置*/
-        $scope.maxSize;//显示页码的个数
-        //$scope.totalItems = 45;//列表条数
-        $scope.currentPage = 1;//当前正在显示的页数
 
         /*点击查询按钮*/
         $scope.toSearch = function () {
@@ -22,41 +18,17 @@ platform.controller('jiancaimanager', ['$scope', '$rootScope', '$http', '$window
         	        url: $rootScope.apiHome + '/info',
         	        silent: true,
         	        query:{
-//        	        	 orderdate:$("#datetext").val(),        	       
-//                         stylename:$("#stylename").val(),
-//                         styleid:$("#styleid").val(),
+        	        	 orderdate:$("#datetext").val(),        	       
+                         stylename:$("#stylename").val(),
+                         styleid:$("#styleid").val(),
+        	        	
         	        }
         	    };
 
         	    $("#tb_report").bootstrapTable('refresh', opt);
         }; 
 
-        /*点击修改按钮，如果是新增则新增，否则修改*/
-        $scope.submit = function () {
-
-            // 先收集数据
-            var data =
-                {
-                    "serviceid": $scope.serviceInfoTemp.serviceid,
-//                    "cardtitle": $scope.cardInfoTemp.cardtitle,
-//                    "cardcontent": $scope.cardInfoTemp.cardcontent,
-//                    "cardurl": $scope.cardInfoTemp.cardurl,
-//                    "appid": $scope.cardInfoTemp.appid,
-//                    "pkgname": $scope.cardInfoTemp.pkgname,
-//                    "entryactivity": $scope.cardInfoTemp.entryactivity,
-                    "servicename": $scope.serviceInfoTemp.servicename,
-//                    "cardtype": $scope.cardInfoTemp.cardtype,
-//                    "cardtime": $scope.cardInfoTemp.cardtime
-                };
-            if (null == idx || idx == -1) {
-                //新增数据
-                saveServiceInfo($rootScope, $scope, data);
-                return;
-            }
-
-            //更新数据
-            updateServiceInfo($rootScope, $scope, data);
-        }
+       
 
         $scope.deleteData = function ($index) {
             if ($index >= 0) {
@@ -103,7 +75,7 @@ platform.controller('jiancaimanager', ['$scope', '$rootScope', '$http', '$window
             striped: true,  //表格显示条纹，默认为false
             pagination: true, // 在表格底部显示分页组件，默认false
             pageList: [10, 20], // 设置页面可以显示的数据条数
-            pageSize: 10, // 页面数据条数
+            pageSize: 15, // 页面数据条数
             pageNumber: 1, // 首页页码
             paginationPreText: "上一页",
             paginationNextText: "下一页",
@@ -143,24 +115,6 @@ platform.controller('jiancaimanager', ['$scope', '$rootScope', '$http', '$window
     }]
 );
 
-
-
-function initServiceInfo($scope, index) {
-    $scope.serviceInfoTemp.serviceid = (null == index || -1 == index) ? null : $scope.datalist[index].serviceId;
-//    $scope.cardInfoTemp.cardtitle = (null == index || -1 == index) ? null : $scope.datalist[index].cardTitle;
-//    $scope.cardInfoTemp.cardcontent = (null == index || -1 == index) ? null : $scope.datalist[index].cardContent;
-//    $scope.cardInfoTemp.cardurl = (null == index || -1 == index) ? null : $scope.datalist[index].cardUrl;
-//    $scope.cardInfoTemp.appid = (null == index || -1 == index) ? null : $scope.datalist[index].appId;
-//    $scope.cardInfoTemp.pkgname = (null == index || -1 == index) ? null : $scope.datalist[index].pkgName;
-//    $scope.cardInfoTemp.entryactivity= (null == index || -1 == index) ? null : $scope.datalist[index].entryActivity;
-    $scope.serviceInfoTemp.servicename = (null == index || -1 == index) ? null : $scope.datalist[index].serviceName;
-//    $scope.cardInfoTemp.cardtype = (null == index || -1 == index) ? null : $scope.datalist[index].cardType;
-//    $scope.cardInfoTemp.cardtime = (null == index || -1 == index) ? null : $scope.datalist[index].cardTime;
-    
-    
-    
-    
-}
 
 /*查询列表*/
 /*function getServiceInfoList($rootScope, $scope) {

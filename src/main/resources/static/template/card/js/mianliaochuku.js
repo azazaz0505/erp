@@ -5,47 +5,22 @@ platform.controller('mianliaochuku', ['$scope', '$rootScope', '$http', '$window'
        // $scope.cardInfoTemp = {};//定义临时修改变量值
         $scope.serviceInfoTemp = {};//定义临时修改变量值
         $scope.ckmanagertmp = {};//定义临时修改变量值
-        var idx = -1;//定义index for list
+        //var idx = -1;//定义index for list
 
         /*下拉列表数据初始化*/
         $scope.serviceTypes = [{id: 1, name: 'webservice服务'}, {id: 2, name: 'rest服务'}];
         $scope.serviceModes = [{id: 0, name: '穿透模式'}, {id: 1, name: '代理模式'}];
         $scope.isCaches = [{id: 0, name: '不缓存'}, {id: 1, name: '缓存'}];
 
-        /*分页初始化参数设置*/
-        $scope.maxSize;//显示页码的个数
-        //$scope.totalItems = 45;//列表条数
-        $scope.currentPage = 1;//当前正在显示的页数
-
-        /*点击修改按钮，如果是新增则新增，否则修改*/
-        $scope.submit = function () {
-            // 先收集数据
-            var data =
-                {
-                    "cangkuaddress": $scope.ckmanagertmp.cangkuaddress,
-                    "kuwei": $scope.ckmanagertmp.kuwei,
-                    "cengci": $scope.ckmanagertmp.cengci,
-                    "rongliang": $scope.ckmanagertmp.rongliang,
-                    "cangkuname": $scope.ckmanagertmp.cangkuname
-
-                };
-            if (null == idx || idx == -1) {
-                //新增数据
-                saveServiceInfo($rootScope, $scope, data);
-                return;
-            }
-            //更新数据
-            updateServiceInfo($rootScope, $scope, data);
-        };
         
         //加载进来子界面隐藏
        /* $("#addKuwei").modal({show:false});
-        $("#delcfmOverhaul").modal({show:false});*/
+        $("#delChuKuTiShi").modal({show:false});*/
 
         //先销毁表格  
         $('#tb_report').bootstrapTable('destroy'); 
         $("#tb_report").bootstrapTable({ // 对应table标签的id
-            url: $rootScope.apiHome + '/info',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
+            url: $rootScope.apiHome + '/mianLiaoChuKu/select',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
             method: "post",                     //使用get请求到服务器获取数据,post大小写有区别
             dataType: "json",
             locale: 'zh-CN',
@@ -87,23 +62,28 @@ platform.controller('mianliaochuku', ['$scope', '$rootScope', '$http', '$window'
                     } 
                   },  
                   {
-                      field: 'styleid', // 返回json数据中的name 
+                      field: 'uuid', // 返回json数据中的name 
+                      title: 'uuid', // 表格表头显示文字  
+                      visible : false,              
+                  },
+                  {
+                      field: 'chukudanhao', // 返回json数据中的name 
                       title: '出库单号', // 表格表头显示文字  
                       align: 'center', // 左右居中
                       valign: 'middle', // 上下居中                   
                   }, {
-                      field: 'orderdate',
+                      field: 'chuhuocangku',
                       title: '出货仓库',   
                       align: 'center',
                       valign: 'middle',
                   },
                   {
-                      field: 'stylename',
+                      field: 'chukufangshi',
                       title: '出库方式',  
                       align: 'center',
                       valign: 'middle',
                   },{
-                      field: 'orderdate',
+                      field: 'chukushijian',
                       title: '出库时间',          
                       align: 'center',
                       valign: 'middle',
@@ -120,7 +100,7 @@ platform.controller('mianliaochuku', ['$scope', '$rootScope', '$http', '$window'
                           return Y+M+D;
                       }
                   }, {
-                  	field: 'stylename',
+                  	field: 'beizhu',
                       title: '备注',  
                       align: 'center',
                       valign: 'middle',
@@ -133,9 +113,9 @@ platform.controller('mianliaochuku', ['$scope', '$rootScope', '$http', '$window'
                   	formatter:function(value, row, index){
                   		var result = "";
                   		result = '<div><p class="bt-span">'
-                      	+ '<span title="编辑" onclick="saveOrUpdataService(\''+index+'\')" class="glyphicon glyphicon-pencil"></span>'
-                        + '<span title="查看" onclick="detail(\''+index+'\')" class="glyphicon glyphicon-list-alt"></span>'
-                        + '<span title="删除" onclick="deleteData(\''+index+'\')" class="glyphicon glyphicon-remove-circle"></span> </p><div>';
+                      	+ '<span title="编辑" onclick="saveOrUpdataChuKu(\''+index+'\')" class="glyphicon glyphicon-pencil"></span>'
+                        + '<span title="查看" onclick="detailChuKu(\''+index+'\')" class="glyphicon glyphicon-list-alt"></span>'
+                        + '<span title="删除" onclick="deleteChuku(\''+index+'\')" class="glyphicon glyphicon-remove-circle"></span> </p><div>';
                   		return result;
                   	},
                   },    
@@ -161,59 +141,63 @@ platform.controller('mianliaochuku', ['$scope', '$rootScope', '$http', '$window'
 
 function initChuKuInfo(index) {
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];//获取该行的数据集
-	$('#chukudanhao').val((null == index || -1 == index) ? null:rowdata.styleid);
+	$('#chukudanhao').val((null == index || -1 == index) ? null:rowdata.chukudanhao);
+	$('#chuhuocangku').val((null == index || -1 == index) ? null:rowdata.chuhuocangku);
+	$('#chukufangshi').val((null == index || -1 == index) ? null:rowdata.chukufangshi);
+	$('#beizhu').val((null == index || -1 == index) ? null:rowdata.beizhu);
 
 };
 
 var checkids = [];
+var idxChuKu = 0;
 //删除某一条
-function deleteData(index) {
+function deleteChuku(index) {
 	$("#deletetishicontent").text("您确认要删除该条信息吗？");
-	$("#deleteHaulBtn").show();
-	$("#delcfmOverhaul").modal({
+	$("#deleteChuKuBtn").show();
+	$("#delChuKuTiShi").modal({
 	        backdrop : 'static',
 	        keyboard : false
 	    });
 	checkids=[];
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];
-	checkids= rowdata.styleid;
+	checkids= rowdata.uuids;
 };
 
 //点击提示删除框的确认按钮
-//$("#deleteHaulBtn").click(function() {
-function deleteHaulBtn() {
+//$("#deleteChuKuBtn").click(function() {
+function deleteChuKuBtn() {
 	var data =
     {
-         "tt": checkids
+         "uuids": checkids
     };
 	
-	deleteServiceInfo(data);
+	deleteChuKuInfo(data);
 };
 
 //删除选中的行
-function deletemianliaos (){
+function deleteChuKus (){
 	 checkids=[];
 	 var rows = $("#tb_report").bootstrapTable('getSelections');
      for (var i = 0; i < rows.length; i++) {
-   	  checkids[i]= rows[i].styleid;
+   	  checkids[i]= rows[i].uuids;
      }
      
 	if(checkids.length<=0){
 		$("#deletetishicontent").text("请选择要删除的记录！");
-		$("#deleteHaulBtn").hide();
+		$("#deleteChuKuBtn").hide();
 	}else{
 		$("#deletetishicontent").text("您确认要删除信息吗？");
-		$("#deleteHaulBtn").show();
+		$("#deleteChuKuBtn").show();
 	}
 	
-	$("#delcfmOverhaul").modal({
+	$("#delChuKuTiShi").modal({
 	        backdrop : 'static',
 	        keyboard : false
 	    });
 };
 
 /*点击添加\编辑按钮（如果是点击编辑按钮，则显示窗口并显示值）*/
-function saveOrUpdataService(index) {
+function saveOrUpdataChuKu(index) {
     // 开启所有禁用的input输入框
     isDisabled(false);
     // 显示模块窗口，并且禁用点击外面关闭窗口configEdit
@@ -229,17 +213,40 @@ function saveOrUpdataService(index) {
        $("#chuKuTitle").text("添加面料出库");
        $("#saveBtn").show();
        //initServiceInfo($scope, index);
+       idxChuKu = -1;
        return;
     }
     $("#chukudanhao").attr("disabled", true);
     $("#saveBtn").show();
     //初始化数据在模态窗口中展示出来
     initChuKuInfo(index);
+    idxChuKu = index;
 
 };
 
+/*点击修改按钮，如果是新增则新增，否则修改*/
+function submitChuKu () {
+    // 先收集数据
+    var data =
+        {
+            "chukudanhao": $("#chukudanhao").val(),
+            "chuhuocangku": $("#chuhuocangku").val(),
+            "chukufangshi": $("#chukufangshi").val(),
+            "beizhu": $("#beizhu").val(),
+            
+
+        };
+    if (null == idxChuKu || idxChuKu == -1) {
+        //新增数据
+        saveChuKuInfo(data);
+        return;
+    }
+    //更新数据
+    updateChuKuInfo(data);
+};
+
 /*查看功能，并没有调用修改那个方法，更方便做不同的处理*/
- function detail(index) {
+ function detailChuKu(index) {
 	$("#chuKuTitle").text("查看出库面料");
     //向页面内填充数据
 	initChuKuInfo(index);
@@ -254,10 +261,10 @@ function saveOrUpdataService(index) {
 };
 
 /*插入单条数据*/
-function saveServiceInfo($rootScope, $scope, data) {
+function saveChuKuInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/setServiceInfo',
+        url: '/mianLiaoChuKu/select',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -270,7 +277,8 @@ function saveServiceInfo($rootScope, $scope, data) {
         },
         success: function (data) {
             if (null != data && null != data.retcode && 1 == data.retcode) {
-                getServiceInfoList($rootScope, $scope);
+                //getServiceInfoList($rootScope, $scope);
+            	$('#tb_report').bootstrapTable('refresh');
                 layer.msg('添加成功', {
                     time: 1000,
                     icon: 0
@@ -286,10 +294,10 @@ function saveServiceInfo($rootScope, $scope, data) {
 };
 
 /*更新数据*/
-function updateServiceInfo($rootScope, $scope, data) {
+function updateChuKuInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/updateServiceInfo',
+        url: '/mianLiaoChuKu/select',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -303,8 +311,9 @@ function updateServiceInfo($rootScope, $scope, data) {
         success: function (data) {
             if (null != data && null != data.retcode && 1 == data.retcode) {
                 // 数据更新成功后查询，因为涉及到值转换，需要查询
-                getServiceInfoList($rootScope, $scope);
-                $('#configEdit').modal('hide');
+                //getServiceInfoList($rootScope, $scope);
+                //$('#configEdit').modal('hide');
+            	$('#tb_report').bootstrapTable('refresh');
                 layer.msg('更新成功', {
                     time: 1000,
                     icon: 0
@@ -320,10 +329,10 @@ function updateServiceInfo($rootScope, $scope, data) {
 };
 
 /*删除信息*/
-function deleteServiceInfo($rootScope, $scope, data) {
+function deleteChuKuInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/deleteServiceInfo',
+        url: '/mianLiaoChuKu/select',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -341,7 +350,8 @@ function deleteServiceInfo($rootScope, $scope, data) {
                     icon: 0
                 });
                 // 查询数据，因为有分页存在所以需要重新分页
-                getServiceInfoList($rootScope, $scope);
+                //getServiceInfoList($rootScope, $scope);
+                $('#tb_report').bootstrapTable('refresh');
                 return;
             }
             layer.msg('删除失败', {

@@ -4,7 +4,7 @@
      <div class="page-header" style="margin:20px 0 2px;">
   		<h1>供应商往来</h1>
 	</div>
-    <div >
+   <!--  <div >
 	   <form class="form-inline" id="toolbar"> 
 
 	           <button style="border:none;margin-top:15px"  onclick="addNewGys()" class="btn btn-info">
@@ -16,8 +16,20 @@
 		     	</button>
       
 	 </form>
- </div> 
-
+ 	</div>  -->
+ 	<div>
+ 	<form class="form-inline" style="padding-bottom:15px" role="form">
+    
+	      <button style="border:none;margin-top:15px"  onclick="addNewGys()" class="btn btn-info">
+		       	新增供应商
+		     	</button>
+		     
+		     	<button style="border:none;margin-top:15px" onclick="deleteGys()" class="btn btn-danger">
+		                   删除选中项
+		     	</button>
+                    
+ </form>
+ </div>
    <div>
    <!--  <button id="exportBtn" class="glyphicon glyphicon-export right" style="border:none" ng-click="ShowExport()">
                 Excel导出</button> -->

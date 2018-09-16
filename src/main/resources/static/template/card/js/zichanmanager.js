@@ -2,27 +2,6 @@ platform.controller('zichanmanager', ['$scope', '$rootScope', '$http', '$window'
     function ($scope, $rootScope, $http, $window) {
         $window.scroll(0, 0);
 
-        /*点击修改按钮，如果是新增则新增，否则修改*/
-        $scope.submit = function () {
-            // 先收集数据
-            var data =
-                {
-                    "cangkuaddress": $scope.ckmanagertmp.cangkuaddress,
-                    "kuwei": $scope.ckmanagertmp.kuwei,
-                    "cengci": $scope.ckmanagertmp.cengci,
-                    "rongliang": $scope.ckmanagertmp.rongliang,
-                    "cangkuname": $scope.ckmanagertmp.cangkuname
-
-                };
-            if (null == idx || idx == -1) {
-                //新增数据
-                saveServiceInfo($rootScope, $scope, data);
-                return;
-            }
-            //更新数据
-            updateServiceInfo($rootScope, $scope, data);
-        };
-
     
         //加载进来子界面隐藏
        /* $("#addKuwei").modal({show:false});
@@ -31,7 +10,7 @@ platform.controller('zichanmanager', ['$scope', '$rootScope', '$http', '$window'
       //先销毁表格  
         $('#tb_report').bootstrapTable('destroy'); 
         $("#tb_report").bootstrapTable({ // 对应table标签的id
-            url: $rootScope.apiHome + '/info',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
+            url: $rootScope.apiHome + '/ziChanGuanLi/select',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
             method: "post",                     //使用get请求到服务器获取数据,post大小写有区别
             dataType: "json",
             locale: 'zh-CN',
@@ -71,30 +50,35 @@ platform.controller('zichanmanager', ['$scope', '$rootScope', '$http', '$window'
                     { 
                   	  return index + 1;
                     } 
-                  },  
+                  },
                   {
-                      field: 'styleid', // 返回json数据中的name 
+                      field: 'uuid', // 返回json数据中的name 
+                      title: 'uuid', // 表格表头显示文字  
+                      visible:false,          
+                  },
+                  {
+                      field: 'gudingzichanbiana', // 返回json数据中的name 
                       title: '固定资产编码', // 表格表头显示文字  
                       align: 'center', // 左右居中
                       valign: 'middle', // 上下居中                   
                   }, {
-                      field: 'orderdate',
+                      field: 'gudingzichanmingcheng',
                       title: '固定资产名称',   
                       align: 'center',
                       valign: 'middle',
                   },
                   {
-                      field: 'stylename',
+                      field: 'gudingzichanleixing',
                       title: '固定资产类型',  
                       align: 'center',
                       valign: 'middle',
                   },{
-                      field: 'orderdate',
+                      field: 'zhejiunianxian',
                       title: '折旧年限',          
                       align: 'center',
                       valign: 'middle',
                       width: 150,
-                      formatter: function (value, row, index) 
+                      /*formatter: function (value, row, index) 
                       { 
                       	var date = new Date(value);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
                           Y = date.getFullYear() + '-';
@@ -104,16 +88,16 @@ platform.controller('zichanmanager', ['$scope', '$rootScope', '$http', '$window'
                           m = date.getMinutes() + ':';
                           s = date.getSeconds();
                           return Y+M+D;
-                      }
+                      }*/
                   }, {
-                  	  field: 'stylename',
+                  	  field: 'yuanzhi',
                       title: '原值',  
                       align: 'center',
                       valign: 'middle',
                       width: 200,
                   },
                   {
-                    	field: 'stylename',
+                    	field: 'jingcanzhi',
                         title: '净残值',  
                         align: 'center',
                         valign: 'middle',
@@ -158,10 +142,16 @@ function initZiChan(index) {
     $scope.ckmanagertmp.cengci  = (null == index || -1 == index) ? null : $scope.datalist[index].stylename;
     $scope.ckmanagertmp.rongliang  = (null == index || -1 == index) ? null : $scope.datalist[index].ssizenumber;*/
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];//获取该行的数据集
-	$('#rukudanhao').val((null == index || -1 == index) ? null:rowdata.styleid);
+	$('#zichanbianma').val((null == index || -1 == index) ? null:rowdata.gudingzichanbiana);
+	$('#ziChanName').val((null == index || -1 == index) ? null:rowdata.gudingzichanmingcheng);
+	$('#ziChanType').val((null == index || -1 == index) ? null:rowdata.gudingzichanleixing);
+	$('#nianxian').val((null == index || -1 == index) ? null:rowdata.zhejiunianxian);
+	$('#yuanzhi').val((null == index || -1 == index) ? null:rowdata.yuanzhi);
+	$('#jingcanzhi').val((null == index || -1 == index) ? null:rowdata.jingcanzhi);
+
 }
 
-
+var idxZiChan = 0;
 /*查看功能，并没有调用修改那个方法，更方便做不同的处理*/
 function detailZiChan(index) {
 	$("#ziChanTitle").text("查看资产");
@@ -193,16 +183,40 @@ function saveOrUpdataZiChan(index) {
     	
         $("#ziChanTitle").text("添加资产");
        //添加时置空
-        initZiChan(index);
+       // initZiChan(index);
+        idxZiChan = -1;
         return;
     }
     $("#ziChanTitle").text("编辑资产");
     $("#zichanbianma").attr("disabled", true);
 
     //在模态窗口中展示出来
+    idxZiChan = index;
     initZiChan(index);
 
   
+};
+
+/*点击修改按钮，如果是新增则新增，否则修改*/
+function submitZiChan() {
+    // 先收集数据
+    var data =
+        {
+            "gudingzichanbiana": $("#zichanbianma").val(),
+            "gudingzichanmingcheng": $("#ziChanName").val(),
+            "gudingzichanleixing": $("#ziChanType").val(),
+            "zhejiunianxian": $("#nianxian").val(),
+            "yuanzhi": $("#yuanzhi").val(),
+            "jingcanzhi" : $("#jingcanzhi").val()
+
+        };
+    if (null == idxZiChan || idxZiChan == -1) {
+        //新增数据
+        saveZiChanInfo(data);
+        return;
+    }
+    //更新数据
+    updateZiChanInfo(data);
 };
 
 
@@ -211,7 +225,7 @@ var checkids = [];
 function deleteOneZiChan(index) {
 	
 	$("#ziChanContent").text("您确认要删除该条信息吗？");
-	$("#deleteHaulBtn").show();
+	$("#deleteZiChanBtn").show();
 	$("#delcfmOverhaul").modal({
 	        backdrop : 'static',
 	        keyboard : false
@@ -220,7 +234,7 @@ function deleteOneZiChan(index) {
 	checkids=[];
 	
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];
-	checkids= rowdata.styleid;
+	checkids= rowdata.uuid;
 	
 };
 
@@ -229,15 +243,15 @@ function deleteZiChans(){
 	checkids=[];
 	var rows = $("#tb_report").bootstrapTable('getSelections');
     for (var i = 0; i < rows.length; i++) {
-  	  checkids[i]= rows[i].styleid;
+  	  checkids[i]= rows[i].uuid;
     }
     
 	if(checkids.length<=0){
 		$("#ziChanContent").text("请选择要删除的记录！");
-		$("#deleteHaulBtn").hide();
+		$("#deleteZiChanBtn").hide();
 	}else{
 		$("#ziChanContent").text("您确认要删除信息吗？");
-		$("#deleteHaulBtn").show();
+		$("#deleteZiChanBtn").show();
 	}
 	
 	$("#delcfmOverhaul").modal({
@@ -247,22 +261,22 @@ function deleteZiChans(){
 };
 
 //点击提示删除框的确认按钮
-function deleteHaulBtn() { 
+function deleteZiChanBtn() { 
 	
 	var data =
     {
-         "tt": checkids
+         "uuids": checkids
     };
 	
-	deleteServiceInfo(data);
+	deleteZiChanInfo(data);
 	
 };
 
 /*插入单条数据*/
-function saveServiceInfo($rootScope, $scope, data) {
+function saveZiChanInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/setServiceInfo',
+        url: '/ziChanGuanLi/select',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -275,7 +289,8 @@ function saveServiceInfo($rootScope, $scope, data) {
         },
         success: function (data) {
             if (null != data && null != data.retcode && 1 == data.retcode) {
-                getServiceInfoList($rootScope, $scope);
+                //getServiceInfoList($rootScope, $scope);
+            	$('#tb_report').bootstrapTable('refresh');
                 layer.msg('添加成功', {
                     time: 1000,
                     icon: 0
@@ -291,10 +306,10 @@ function saveServiceInfo($rootScope, $scope, data) {
 }
 
 /*更新数据*/
-function updateServiceInfo($rootScope, $scope, data) {
+function updateZiChanInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/updateServiceInfo',
+        url: '/ziChanGuanLi/select',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -308,8 +323,7 @@ function updateServiceInfo($rootScope, $scope, data) {
         success: function (data) {
             if (null != data && null != data.retcode && 1 == data.retcode) {
                 // 数据更新成功后查询，因为涉及到值转换，需要查询
-                getServiceInfoList($rootScope, $scope);
-                $('#configEdit').modal('hide');
+            	$('#tb_report').bootstrapTable('refresh');
                 layer.msg('更新成功', {
                     time: 1000,
                     icon: 0
@@ -325,10 +339,10 @@ function updateServiceInfo($rootScope, $scope, data) {
 }
 
 /*删除信息*/
-function deleteServiceInfo($rootScope, $scope, data) {
+function deleteZiChanInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/deleteServiceInfo',
+        url: '/ziChanGuanLi/select',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -346,7 +360,8 @@ function deleteServiceInfo($rootScope, $scope, data) {
                     icon: 0
                 });
                 // 查询数据，因为有分页存在所以需要重新分页
-                getServiceInfoList($rootScope, $scope);
+               // getServiceInfoList($rootScope, $scope);
+                $('#tb_report').bootstrapTable('refresh');
                 return;
             }
             layer.msg('删除失败', {

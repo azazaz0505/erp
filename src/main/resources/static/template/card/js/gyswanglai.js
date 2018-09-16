@@ -52,11 +52,11 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
             method: "post",                     //使用get请求到服务器获取数据,post大小写有区别
             dataType: "json",
             locale: 'zh-CN',
-            toolbar: "#toolbar",                //一个jQuery 选择器，指明自定义的toolbar 例如:#toolbar
+           // toolbar: "#toolbar",                //一个jQuery 选择器，指明自定义的toolbar 例如:#toolbar
             sortable:true,
-            showColumns: true,
-            showRefresh:true,
-            showToggle:true,
+            showColumns: false,
+            //showRefresh:true,
+           // showToggle:true,
             //contentType: 'application/json,charset=utf-8',
             contentType: "application/json",
             cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true

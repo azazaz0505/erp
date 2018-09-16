@@ -30,7 +30,7 @@ function register() {
     $.ajax({
         cache: true,
         type: "POST",
-        url: '/login',
+        url: '/register',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -43,9 +43,9 @@ function register() {
         },
         success: function (data) {
             if (null != data.retcode && "1" == data.retcode) {
-                sessionStorage.setItem("tokenId", data.tokenId);
+                //sessionStorage.setItem("tokenId", data.tokenId);
                 sessionStorage.setItem("name", data.name);
-                window.location.href = "iniIndex";
+                window.location.href = "/iniLogin";
             } else {
                 createCode();
                 layer.msg(data.retmsg, {
@@ -56,7 +56,7 @@ function register() {
         }
     });
     /* window.location.href="index.html"; */
-}
+};
 $(document).keydown(function (event) {
     if (event.keyCode == 13) { //绑定回车
         login();
