@@ -27,6 +27,7 @@
     <result column="orderdate" jdbcType="DATE" property="orderdate" />
     <result column="stylename" jdbcType="VARCHAR" property="stylename" />
     <result column="styleid" jdbcType="VARCHAR" property="styleid" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -90,7 +91,7 @@
     id, totalsizeleft, totalsizemodify, totalsizenumber, xxxlsizeleft, xxxlsizemodify, 
     xxxlsizenumber, xxlsizeleft, xxlsizemodify, xxlsizenumber, xlsizeleft, xlsizemodify, 
     xlsizenumber, lsizeleft, lsizemodify, lsizenumber, msizeleft, msizemodify, msizenumber, 
-    ssizeleft, ssizemodify, ssizenumber, orderdate, stylename, styleid
+    ssizeleft, ssizemodify, ssizenumber, orderdate, stylename, styleid, color
   </sql>
   <select id="selectByExample" parameterType="com.nt.erp.model.InfoExample" resultMap="BaseResultMap">
     select
