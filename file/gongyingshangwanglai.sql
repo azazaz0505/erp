@@ -38,3 +38,25 @@ CREATE TABLE `gongyingshangwanglai` (
 -- Records of gongyingshangwanglai
 -- ----------------------------
 INSERT INTO `gongyingshangwanglai` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', null, null, null);
+
+
+
+---修改表
+CREATE TABLE `gongyingshangwanglai` (
+  `uuid` int(11) NOT NULL AUTO_INCREMENT,
+  `fukuanleixing` varchar(20) DEFAULT NULL,
+  `gongyingshangmingcheng` varchar(255) DEFAULT NULL,
+  `shiyou` varchar(255) DEFAULT NULL,
+  `zhifufangshi` varchar(255) DEFAULT NULL,
+  `fapiaoxinxi` varchar(255) DEFAULT NULL,
+  `fapiaoshuilv` varchar(255) DEFAULT NULL,
+  `hetongzongjine` double DEFAULT NULL,
+  `yifukuanjine` double DEFAULT NULL,
+  `fukuanriqi` timestamp NULL DEFAULT NULL,
+  `rukuzongjine` double DEFAULT NULL,
+  `zhuangtai` varchar(255) DEFAULT NULL,
+  `shenqingriqi` timestamp NULL DEFAULT NULL,
+  `bumen` varchar(255) DEFAULT NULL,
+  `jingbanren` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
