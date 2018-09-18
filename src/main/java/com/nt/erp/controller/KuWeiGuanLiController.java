@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +26,35 @@ public class KuWeiGuanLiController {
 
     //入参报文需要根据前台需要修改
     @RequestMapping(value = "/kuWeiGuanLi/select", method = RequestMethod.POST)
-    public JSONObject info(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+    public JSONObject select(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
 
         JSONObject json = new JSONObject();
 
         // 在此添加条件查询
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
+        String pageNumber = (String) requestParam.get("pageNumber");
+        String pageSize = (String) requestParam.get("pageSize");
+        if (StringUtils.isNotBlank(pageNumber)) {
+            try {
+                example.setOffset(Integer.valueOf(pageNumber));
+            } catch (Exception e) {
+                json.put("retmsg", "失败");
+                json.put("retcode", "0");
+                return json;
+            }
+        }
+        
+        if (StringUtils.isNotBlank(pageSize)) {
+            try {
+                example.setRows(Integer.valueOf(pageSize));
+            } catch (Exception e) {
+                json.put("retmsg", "失败");
+                json.put("retcode", "0");
+                return json;
+            }
+        }
+       
+        
         List<KuWeiGuanLi> rows = kuWeiGuanLiMapper.selectByExample(example);
         long total = kuWeiGuanLiMapper.countByExample(example);
         
@@ -40,6 +64,104 @@ public class KuWeiGuanLiController {
         json.put("retcode", "1");
         return json;
     }
+    
+    @RequestMapping(value = "/kuWeiGuanLi/add", method = RequestMethod.POST)
+    public JSONObject add(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
 
+        KuWeiGuanLi record = new KuWeiGuanLi();
+        String level = (String) requestParam.get("level");
+        record.setAddress((String) requestParam.get("address"));
+        record.setAddress((String) requestParam.get("name"));
+        record.setAddress((String) requestParam.get("capacity"));
+        record.setAddress((String) requestParam.get("operation"));
+      
+        if (StringUtils.isNotBlank(level)) {
+            try {
+                record.setLevel(Integer.valueOf(level));
+            } catch (Exception e) {
+                json.put("retmsg", "失败");
+                json.put("retcode", "0");
+                return json;
+            }
+        }
+        
+        try {
+            kuWeiGuanLiMapper.insert(record);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+       
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
+    @RequestMapping(value = "/kuWeiGuanLi/update", method = RequestMethod.POST)
+    public JSONObject update(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        KuWeiGuanLi record = new KuWeiGuanLi();
+        String level = (String) requestParam.get("level");
+        record.setAddress((String) requestParam.get("address"));
+        record.setAddress((String) requestParam.get("name"));
+        record.setAddress((String) requestParam.get("capacity"));
+        record.setAddress((String) requestParam.get("operation"));
+      
+        if (StringUtils.isNotBlank(level)) {
+            try {
+                record.setLevel(Integer.valueOf(level));
+            } catch (Exception e) {
+                json.put("retmsg", "失败");
+                json.put("retcode", "0");
+                return json;
+            }
+        }
+        
+        KuWeiGuanLiExample example = new KuWeiGuanLiExample();
+        example.createCriteria().andAddressEqualTo((String) requestParam.get("address"));
+        
+        try {
+            kuWeiGuanLiMapper.updateByExample(record, example);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+       
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+
+    @RequestMapping(value = "/kuWeiGuanLi/delete", method = RequestMethod.POST)
+    public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        Integer[] uuids = (Integer[]) requestParam.get("uuids");
+        try {
+            if (uuids != null && uuids.length > 0) {
+                for (int i = 0; i < uuids.length; i++) {
+                    if (uuids[i] != null) {
+                        kuWeiGuanLiMapper.deleteByPrimaryKey(uuids[i]); 
+                    }
+                }
+            }
+        
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+       
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
 
 }
