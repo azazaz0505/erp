@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,29 @@ public class MianLiaoChuKuController {
 
         // 在此添加条件查询
         MianLiaoChuKuExample example = new MianLiaoChuKuExample();
+        
+        String pageNumber = (String) requestParam.get("pageNumber");
+        String pageSize = (String) requestParam.get("pageSize");
+        if (StringUtils.isNotBlank(pageNumber)) {
+            try {
+                example.setOffset(Integer.valueOf(pageNumber));
+            } catch (Exception e) {
+                json.put("retmsg", "失败");
+                json.put("retcode", "0");
+                return json;
+            }
+        }
+        
+        if (StringUtils.isNotBlank(pageSize)) {
+            try {
+                example.setRows(Integer.valueOf(pageSize));
+            } catch (Exception e) {
+                json.put("retmsg", "失败");
+                json.put("retcode", "0");
+                return json;
+            }
+        }
+        
         List<MianLiaoChuKu> rows = mianLiaoChuKuMapper.selectByExample(example);
         long total = mianLiaoChuKuMapper.countByExample(example);
         json.put("rows", rows);
