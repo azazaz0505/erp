@@ -50,53 +50,95 @@
                 <div class="orgAdd-body">
                     <input type="hidden" ng-model="sysInfoTemp.sysuuid">
                     <div class="row" >
-                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库地址:</div>
+                        <div class="col-xs-4 text-right" style="padding-top:7px">付款类型:</div>
                         <div class="col-xs-6">
-                            <input class="isDisabled" id="cangkuaddress" type="text" name="cangkuaddress" ng-model="ckmanagertmp.cangkuaddress">
+                            <input class="isDisabled" id="fukuanleixing" type="text" name="fukuanleixing">
                         </div>
                        
                     </div>
                       
-                    <!--  <div class="row" >
-                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库名</div>
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">供应商名称:</div>
                         <div class="col-xs-6">
                         	<div class="controls input-append date form_datetime" data-date="2017-07-11T05:25:07Z">
-                    			<input class="isDisabled"  id="cardtime" type="text" name="cardtime" ng-model="cardInfoTemp.cardtime">
+                    			<input class="isDisabled"  id="gongyingshangmingcheng" type="text" name="gongyingshangmingcheng" >
                				 </div>
 							
                         </div>
-                    </div> -->
+                    </div> 
                     
                     <div class="row" >
-                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库库名:</div>
+                        <div class="col-xs-4 text-right" style="padding-top:7px">事由:</div>
                         <div class="col-xs-6">
-                            <input class="isDisabled" id="cangkuname" type="text" name="cangkuname" ng-model="ckmanagertmp.cangkuname">
+                            <input class="isDisabled" id="shiyou" type="text" name="shiyou" >
                         </div>
                     </div>
                     
                      <div class="row" >
-                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库库位:</div>
+                        <div class="col-xs-4 text-right" style="padding-top:7px">支付方式:</div>
                         <div class="col-xs-6">
-                            <input class="isDisabled" id="kuwei" type="text" name="kuwei" ng-model="ckmanagertmp.kuwei">
+                            <input class="isDisabled" id="zhifufangshi" type="text" name="zhifufangshi" >
                         </div>
                     </div>
                     
                      <div class="row" >
-                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库层次:</div>
+                        <div class="col-xs-4 text-right" style="padding-top:7px">发票信息:</div>
                         <div class="col-xs-6">
-                            <input class="isDisabled" id="cengci" type="text" name="cengci" ng-model="ckmanagertmp.cengci">
+                            <input class="isDisabled" id="fapiaoxinxi" type="text" name="fapiaoxinxi">
                         </div>
                     </div>
                      <div class="row" >
-                        <div class="col-xs-4 text-right" style="padding-top:7px">仓库容量:</div>
+                        <div class="col-xs-4 text-right" style="padding-top:7px">发票税率:</div>
                         <div class="col-xs-6">
-                            <input class="isDisabled" id="rongliang" type="text" name="rongliang" ng-model="ckmanagertmp.rongliang">
+                            <input class="isDisabled" id="fapiaoshuilv" type="text" name="fapiaoshuilv">
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">合同总金额:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="hetongzongjine" type="text" name="hetongzongjine">
+                        </div>
+                    </div>
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">付款日期:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="fukuanriqi" type="text" name="fukuanriqi">
+                        </div>
+                    </div>
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">入库总金额:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="hetonrukuzongjinegzongjine" type="text" name="rukuzongjine">
+                        </div>
+                    </div>
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">状态:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="zhuangtai" type="text" name="zhuangtai">
+                        </div>
+                    </div>
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">申请日期:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="shenqingriqi" type="text" name="shenqingriqi">
+                        </div>
+                    </div>
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">部门:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="bumen" type="text" name="bumen">
+                        </div>
+                    </div>
+                     <div class="row" >
+                        <div class="col-xs-4 text-right" style="padding-top:7px">经办人:</div>
+                        <div class="col-xs-6">
+                            <input class="isDisabled" id="jingbanren" type="text" name="jingbanren">
                         </div>
                     </div>
                 </div>
                 <div class="row orgAdd-foot">
                     <button class="btn  btn-default" type="button" data-dismiss="modal">取消</button>
-                    <button id="saveBtn" onclick="submit()" class="btn  btn-info">保存</button>
+                    <button id="saveBtn" onclick="submitgys()" data-dismiss="modal" class="btn  btn-info">保存</button>
                 </div>
             </div>
         </div>
@@ -104,7 +146,7 @@
     <!--修改配置-->
     
     <!-- 删除提示 -->
-    <div class="modal fade" id="delcfmOverhaul" role="dialog" tabindex="-1">
+    <div class="modal fade" id="delgysOverhaul" role="dialog" tabindex="-1">
        <div class="modal-dialog">
                 <div class="modal-content message_align">
                     <div class="modal-header">
@@ -121,7 +163,7 @@
                         <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消</button>
                         <button type="button" class="btn btn-info" aria-hidden="true"
-                          data-dismiss="modal"  onclick="deleteHaulBtn()" id="deleteHaulBtn">确认</button>
+                          data-dismiss="modal"  onclick="deleteGysBtn()" id="deleteGysBtn">确认</button>
                     </div>
                 </div>                    
         </div>           

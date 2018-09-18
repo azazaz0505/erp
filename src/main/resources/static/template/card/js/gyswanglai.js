@@ -2,31 +2,9 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
     function ($scope, $rootScope, $http, $window) {
         $window.scroll(0, 0);        
         
-        /*点击修改按钮，如果是新增则新增，否则修改*/
-        $scope.submit = function () {
-            // 先收集数据
-            var data =
-                {
-                    "cangkuaddress": $scope.ckmanagertmp.cangkuaddress,
-                    "kuwei": $scope.ckmanagertmp.kuwei,
-                    "cengci": $scope.ckmanagertmp.cengci,
-                    "rongliang": $scope.ckmanagertmp.rongliang,
-                    "cangkuname": $scope.ckmanagertmp.cangkuname
-
-                };
-            if (null == idx || idx == -1) {
-                //新增数据
-                saveServiceInfo($rootScope, $scope, data);
-                return;
-            }
-            //更新数据
-            updateServiceInfo($rootScope, $scope, data);
-        };
-        
-        
         //加载进来子界面隐藏
         /*$("#addKuwei").modal({show:false});
-        $("#delcfmOverhaul").modal({show:false});*/
+        $("#delgysOverhaul").modal({show:false});*/
     
         //导出Excel数据
         /*$scope.ShowExport = function ShowExport() {
@@ -78,18 +56,10 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
             queryParamsType : "undefined",//默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort
                                 // 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber 
             queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
-
-                return {
-                    //pageSize: params.limit, // 每页要显示的数据条数
-                    //offset: params.offset, // 每页显示数据的开始行号
+                return {                
                 	pageSize:params.pageSize,
                     pageNumber:params.pageNumber,
-                    //sort: params.sort, // 要排序的字段
-                    //sortOrder: params.order, // 排序规则
-                    //dataId: "ss" // 额外添加的参数
-                    //orderdate:"1",
-                    //stylename:"1",
-                    //styleid:"1"
+                    
                 };
             	
             },
@@ -105,27 +75,31 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
                   { 
                 	  return index + 1;
                   } 
+                },{
+                	field: 'uuid',
+                	title: 'uuid',
+                	visible:false
                 },  
                 {
-                    field: 'color', // 返回json数据中的name 
+                    field: 'fukuanleixing', // 返回json数据中的name 
                     title: '付款类型', // 面料供应商、生产供应商
                     align: 'center', // 左右居中
                     valign: 'middle', // 上下居中      
                     switchable:true
                 }, {
-                    field: 'stylename',
+                    field: 'gongyingshangmingcheng',
                     title: '供应商名称',   
                     align: 'center',
                     valign: 'middle'
                     
                 },
                 {
-                    field: 'orderdate',
+                    field: 'shiyou',
                     title: '事由',
                     align: 'center',
                     valign: 'middle',
                 },{
-                    field: 'styleid',
+                    field: 'zhifufangshi',
                     title: '支付方式',        
                     align: 'center',
                     valign: 'middle',
@@ -144,31 +118,31 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
                     }
                 },
                 {
-                    field: 'orderdate',
+                    field: 'fapiaoxinxi',
                     title: '发票信息',
                     align: 'center',
                     valign: 'middle',
                 },
                 {
-                    field: 'orderdate',
+                    field: 'fapiaoshuilv',
                     title: '发票税率',
                     align: 'center',
                     valign: 'middle',
                 },
                 {
-                    field: 'orderdate',
+                    field: 'hetongzongjine',
                     title: '合同总金额',
                     align: 'center',
                     valign: 'middle',
                 },
                 {
-                    field: 'orderdate',
+                    field: 'yifukuanjine',
                     title: '已付款金额',
                     align: 'center',
                     valign: 'middle',
                 },
                 {
-                    field: 'orderdate',
+                    field: 'fukuanriqi',
                     title: '付款日期',
                     align: 'center',
                     valign: 'middle',
@@ -185,13 +159,13 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
                     }
                 },
                 {
-                    field: 'orderdate',
+                    field: 'rukuzongjine',
                     title: '入库总金额',
                     align: 'center',
                     valign: 'middle',
                 },
                 {
-                    field: 'orderdate',
+                    field: 'zhuangtai',
                     title: '状态',
                     align: 'center',
                     valign: 'middle',
@@ -210,7 +184,7 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
                     }
                 },
                 {
-                    field: 'orderdate',
+                    field: 'shenqingriqi',
                     title: '申请日期',
                     align: 'center',
                     valign: 'middle',
@@ -226,34 +200,19 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
                         return Y+M+D;
                     }
                 },{
-                	field: 'orderdate',
+                	field: 'bumen',
                     title: '部门',
                     align: 'center',
                     valign: 'middle',
                 	
                 },
                 {
-                	field: 'orderdate',
+                	field: 'jingbanren',
                     title: '经办人',
                     align: 'center',
                     valign: 'middle',
                 	
                 },
-                /*{
-                	title:'操作',
-                	align: 'center',
-                    valign: 'middle',
-                	formatter:function(){
-                		var result = "";
-                		result = " <p class='bt-span'> "
-                    	+ "<span title='编辑' ng-click='saveOrUpdataService($index)' class='glyphicon glyphicon-pencil'></span>"
-                        + "<span title='查看' ng-click='detail($index)' class='glyphicon glyphicon-list-alt'></span>"
-                        + "<span title='删除' ng-click='deleteData($index)' class='glyphicon glyphicon-remove-circle'></span> </p>";
-                        
-                   
-                		return result;
-                	}
-                },*/
               ],
            
             onLoadSuccess: function(){  //加载成功时执行
@@ -274,19 +233,30 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
     }]
 );
 
+/*点击添加确认*/
+function submitgys() {
+    // 先收集数据
+    var data =
+        {
+            "fukuanleixing": $("#fukuanleixing").val(),
+            "gongyingshangmingcheng": $("#gongyingshangmingcheng").val(),
+            "shiyou": $("#shiyou").val(),
+            "zhifufangshi": $("#zhifufangshi").val(),
+            "fapiaoxinxi": $("#fapiaoxinxi").val(),
+            "fapiaoshuilv": $("#fapiaoshuilv").val(),
+            "hetongzongjine": $("#hetongzongjine").val(),
+            "yifukuanjine": $("#yifukuanjine").val(),
+            "fukuanriqi": $("#fukuanriqi").val(),
+            "rukuzongjine": $("#rukuzongjine").val(),
+            "zhuangtai": $("#zhuangtai").val(),
+            "shenqingriqi": $("#shenqingriqi").val(),
+            "bumen": $("#bumen").val(),
+            "jingbanren": $("#jingbanren").val()
 
-
-/*function initServiceInfo($scope, index) {
-    $scope.ckmanagertmp.cangkuaddress = (null == index || -1 == index) ? null : $scope.datalist[index].styleid;
-    $scope.ckmanagertmp.cangkuname = (null == index || -1 == index) ? null : $scope.datalist[index].color;
-    $scope.ckmanagertmp.kuwei  = (null == index || -1 == index) ? null : $scope.datalist[index].orderdate;
-    $scope.ckmanagertmp.cengci  = (null == index || -1 == index) ? null : $scope.datalist[index].stylename;
-    $scope.ckmanagertmp.rongliang  = (null == index || -1 == index) ? null : $scope.datalist[index].ssizenumber;
-
-}*/
-
-/*点击添加*/
-//$scope.saveOrUpdataService = function (index) {
+        };
+        //新增数据
+        saveGysInfo(data);
+};
 function addNewGys(){
     	$("#addGys").modal({show:true});
         $("#gysTitle").text("添加供应商");
@@ -294,14 +264,13 @@ function addNewGys(){
  
 var checkids = [];
 //点击提示删除框的确认按钮
-function deleteHaulBtn() {    		
+function deleteGysBtn() {    		
 	var data =
     {
         
-         "tt": checkids
+         "uuids": checkids
     };
-	
-	deleteServiceInfo(data);
+	deleteGysInfo(data);
 	
 };
         
@@ -312,17 +281,17 @@ function deleteGys(){
 	 checkids=[];
 	 var rows = $("#tb_report").bootstrapTable('getSelections');
 	              for (var i = 0; i < rows.length; i++) {
-	            	  checkids[i]= rows[i].color;
+	            	  checkids[i]= rows[i].uuid;
 	              }
 	if(checkids.length<=0){        		
 		$('#deletegyscontent').text('请选择要删除的记录！');
-		$("#deleteHaulBtn").hide();
+		$("#deleteGysBtn").hide();
 	}else{
 		$('#deletegyscontent').text('您确认要删除信息吗？');
-		$("#deleteHaulBtn").show();
+		$("#deleteGysBtn").show();
 	}
 	
-	$("#delcfmOverhaul").modal({
+	$("#delgysOverhaul").modal({
 	        backdrop : 'static',
 	        keyboard : false
 	    });
@@ -330,10 +299,10 @@ function deleteGys(){
 
 
 /*插入单条数据*/
-function saveServiceInfo($rootScope, $scope, data) {
+function saveGysInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/setServiceInfo',
+        url: '/gongYingShangWangLai/select',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -346,7 +315,8 @@ function saveServiceInfo($rootScope, $scope, data) {
         },
         success: function (data) {
             if (null != data && null != data.retcode && 1 == data.retcode) {
-                getServiceInfoList($rootScope, $scope);
+                //getServiceInfoList($rootScope, $scope);
+            	$('#tb_report').bootstrapTable('refresh'); 
                 layer.msg('添加成功', {
                     time: 1000,
                     icon: 0
@@ -361,45 +331,11 @@ function saveServiceInfo($rootScope, $scope, data) {
     });
 }
 
-/*更新数据*/
-function updateServiceInfo($rootScope, $scope, data) {
-    $.ajax({
-        type: "POST",
-        url: $rootScope.apiHome + 'insert/updateServiceInfo',
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(data),
-        async: false,
-        error: function () {
-            layer.msg('请求失败', {
-                time: 1000,
-                icon: 0
-            });
-        },
-        success: function (data) {
-            if (null != data && null != data.retcode && 1 == data.retcode) {
-                // 数据更新成功后查询，因为涉及到值转换，需要查询
-                getServiceInfoList($rootScope, $scope);
-                $('#configEdit').modal('hide');
-                layer.msg('更新成功', {
-                    time: 1000,
-                    icon: 0
-                });
-                return;
-            }
-            layer.msg('更新失败', {
-                time: 1000,
-                icon: 0
-            });
-        }
-    });
-}
-
 /*删除信息*/
-function deleteServiceInfo($rootScope, $scope, data) {
+function deleteGysInfo(data) {
     $.ajax({
         type: "POST",
-        url: $rootScope.apiHome + 'insert/deleteServiceInfo',
+        url: '/gongYingShangWangLai/select',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -417,7 +353,7 @@ function deleteServiceInfo($rootScope, $scope, data) {
                     icon: 0
                 });
                 // 查询数据，因为有分页存在所以需要重新分页
-                getServiceInfoList($rootScope, $scope);
+                $('#tb_report').bootstrapTable('refresh');
                 return;
             }
             layer.msg('删除失败', {
