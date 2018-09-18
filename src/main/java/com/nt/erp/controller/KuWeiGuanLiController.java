@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +32,10 @@ public class KuWeiGuanLiController {
 
         // 在此添加条件查询
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
-        String pageNumber = (String) requestParam.get("pageNumber");
-        String pageSize = (String) requestParam.get("pageSize");
+       /* String pageNumber = (String) requestParam.get("pageNumber");
+        String pageSize = (String) requestParam.get("pageSize");*/
+        String pageNumber = requestParam.get("pageNumber").toString();
+        String pageSize = requestParam.get("pageSize").toString();
         if (StringUtils.isNotBlank(pageNumber)) {
             try {
                 example.setOffset(Integer.valueOf(pageNumber));
