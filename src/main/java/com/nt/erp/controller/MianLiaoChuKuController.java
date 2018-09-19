@@ -33,27 +33,13 @@ public class MianLiaoChuKuController {
         // 在此添加条件查询
         MianLiaoChuKuExample example = new MianLiaoChuKuExample();
         
-        String pageNumber = (String) requestParam.get("pageNumber");
-        String pageSize = (String) requestParam.get("pageSize");
-        if (StringUtils.isNotBlank(pageNumber)) {
-            try {
-                example.setOffset(Integer.valueOf(pageNumber));
-            } catch (Exception e) {
-                json.put("retmsg", "失败");
-                json.put("retcode", "0");
-                return json;
-            }
+        Integer pageNumber = (Integer) requestParam.get("pageNumber");
+        Integer pageSize = (Integer) requestParam.get("pageSize");
+        if (pageNumber != null && pageNumber >= 1) {
+            pageNumber--;
         }
-        
-        if (StringUtils.isNotBlank(pageSize)) {
-            try {
-                example.setRows(Integer.valueOf(pageSize));
-            } catch (Exception e) {
-                json.put("retmsg", "失败");
-                json.put("retcode", "0");
-                return json;
-            }
-        }
+        example.setOffset(pageNumber);
+        example.setRows(pageSize);
         
         List<MianLiaoChuKu> rows = mianLiaoChuKuMapper.selectByExample(example);
         long total = mianLiaoChuKuMapper.countByExample(example);
