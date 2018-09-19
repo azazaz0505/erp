@@ -29,8 +29,15 @@ public class GongYingShangWangLaiController {
 
         JSONObject json = new JSONObject();
 
-        // 在此添加查询条件
         GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();
+        Integer pageNumber = (Integer) requestParam.get("pageNumber");
+        Integer pageSize = (Integer) requestParam.get("pageSize");
+        if (pageNumber != null && pageNumber >= 1) {
+            pageNumber--;
+        }
+        example.setOffset(pageNumber);
+        example.setRows(pageSize);
+        
         List<GongYingShangWangLai> rows = gongYingShangWangLaiMapper.selectByExample(example);
         long total = gongYingShangWangLaiMapper.countByExample(example);
         json.put("rows", rows);

@@ -28,8 +28,15 @@ public class InfoController {
 
         JSONObject json = new JSONObject();
 
-        // 在此添加条件查询
         InfoExample example = new InfoExample();
+        Integer pageNumber = (Integer) requestParam.get("pageNumber");
+        Integer pageSize = (Integer) requestParam.get("pageSize");
+        if (pageNumber != null && pageNumber >= 1) {
+            pageNumber--;
+        }
+        example.setOffset(pageNumber);
+        example.setRows(pageSize);
+        
         List<Info> rows = infoMapper.selectByExample(example);
         long total = infoMapper.countByExample(example);
 
