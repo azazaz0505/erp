@@ -1,12 +1,12 @@
 package com.nt.erp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,33 +32,22 @@ public class KuWeiGuanLiController {
 
         // 在此添加条件查询
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
-        String pageNumber = (String) requestParam.get("pageNumber");
-        String pageSize = (String) requestParam.get("pageSize");
-//        String pageNumber = requestParam.get("pageNumber").toString();
-//        String pageSize = requestParam.get("pageSize").toString();
-        if (StringUtils.isNotBlank(pageNumber)) {
-            try {
-                example.setOffset(Integer.valueOf(pageNumber));
-            } catch (Exception e) {
-                json.put("retmsg", "失败");
-                json.put("retcode", "0");
-                return json;
-            }
-        }
+        Integer pageNumber = (Integer) requestParam.get("pageNumber");
+        Integer pageSize = (Integer) requestParam.get("pageSize");
+        example.setOffset(pageNumber);
+        example.setRows(pageSize);
         
-        if (StringUtils.isNotBlank(pageSize)) {
-            try {
-                example.setRows(Integer.valueOf(pageSize));
-            } catch (Exception e) {
-                json.put("retmsg", "失败");
-                json.put("retcode", "0");
-                return json;
-            }
+        List<KuWeiGuanLi> rows = new ArrayList<KuWeiGuanLi>();
+        long total = 0;
+        try {
+            rows = kuWeiGuanLiMapper.selectByExample(example);
+            total = kuWeiGuanLiMapper.countByExample(example);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
         }
-       
-        
-        List<KuWeiGuanLi> rows = kuWeiGuanLiMapper.selectByExample(example);
-        long total = kuWeiGuanLiMapper.countByExample(example);
+     
         
         json.put("rows", rows);
         json.put("total", total);
