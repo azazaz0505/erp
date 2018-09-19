@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50559
 File Encoding         : 65001
 
-Date: 2018-06-25 10:30:21
+Date: 2018-09-19 09:05:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,11 +23,11 @@ CREATE TABLE `kuweiguanli` (
   `uuid` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
+  `level` varchar(255) DEFAULT NULL,
   `capacity` varchar(255) DEFAULT NULL,
   `operation` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of kuweiguanli

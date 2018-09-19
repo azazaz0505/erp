@@ -7,7 +7,7 @@ public class KuWeiGuanLi {
 
     private String name;
 
-    private Integer level;
+    private String level;
 
     private String capacity;
 
@@ -37,12 +37,12 @@ public class KuWeiGuanLi {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setLevel(String level) {
+        this.level = level == null ? null : level.trim();
     }
 
     public String getCapacity() {
@@ -148,7 +148,7 @@ public class KuWeiGuanLi {
          * @mbg.generated
          * @author hewei
          */
-        public Builder level(Integer level) {
+        public Builder level(String level) {
             obj.level = level;
             return this;
         }

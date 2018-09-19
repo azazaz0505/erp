@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +32,10 @@ public class KuWeiGuanLiController {
 
         // 在此添加条件查询
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
-       /* String pageNumber = (String) requestParam.get("pageNumber");
-        String pageSize = (String) requestParam.get("pageSize");*/
-        String pageNumber = requestParam.get("pageNumber").toString();
-        String pageSize = requestParam.get("pageSize").toString();
+        String pageNumber = (String) requestParam.get("pageNumber");
+        String pageSize = (String) requestParam.get("pageSize");
+//        String pageNumber = requestParam.get("pageNumber").toString();
+//        String pageSize = requestParam.get("pageSize").toString();
         if (StringUtils.isNotBlank(pageNumber)) {
             try {
                 example.setOffset(Integer.valueOf(pageNumber));
@@ -72,22 +72,12 @@ public class KuWeiGuanLiController {
         JSONObject json = new JSONObject();
 
         KuWeiGuanLi record = new KuWeiGuanLi();
-        String level = (String) requestParam.get("level");
         record.setAddress((String) requestParam.get("address"));
         record.setAddress((String) requestParam.get("name"));
         record.setAddress((String) requestParam.get("capacity"));
         record.setAddress((String) requestParam.get("operation"));
+        record.setLevel((String) requestParam.get("level"));
       
-        if (StringUtils.isNotBlank(level)) {
-            try {
-                record.setLevel(Integer.valueOf(level));
-            } catch (Exception e) {
-                json.put("retmsg", "失败");
-                json.put("retcode", "0");
-                return json;
-            }
-        }
-        
         try {
             kuWeiGuanLiMapper.insert(record);
         } catch (Exception e) {
@@ -107,21 +97,11 @@ public class KuWeiGuanLiController {
         JSONObject json = new JSONObject();
 
         KuWeiGuanLi record = new KuWeiGuanLi();
-        String level = (String) requestParam.get("level");
+        record.setLevel((String) requestParam.get("level"));
         record.setAddress((String) requestParam.get("address"));
         record.setAddress((String) requestParam.get("name"));
         record.setAddress((String) requestParam.get("capacity"));
         record.setAddress((String) requestParam.get("operation"));
-      
-        if (StringUtils.isNotBlank(level)) {
-            try {
-                record.setLevel(Integer.valueOf(level));
-            } catch (Exception e) {
-                json.put("retmsg", "失败");
-                json.put("retcode", "0");
-                return json;
-            }
-        }
         
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
         example.createCriteria().andAddressEqualTo((String) requestParam.get("address"));

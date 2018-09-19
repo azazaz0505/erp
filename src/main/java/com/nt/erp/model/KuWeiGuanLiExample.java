@@ -447,52 +447,62 @@ public class KuWeiGuanLiExample {
             return (Criteria) this;
         }
 
-        public Criteria andLevelEqualTo(Integer value) {
+        public Criteria andLevelEqualTo(String value) {
             addCriterion("level =", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotEqualTo(Integer value) {
+        public Criteria andLevelNotEqualTo(String value) {
             addCriterion("level <>", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelGreaterThan(Integer value) {
+        public Criteria andLevelGreaterThan(String value) {
             addCriterion("level >", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelGreaterThanOrEqualTo(Integer value) {
+        public Criteria andLevelGreaterThanOrEqualTo(String value) {
             addCriterion("level >=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelLessThan(Integer value) {
+        public Criteria andLevelLessThan(String value) {
             addCriterion("level <", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelLessThanOrEqualTo(Integer value) {
+        public Criteria andLevelLessThanOrEqualTo(String value) {
             addCriterion("level <=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIn(List<Integer> values) {
+        public Criteria andLevelLike(String value) {
+            addCriterion("level like", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotLike(String value) {
+            addCriterion("level not like", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIn(List<String> values) {
             addCriterion("level in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotIn(List<Integer> values) {
+        public Criteria andLevelNotIn(List<String> values) {
             addCriterion("level not in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelBetween(Integer value1, Integer value2) {
+        public Criteria andLevelBetween(String value1, String value2) {
             addCriterion("level between", value1, value2, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotBetween(Integer value1, Integer value2) {
+        public Criteria andLevelNotBetween(String value1, String value2) {
             addCriterion("level not between", value1, value2, "level");
             return (Criteria) this;
         }

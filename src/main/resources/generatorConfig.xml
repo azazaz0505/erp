@@ -202,8 +202,9 @@
         <table tableName="mianliaochuku" domainObjectName="MianLiaoChuKu"/>
         <table tableName="mianliaoruku" domainObjectName="MianLiaoRuKu"/>
         <table tableName="zichanguanli" domainObjectName="ZiChanGuanLi"/>
-        <table tableName="infos" domainObjectName="Info"/>-->
-        <table tableName="login" domainObjectName="Login"/> 
+        <table tableName="infos" domainObjectName="Info"/>
+        <table tableName="login" domainObjectName="Login"/> -->
+        <table tableName="kuweiguanli" domainObjectName="KuWeiGuanLi"/> 
 
         <!--&lt;!&ndash; 参考 javaModelGenerator 的 constructorBased属性&ndash;&gt;-->
         <!--<property name="constructorBased" value="false"/>-->
