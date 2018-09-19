@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -116,22 +117,20 @@ public class KuWeiGuanLiController {
     public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
         JSONObject json = new JSONObject();
 
-        Integer[] uuids = (Integer[]) requestParam.get("uuids");
+        List<Integer> uuids = (List<Integer>) requestParam.get("uuids");
         try {
-            if (uuids != null && uuids.length > 0) {
-                for (int i = 0; i < uuids.length; i++) {
-                    if (uuids[i] != null) {
-                        kuWeiGuanLiMapper.deleteByPrimaryKey(uuids[i]); 
+            if (CollectionUtils.isNotEmpty(uuids)) {
+                for (Integer integer : uuids) {
+                    if (integer != null) {
+                        kuWeiGuanLiMapper.deleteByPrimaryKey(integer); 
                     }
                 }
             }
-        
         } catch (Exception e) {
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
         }
-       
         
         json.put("retmsg", "成功");
         json.put("retcode", "1");

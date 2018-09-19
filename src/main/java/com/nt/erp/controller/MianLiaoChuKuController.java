@@ -1,12 +1,13 @@
 package com.nt.erp.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,57 @@ public class MianLiaoChuKuController {
         long total = mianLiaoChuKuMapper.countByExample(example);
         json.put("rows", rows);
         json.put("total", total);
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
+    @RequestMapping(value = "/mianLiaoChuKu/add", method = RequestMethod.POST)
+    public JSONObject add(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        MianLiaoChuKu record = new MianLiaoChuKu();
+        record.setChukudanhao((Integer) requestParam.get("chukudanhao"));
+        record.setChuhuocangku((String) requestParam.get("chuhuocangku"));
+        record.setChukufangshi((String) requestParam.get("chukufangshi"));
+        record.setBeizhu((String) requestParam.get("beizhu"));
+        record.setChukushijian(new Date());
+      
+        try {
+            mianLiaoChuKuMapper.insert(record);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
+
+    @RequestMapping(value = "/mianLiaoChuKu/delete", method = RequestMethod.POST)
+    public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        List<Integer> uuids = (List<Integer>) requestParam.get("uuids");
+        try {
+            if (CollectionUtils.isNotEmpty(uuids)) {
+                for (Integer integer : uuids) {
+                    if (integer != null) {
+                        mianLiaoChuKuMapper.deleteByPrimaryKey(integer); 
+                    }
+                }
+            }
+        
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+       
+        
         json.put("retmsg", "成功");
         json.put("retcode", "1");
         return json;

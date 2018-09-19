@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,6 +69,32 @@ public class MianLiaoRuKuController {
             json.put("retcode", "0");
             return json;
         }
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
+
+    @RequestMapping(value = "/mianLiaoRuKu/delete", method = RequestMethod.POST)
+    public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+        
+        List<Integer> uuids = (List<Integer>) requestParam.get("uuids");
+        try {
+            if (CollectionUtils.isNotEmpty(uuids)) {
+                for (Integer integer : uuids) {
+                    if (integer != null) {
+                        mianLiaoRuKuMapper.deleteByPrimaryKey(integer); 
+                    }
+                }
+            }
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+       
         
         json.put("retmsg", "成功");
         json.put("retcode", "1");
