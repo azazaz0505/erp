@@ -18,7 +18,7 @@ import com.nt.erp.model.ZiChanGuanLi;
 import com.nt.erp.model.ZiChanGuanLiExample;
 
 @RestController
-public class ZiChanGuanLiMapperController {
+public class ZiChanGuanLiController {
 
     @Autowired
     private ZiChanGuanLiMapper ziChanGuanLiMapper;
