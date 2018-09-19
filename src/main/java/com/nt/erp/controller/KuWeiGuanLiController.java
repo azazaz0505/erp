@@ -34,10 +34,8 @@ public class KuWeiGuanLiController {
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
         Integer pageNumber = (Integer) requestParam.get("pageNumber");
         Integer pageSize = (Integer) requestParam.get("pageSize");
-        if (pageNumber >= 1) {
+        if (pageNumber != null && pageNumber >= 1) {
             pageNumber--;
-        }else {
-            pageNumber = 0;
         }
         example.setOffset(pageNumber);
         example.setRows(pageSize);
