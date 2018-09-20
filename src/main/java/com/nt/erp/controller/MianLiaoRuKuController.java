@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.dao.MianLiaoRuKuMapper;
-import com.nt.erp.model.KuWeiGuanLi;
 import com.nt.erp.model.MianLiaoRuKu;
 import com.nt.erp.model.MianLiaoRuKuExample;
 
@@ -108,6 +107,7 @@ public class MianLiaoRuKuController {
     public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
         JSONObject json = new JSONObject();
         
+        @SuppressWarnings("unchecked")
         List<Integer> uuids = (List<Integer>) requestParam.get("uuids");
         try {
             if (CollectionUtils.isNotEmpty(uuids)) {

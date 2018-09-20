@@ -17,8 +17,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.dao.GongYingShangWangLaiMapper;
 import com.nt.erp.model.GongYingShangWangLai;
 import com.nt.erp.model.GongYingShangWangLaiExample;
-import com.nt.erp.model.KuWeiGuanLi;
-import com.nt.erp.model.KuWeiGuanLiExample;
 
 @RestController
 public class GongYingShangWangLaiController {
@@ -119,6 +117,7 @@ public class GongYingShangWangLaiController {
     public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
         JSONObject json = new JSONObject();
 
+        @SuppressWarnings("unchecked")
         List<Integer> uuids = (List<Integer>) requestParam.get("uuids");
         try {
             if (CollectionUtils.isNotEmpty(uuids)) {

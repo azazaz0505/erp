@@ -107,6 +107,7 @@ public class MianLiaoChuKuController {
     public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
         JSONObject json = new JSONObject();
 
+        @SuppressWarnings("unchecked")
         List<Integer> uuids = (List<Integer>) requestParam.get("uuids");
         try {
             if (CollectionUtils.isNotEmpty(uuids)) {
