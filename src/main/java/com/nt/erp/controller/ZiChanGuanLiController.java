@@ -86,6 +86,7 @@ public class ZiChanGuanLiController {
         record.setGudingzichanmingcheng((String) requestParam.get("gudingzichanmingcheng"));
         record.setJingcanzhi((String) requestParam.get("jingcanzhi"));
         record.setYuanzhi((String) requestParam.get("yuanzhi"));
+        record.setUuid((Integer) requestParam.get("uuid"));
         
         ZiChanGuanLiExample example = new ZiChanGuanLiExample();
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));

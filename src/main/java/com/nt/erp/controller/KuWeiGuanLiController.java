@@ -97,6 +97,7 @@ public class KuWeiGuanLiController {
         record.setName((String) requestParam.get("name"));
         record.setCapacity((String) requestParam.get("capacity"));
         record.setOperation((String) requestParam.get("operation"));
+        record.setUuid((Integer) requestParam.get("uuid"));
         
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));

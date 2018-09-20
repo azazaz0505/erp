@@ -84,6 +84,7 @@ public class MianLiaoChuKuController {
         record.setChuhuocangku((String) requestParam.get("chuhuocangku"));
         record.setChukufangshi((String) requestParam.get("chukufangshi"));
         record.setBeizhu((String) requestParam.get("beizhu"));
+        record.setUuid((Integer) requestParam.get("uuid"));
         
         MianLiaoChuKuExample example = new MianLiaoChuKuExample();
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));

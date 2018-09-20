@@ -84,6 +84,7 @@ public class MianLiaoRuKuController {
         record.setShouhuocangku((String) requestParam.get("shouhuocangku"));
         record.setRukufangshi((String) requestParam.get("rukufangshi"));
         record.setBeizhu((String) requestParam.get("beizhu"));
+        record.setUuid((Integer) requestParam.get("uuid"));
         
         MianLiaoRuKuExample example = new MianLiaoRuKuExample();
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));

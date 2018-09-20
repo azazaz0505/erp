@@ -94,6 +94,7 @@ public class GongYingShangWangLaiController {
         record.setYifukuanjine((Double) requestParam.get("yifukuanjine"));
         record.setYikaipiaojine((Double) requestParam.get("yikaipiaojine"));
         record.setYufukuan((Double) requestParam.get("yufukuan"));
+        record.setUuid((Integer) requestParam.get("uuid"));
         
         GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
