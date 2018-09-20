@@ -92,9 +92,9 @@ public class KuWeiGuanLiController {
         KuWeiGuanLi record = new KuWeiGuanLi();
         record.setLevel((String) requestParam.get("level"));
         record.setAddress((String) requestParam.get("address"));
-        record.setAddress((String) requestParam.get("name"));
-        record.setAddress((String) requestParam.get("capacity"));
-        record.setAddress((String) requestParam.get("operation"));
+        record.setName((String) requestParam.get("name"));
+        record.setCapacity((String) requestParam.get("capacity"));
+        record.setOperation((String) requestParam.get("operation"));
         
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
         example.createCriteria().andAddressEqualTo((String) requestParam.get("address"));
