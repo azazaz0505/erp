@@ -41,6 +41,7 @@ public class InfoController {
             try {
                 criteria.andOrderdateGreaterThanOrEqualTo(sdf.parse((String) requestParam.get("orderdate")));
             } catch (ParseException e) {
+                System.out.println(e);
                 json.put("retmsg", " 日期转化失败");
                 json.put("retcode", "0");
                 return json;
