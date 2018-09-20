@@ -71,18 +71,5 @@ public class InfoController {
         json.put("retcode", "1");
         return json;
     }
-    
-    public static void main(String[] args) {
-        String ss= "2018-09-11";
-        if (StringUtils.isNotBlank(ss)) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            try {
-                System.out.println(sdf.parse(ss));
-            } catch (ParseException e) {
-                System.out.println(e);
-            }
-        }
-    }
-    
 
 }
