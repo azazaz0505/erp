@@ -38,7 +38,7 @@ public class ChuCuoHuiZongController {
         if (StringUtils.isNotBlank((String) requestParam.get("orderdate"))) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                criteria.andOrderdateGreaterThanOrEqualTo(sdf.parse((String) requestParam.get("orderdate")));
+                criteria.andOrderdateEqualTo(sdf.parse((String) requestParam.get("orderdate")));
             } catch (ParseException e) {
                 System.out.println(e);
                 json.put("retmsg", " 日期解析失败");
