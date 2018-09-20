@@ -1,12 +1,14 @@
 package com.nt.erp.controller;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.dao.ChuCuoHuiZongMapper;
 import com.nt.erp.model.ChuCuoHuiZong;
 import com.nt.erp.model.ChuCuoHuiZongExample;
+import com.nt.erp.model.ChuCuoHuiZongExample.Criteria;
 
 @RestController
 public class ChuCuoHuiZongController {
@@ -30,8 +33,18 @@ public class ChuCuoHuiZongController {
         JSONObject json = new JSONObject();
 
         ChuCuoHuiZongExample example = new ChuCuoHuiZongExample();
-        example.createCriteria()
-        .andOrderdateGreaterThanOrEqualTo((Date) requestParam.get("orderdate"));
+        Criteria criteria = example.createCriteria();
+        
+        if (StringUtils.isNotBlank((String) requestParam.get("orderdate"))) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                criteria.andOrderdateGreaterThanOrEqualTo(sdf.parse((String) requestParam.get("orderdate")));
+            } catch (ParseException e) {
+                json.put("retmsg", " 日期转化失败");
+                json.put("retcode", "0");
+                return json;
+            }
+        }
         
         
         Integer pageNumber = (Integer) requestParam.get("pageNumber");
