@@ -57,6 +57,7 @@ public class LoginController {
         try {
             pw = Base64.decode(list.get(0).getLoginpasswd());
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "内部服务异常");
             json.put("retcode", "0");
             return json;
@@ -103,6 +104,7 @@ public class LoginController {
             record.setLoginpasswd(encodePasswd);
             loginMapper.insert(record);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "内部服务异常");
             json.put("retcode", "0");
             return json;

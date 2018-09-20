@@ -69,6 +69,7 @@ public class GongYingShangWangLaiController {
         try {
             gongYingShangWangLaiMapper.insert(record);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
@@ -102,6 +103,7 @@ public class GongYingShangWangLaiController {
         try {
             gongYingShangWangLaiMapper.updateByExample(record, example);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
@@ -127,6 +129,7 @@ public class GongYingShangWangLaiController {
                 }
             }
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;

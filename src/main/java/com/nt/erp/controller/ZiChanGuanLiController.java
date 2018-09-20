@@ -66,6 +66,7 @@ public class ZiChanGuanLiController {
         try {
             ziChanGuanLiMapper.insert(record);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
@@ -93,6 +94,7 @@ public class ZiChanGuanLiController {
         try {
             ziChanGuanLiMapper.updateByExample(record, example);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
@@ -119,6 +121,7 @@ public class ZiChanGuanLiController {
                 }
             }
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;

@@ -47,6 +47,7 @@ public class KuWeiGuanLiController {
             rows = kuWeiGuanLiMapper.selectByExample(example);
             total = kuWeiGuanLiMapper.countByExample(example);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
@@ -74,6 +75,7 @@ public class KuWeiGuanLiController {
         try {
             kuWeiGuanLiMapper.insert(record);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
@@ -97,7 +99,7 @@ public class KuWeiGuanLiController {
         record.setOperation((String) requestParam.get("operation"));
         
         KuWeiGuanLiExample example = new KuWeiGuanLiExample();
-        example.createCriteria().andAddressEqualTo((String) requestParam.get("address"));
+        example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
         
         try {
             kuWeiGuanLiMapper.updateByExample(record, example);
@@ -128,6 +130,7 @@ public class KuWeiGuanLiController {
                 }
             }
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;

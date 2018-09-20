@@ -65,6 +65,7 @@ public class MianLiaoRuKuController {
         try {
             mianLiaoRuKuMapper.insert(record);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
@@ -91,6 +92,7 @@ public class MianLiaoRuKuController {
         try {
             mianLiaoRuKuMapper.updateByExample(record, example);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
@@ -116,6 +118,7 @@ public class MianLiaoRuKuController {
                 }
             }
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
