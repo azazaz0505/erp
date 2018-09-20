@@ -98,7 +98,7 @@ public class GongYingShangWangLaiController {
         record.setYufukuan((Double) requestParam.get("yufukuan"));
         
         GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();
-        example.createCriteria().andGongyingshanbianmaEqualTo((String) requestParam.get("gongyingshanbianma"));
+        example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
         
         try {
             gongYingShangWangLaiMapper.updateByExample(record, example);

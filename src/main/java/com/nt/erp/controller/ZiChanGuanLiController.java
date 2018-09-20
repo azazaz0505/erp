@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.dao.ZiChanGuanLiMapper;
-import com.nt.erp.model.MianLiaoRuKu;
 import com.nt.erp.model.ZiChanGuanLi;
 import com.nt.erp.model.ZiChanGuanLiExample;
 
@@ -89,7 +88,7 @@ public class ZiChanGuanLiController {
         record.setYuanzhi((String) requestParam.get("yuanzhi"));
         
         ZiChanGuanLiExample example = new ZiChanGuanLiExample();
-        example.createCriteria().andGudingzichanbianaEqualTo((String) requestParam.get("gudingzichanbiana"));
+        example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
       
         try {
             ziChanGuanLiMapper.updateByExample(record, example);

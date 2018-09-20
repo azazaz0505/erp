@@ -86,7 +86,7 @@ public class MianLiaoChuKuController {
         record.setBeizhu((String) requestParam.get("beizhu"));
         
         MianLiaoChuKuExample example = new MianLiaoChuKuExample();
-        example.createCriteria().andChukudanhaoEqualTo((Integer) requestParam.get("chukudanhao"));
+        example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
       
         try {
             mianLiaoChuKuMapper.updateByExample(record, example);

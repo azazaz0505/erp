@@ -87,7 +87,7 @@ public class MianLiaoRuKuController {
         record.setBeizhu((String) requestParam.get("beizhu"));
         
         MianLiaoRuKuExample example = new MianLiaoRuKuExample();
-        example.createCriteria().andRukudanhaoEqualTo((Integer) requestParam.get("rukudanhao"));
+        example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
         
         try {
             mianLiaoRuKuMapper.updateByExample(record, example);
