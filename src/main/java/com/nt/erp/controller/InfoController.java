@@ -53,8 +53,6 @@ public class InfoController {
                 return json;
             }
         }
-       
-        
         
         Integer pageNumber = (Integer) requestParam.get("pageNumber");
         Integer pageSize = (Integer) requestParam.get("pageSize");
