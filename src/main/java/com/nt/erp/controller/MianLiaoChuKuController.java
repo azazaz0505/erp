@@ -31,7 +31,6 @@ public class MianLiaoChuKuController {
 
         JSONObject json = new JSONObject();
 
-        // 在此添加条件查询
         MianLiaoChuKuExample example = new MianLiaoChuKuExample();
         
         Integer pageNumber = (Integer) requestParam.get("pageNumber");
@@ -64,6 +63,32 @@ public class MianLiaoChuKuController {
       
         try {
             mianLiaoChuKuMapper.insert(record);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
+    @RequestMapping(value = "/mianLiaoChuKu/update", method = RequestMethod.POST)
+    public JSONObject update(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        MianLiaoChuKu record = new MianLiaoChuKu();
+        record.setChukudanhao((Integer) requestParam.get("chukudanhao"));
+        record.setChuhuocangku((String) requestParam.get("chuhuocangku"));
+        record.setChukufangshi((String) requestParam.get("chukufangshi"));
+        record.setBeizhu((String) requestParam.get("beizhu"));
+        
+        MianLiaoChuKuExample example = new MianLiaoChuKuExample();
+        example.createCriteria().andChukudanhaoEqualTo((Integer) requestParam.get("chukudanhao"));
+      
+        try {
+            mianLiaoChuKuMapper.updateByExample(record, example);
         } catch (Exception e) {
             json.put("retmsg", "失败");
             json.put("retcode", "0");

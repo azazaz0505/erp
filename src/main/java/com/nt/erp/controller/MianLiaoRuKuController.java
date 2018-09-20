@@ -75,6 +75,32 @@ public class MianLiaoRuKuController {
         return json;
     }
     
+    @RequestMapping(value = "/mianLiaoRuKu/update", method = RequestMethod.POST)
+    public JSONObject update(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        MianLiaoRuKu record = new MianLiaoRuKu();
+        record.setRukudanhao((Integer) requestParam.get("rukudanhao"));
+        record.setShouhuocangku((String) requestParam.get("shouhuocangku"));
+        record.setRukufangshi((String) requestParam.get("rukufangshi"));
+        record.setBeizhu((String) requestParam.get("beizhu"));
+        
+        MianLiaoRuKuExample example = new MianLiaoRuKuExample();
+        example.createCriteria().andRukudanhaoEqualTo((Integer) requestParam.get("rukudanhao"));
+        
+        try {
+            mianLiaoRuKuMapper.updateByExample(record, example);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
 
     @RequestMapping(value = "/mianLiaoRuKu/delete", method = RequestMethod.POST)
     public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
