@@ -14,24 +14,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nt.erp.dao.InfoMapper;
-import com.nt.erp.model.Info;
-import com.nt.erp.model.InfoExample;
+import com.nt.erp.dao.ChuCuoHuiZongMapper;
+import com.nt.erp.model.ChuCuoHuiZong;
+import com.nt.erp.model.ChuCuoHuiZongExample;
 
 @RestController
-public class InfoController {
+public class ChuCuoHuiZongController {
 
     @Autowired
-    private InfoMapper infoMapper;
+    private ChuCuoHuiZongMapper chuCuoHuiZongMapper;
 
-    @RequestMapping(value = "/info",method = RequestMethod.POST)
-    public JSONObject info(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+    @RequestMapping(value = "/errorcollect",method = RequestMethod.POST)
+    public JSONObject errorcollect(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
 
         JSONObject json = new JSONObject();
 
-        InfoExample example = new InfoExample();
-        example.createCriteria().andStyleidEqualTo((String) requestParam.get("styleid"))
-        .andStylenameEqualTo((String) requestParam.get("stylename"))
+        ChuCuoHuiZongExample example = new ChuCuoHuiZongExample();
+        example.createCriteria()
         .andOrderdateGreaterThanOrEqualTo((Date) requestParam.get("orderdate"));
         
         
@@ -43,8 +42,8 @@ public class InfoController {
         example.setOffset(pageNumber);
         example.setRows(pageSize);
         
-        List<Info> rows = infoMapper.selectByExample(example);
-        long total = infoMapper.countByExample(example);
+        List<ChuCuoHuiZong> rows = chuCuoHuiZongMapper.selectByExample(example);
+        long total = chuCuoHuiZongMapper.countByExample(example);
 
         json.put("rows", rows);
         json.put("total", total);

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.nt.erp.dao.GongYingShangWangLaiMapper;
 import com.nt.erp.model.GongYingShangWangLai;
 import com.nt.erp.model.GongYingShangWangLaiExample;
+import com.nt.erp.model.KuWeiGuanLi;
+import com.nt.erp.model.KuWeiGuanLiExample;
 
 @RestController
 public class GongYingShangWangLaiController {
@@ -42,6 +45,93 @@ public class GongYingShangWangLaiController {
         long total = gongYingShangWangLaiMapper.countByExample(example);
         json.put("rows", rows);
         json.put("total", total);
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
+    @RequestMapping(value = "/gongYingShangWangLai/add", method = RequestMethod.POST)
+    public JSONObject add(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        GongYingShangWangLai record = new GongYingShangWangLai();
+        record.setBaobiao((String) requestParam.get("baobiao"));
+        record.setFukuan((String) requestParam.get("fukuan"));
+        record.setGongyingshanbianma((String) requestParam.get("gongyingshanbianma"));
+        record.setGongyingshangmingcheng((String) requestParam.get("gongyingshangmingcheng"));
+        record.setHetongzongjine((Double) requestParam.get("hetongzongjine"));
+        record.setRukuzongjine((Double) requestParam.get("rukuzongjine"));
+        record.setWeikaipiaojine((Double) requestParam.get("weikaipiaojine"));
+        record.setYifukuanjine((Double) requestParam.get("yifukuanjine"));
+        record.setYikaipiaojine((Double) requestParam.get("yikaipiaojine"));
+        record.setYufukuan((Double) requestParam.get("yufukuan"));
+      
+        try {
+            gongYingShangWangLaiMapper.insert(record);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+       
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
+    @RequestMapping(value = "/gongYingShangWangLai/update", method = RequestMethod.POST)
+    public JSONObject update(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        GongYingShangWangLai record = new GongYingShangWangLai();
+        record.setBaobiao((String) requestParam.get("baobiao"));
+        record.setFukuan((String) requestParam.get("fukuan"));
+        record.setGongyingshanbianma((String) requestParam.get("gongyingshanbianma"));
+        record.setGongyingshangmingcheng((String) requestParam.get("gongyingshangmingcheng"));
+        record.setHetongzongjine((Double) requestParam.get("hetongzongjine"));
+        record.setRukuzongjine((Double) requestParam.get("rukuzongjine"));
+        record.setWeikaipiaojine((Double) requestParam.get("weikaipiaojine"));
+        record.setYifukuanjine((Double) requestParam.get("yifukuanjine"));
+        record.setYikaipiaojine((Double) requestParam.get("yikaipiaojine"));
+        record.setYufukuan((Double) requestParam.get("yufukuan"));
+        
+        GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();
+        example.createCriteria().andGongyingshanbianmaEqualTo((String) requestParam.get("gongyingshanbianma"));
+        
+        try {
+            gongYingShangWangLaiMapper.updateByExample(record, example);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+       
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+
+    @RequestMapping(value = "/gongYingShangWangLai/delete", method = RequestMethod.POST)
+    public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        List<Integer> uuids = (List<Integer>) requestParam.get("uuids");
+        try {
+            if (CollectionUtils.isNotEmpty(uuids)) {
+                for (Integer integer : uuids) {
+                    if (integer != null) {
+                        gongYingShangWangLaiMapper.deleteByPrimaryKey(integer); 
+                    }
+                }
+            }
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+        
         json.put("retmsg", "成功");
         json.put("retcode", "1");
         return json;

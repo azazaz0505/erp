@@ -76,6 +76,34 @@ public class ZiChanGuanLiController {
         return json;
     }
     
+    @RequestMapping(value = "/ziChanGuanLi/update", method = RequestMethod.POST)
+    public JSONObject update(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        ZiChanGuanLi record = new ZiChanGuanLi();
+        record.setGudingzichanbiana((String) requestParam.get("gudingzichanbiana"));
+        record.setGudingzichanleixing((String) requestParam.get("gudingzichanleixing"));
+        record.setGudingzichanmingcheng((String) requestParam.get("gudingzichanmingcheng"));
+        record.setJingcanzhi((String) requestParam.get("jingcanzhi"));
+        record.setYuanzhi((String) requestParam.get("yuanzhi"));
+        
+        ZiChanGuanLiExample example = new ZiChanGuanLiExample();
+        example.createCriteria().andGudingzichanbianaEqualTo((String) requestParam.get("gudingzichanbiana"));
+      
+        try {
+            ziChanGuanLiMapper.updateByExample(record, example);
+        } catch (Exception e) {
+            json.put("retmsg", "失败");
+            json.put("retcode", "0");
+            return json;
+        }
+        
+        json.put("retmsg", "成功");
+        json.put("retcode", "1");
+        return json;
+    }
+    
+    
 
     @RequestMapping(value = "/ziChanGuanLi/delete", method = RequestMethod.POST)
     public JSONObject delete(@RequestBody Map<String, Object> requestParam,HttpServletRequest request,  HttpServletResponse response) {
