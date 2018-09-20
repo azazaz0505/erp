@@ -34,8 +34,14 @@ public class InfoController {
 
         InfoExample example = new InfoExample();
         Criteria criteria = example.createCriteria();
-        criteria.andStyleidEqualTo((String) requestParam.get("styleid"))
-        .andStylenameEqualTo((String) requestParam.get("stylename"));
+        if (StringUtils.isNotBlank((String) requestParam.get("styleid"))) {
+            criteria.andStyleidEqualTo((String) requestParam.get("styleid"));
+        }
+        
+        if (StringUtils.isNotBlank((String) requestParam.get("stylename"))) {
+            criteria.andStylenameEqualTo((String) requestParam.get("stylename"));
+        }
+        
         if (StringUtils.isNotBlank((String) requestParam.get("orderdate"))) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
