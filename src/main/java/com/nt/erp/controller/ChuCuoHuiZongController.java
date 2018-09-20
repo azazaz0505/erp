@@ -36,11 +36,12 @@ public class ChuCuoHuiZongController {
         Criteria criteria = example.createCriteria();
         
         if (StringUtils.isNotBlank((String) requestParam.get("orderdate"))) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 criteria.andOrderdateGreaterThanOrEqualTo(sdf.parse((String) requestParam.get("orderdate")));
             } catch (ParseException e) {
-                json.put("retmsg", " 日期转化失败");
+                System.out.println(e);
+                json.put("retmsg", " 日期解析失败");
                 json.put("retcode", "0");
                 return json;
             }
