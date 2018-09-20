@@ -102,6 +102,7 @@ public class KuWeiGuanLiController {
         try {
             kuWeiGuanLiMapper.updateByExample(record, example);
         } catch (Exception e) {
+            System.out.println(e);
             json.put("retmsg", "失败");
             json.put("retcode", "0");
             return json;
