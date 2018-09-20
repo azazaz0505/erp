@@ -100,7 +100,7 @@ public class GongYingShangWangLaiController {
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
         
         try {
-            gongYingShangWangLaiMapper.updateByExample(record, example);
+            gongYingShangWangLaiMapper.updateByExampleSelective(record, example);
         } catch (Exception e) {
             System.out.println(e);
             json.put("retmsg", "失败");

@@ -94,6 +94,7 @@ public class LoginController {
         if (StringUtils.isEmpty(passwd)) {
             json.put("retmsg", "错误，密码不能为空");
             json.put("retcode", "0");
+            return json;
         }
         
         String encodePasswd = null;

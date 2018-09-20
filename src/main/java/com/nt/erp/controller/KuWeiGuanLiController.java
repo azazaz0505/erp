@@ -103,7 +103,7 @@ public class KuWeiGuanLiController {
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
         
         try {
-            kuWeiGuanLiMapper.updateByExample(record, example);
+            kuWeiGuanLiMapper.updateByExampleSelective(record, example);
         } catch (Exception e) {
             System.out.println(e);
             json.put("retmsg", "失败");

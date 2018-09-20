@@ -90,7 +90,7 @@ public class MianLiaoChuKuController {
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
       
         try {
-            mianLiaoChuKuMapper.updateByExample(record, example);
+            mianLiaoChuKuMapper.updateByExampleSelective(record, example);
         } catch (Exception e) {
             System.out.println(e);
             json.put("retmsg", "失败");

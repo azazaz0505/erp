@@ -92,7 +92,7 @@ public class ZiChanGuanLiController {
         example.createCriteria().andUuidEqualTo((Integer) requestParam.get("uuid"));
       
         try {
-            ziChanGuanLiMapper.updateByExample(record, example);
+            ziChanGuanLiMapper.updateByExampleSelective(record, example);
         } catch (Exception e) {
             System.out.println(e);
             json.put("retmsg", "失败");
