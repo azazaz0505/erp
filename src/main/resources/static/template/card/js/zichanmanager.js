@@ -148,7 +148,7 @@ function initZiChan(index) {
 	$('#nianxian').val((null == index || -1 == index) ? null:rowdata.zhejiunianxian);
 	$('#yuanzhi').val((null == index || -1 == index) ? null:rowdata.yuanzhi);
 	$('#jingcanzhi').val((null == index || -1 == index) ? null:rowdata.jingcanzhi);
-
+	$('#zcgluuid').val((null == index || -1 == index) ? null:rowdata.uuid);
 }
 
 var idxZiChan = 0;
@@ -183,9 +183,9 @@ function saveOrUpdataZiChan(index) {
     	
         $("#ziChanTitle").text("添加资产");
        //添加时置空
-       // initZiChan(index);
-        idxZiChan = -1;
-        return;
+       initZiChan(index);
+       idxZiChan = -1;
+       return;
     }
     $("#ziChanTitle").text("编辑资产");
     $("#zichanbianma").attr("disabled", true);
@@ -207,7 +207,8 @@ function submitZiChan() {
             "gudingzichanleixing": $("#ziChanType").val(),
             "zhejiunianxian": $("#nianxian").val(),
             "yuanzhi": $("#yuanzhi").val(),
-            "jingcanzhi" : $("#jingcanzhi").val()
+            "jingcanzhi" : $("#jingcanzhi").val(),
+            "uuid":parseInt($("#zcgluuid").val())
 
         };
     if (null == idxZiChan || idxZiChan == -1) {
@@ -234,7 +235,7 @@ function deleteOneZiChan(index) {
 	checkids=[];
 	
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];
-	checkids= rowdata.uuid;
+	checkids[0]= rowdata.uuid;
 	
 };
 
@@ -276,7 +277,7 @@ function deleteZiChanBtn() {
 function saveZiChanInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/ziChanGuanLi/select',
+        url: '/ziChanGuanLi/add',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -309,7 +310,7 @@ function saveZiChanInfo(data) {
 function updateZiChanInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/ziChanGuanLi/select',
+        url: '/ziChanGuanLi/update',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -342,7 +343,7 @@ function updateZiChanInfo(data) {
 function deleteZiChanInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/ziChanGuanLi/select',
+        url: '/ziChanGuanLi/delete',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),

@@ -26,7 +26,7 @@ platform.controller('gyswanglai', ['$scope', '$rootScope', '$http', '$window',
         //先销毁表格  
         $('#tb_report').bootstrapTable('destroy'); 
         $("#tb_report").bootstrapTable({ // 对应table标签的id
-            url: $rootScope.apiHome + '/info',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
+            url: $rootScope.apiHome + '/gongYingShangWangLai/select',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
             method: "post",                     //使用get请求到服务器获取数据,post大小写有区别
             dataType: "json",
             locale: 'zh-CN',
@@ -302,7 +302,7 @@ function deleteGys(){
 function saveGysInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/gongYingShangWangLai/select',
+        url: '/gongYingShangWangLai/add',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -335,7 +335,7 @@ function saveGysInfo(data) {
 function deleteGysInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/gongYingShangWangLai/select',
+        url: '/gongYingShangWangLai/delete',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),

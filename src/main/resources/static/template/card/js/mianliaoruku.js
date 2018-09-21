@@ -2,10 +2,6 @@ platform.controller('mianliaoruku', ['$scope', '$rootScope', '$http', '$window',
     function ($scope, $rootScope, $http, $window) {
         $window.scroll(0, 0);
 
-        //加载进来子界面隐藏
-        /*$("#addKuwei").modal({show:false});
-        $("#delRuKuTiShi").modal({show:false});*/
-
         //先销毁表格  
         $('#tb_report').bootstrapTable('destroy'); 
         $("#tb_report").bootstrapTable({ // 对应table标签的id
@@ -131,7 +127,7 @@ function initRuKufo(index) {
 	$('#ruhuocangku').val((null == index || -1 == index) ? null:rowdata.shouhuocangku);
 	$('#rukufangshi').val((null == index || -1 == index) ? null:rowdata.rukufangshi);
 	$('#beizhu').val((null == index || -1 == index) ? null:rowdata.beizhu);
-	
+	$('#mlrkuuid').val((null == index || -1 == index) ? null:rowdata.uuid);
 }
 var idxRuKu = 0;
 
@@ -169,8 +165,8 @@ var idxRuKu = 0;
     	 $("#ruKuTitle").text("增加入库面料");
         //$("#serviceid").attr("disabled", false);
     	 idxRuKu = -1;
-    	//initRuKufo(index);
-        return;
+    	 initRuKufo(index);
+         return;
     };
     
     $("#ruKuTitle").text("编辑入库面料");
@@ -188,10 +184,11 @@ function submitRuKu () {
     // 先收集数据
     var data =
         {
-            "rukudanhao": $("#rukudanhao").val(),
-            "ruhuocangku": $("#ruhuocangku").val(),
+            "rukudanhao": parseInt($("#rukudanhao").val()),
+            "shouhuocangku": $("#ruhuocangku").val(),
             "rukufangshi": $("#rukufangshi").val(),
             "beizhu": $("#beizhu").val(),
+            "uuid": parseInt($('#mlrkuuid').val()),
         };
     if (null == idxRuKu || idxRuKu == -1) {
         //新增数据
@@ -214,7 +211,7 @@ function deleteOneRuku(index) {
 	 
 	checkids = [];
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];
-	checkids= rowdata.uuid;
+	checkids[0]= rowdata.uuid;
 };
 
 //点击提示删除框的确认按钮
@@ -323,7 +320,7 @@ function updateRuKuInfo(data) {
 function deleteRuKuInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/mianLiaoRuKu/select',
+        url: '/mianLiaoRuKu/delete',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),

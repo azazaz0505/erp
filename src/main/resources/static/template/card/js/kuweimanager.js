@@ -148,7 +148,11 @@ function initkuwei(index) {
     $scope.ckmanagertmp.rongliang  = (null == index || -1 == index) ? null : $scope.datalist[index].ssizenumber;*/
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];//获取该行的数据集
 	$('#cangkuaddress').val((null == index || -1 == index) ? null:rowdata.address);
-
+	$('#cangkuname').val((null == index || -1 == index) ? null:rowdata.name);
+	$('#kuwei').val((null == index || -1 == index) ? null:rowdata.level);
+	$('#cengci').val((null == index || -1 == index) ? null:rowdata.capacity);
+	$('#rongliang').val((null == index || -1 == index) ? null:rowdata.operation);
+	$('#kwgluuid').val((null == index || -1 == index) ? null:rowdata.uuid);
 }
 
 var checkids = [];
@@ -161,6 +165,7 @@ function deleteKWBtn(){
         //"serviceid": $scope.deleteid,
          "uuids": checkids
     };
+	//var uuids= checkids;
 	deleteKuWeiInfo(data);	
 };
 
@@ -202,15 +207,15 @@ function saveOrUpdataKuWei(index) {
     if (index == null || index == -1) {
     	$("#addKuwei").modal({show:true});
     	$('#content').text('添加库位');
-    	$("saveBtn").show();
+    	$("#saveKuWeiBtn").show();
         //如果是添加则置空各输入框
-        //initkuwei(index);
+        initkuwei(index);
     	idxkwgl = index;
         return;
     }
     $('#content').text('编辑库位');
     $("#cangkuaddress").attr("disabled", true);//库位地址不可编辑    
-    $("#saveBtn").show();
+    $("#saveKuWeiBtn").show();
     //将选中行的数据在下面的模态窗口中展示出来
     initkuwei(index);
 
@@ -225,11 +230,13 @@ function submit() {
     // 先收集数据
     var data =
         {
-    		 "cangkuaddress": $("#cangkuaddress").val(),
-             "kuwei": $("#kuwei").val(),
-             "cengci": $("#cengci").val(),
-             "rongliang": $("#rongliang").val(),
-             "cangkuname": $("#cangkuname").val()
+    		 "address": $("#cangkuaddress").val(),
+    		 "name": $("#cangkuname").val(),
+             "level": $("#kuwei").val(),
+             "capacity": $("#cengci").val(),
+             "operation": $("#rongliang").val(),
+             "uuid": parseInt($("#kwgluuid").val()),
+             
         };
     if (null == idxkwgl || idxkwgl == -1) {
         //新增数据
@@ -253,7 +260,7 @@ function deleteKuWei(index) {
 	    });
 	checkids=[];
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];
-	checkids= rowdata.uuid;
+	checkids[0]= rowdata.uuid;
 	/*var data = {
 		"uuids" : checkids
 	};*/
@@ -269,11 +276,11 @@ function detailKuWei(index){
     isDisabled(true);
     //显示查看模块窗口
     $('#addKuwei').modal('show');
-    $('#saveBtn').hide();
+    $('#saveKuWeiBtn').hide();
     //向页面内填充数据
     initkuwei(index);
     //$('#cancleBtn').hide();
-    //$('#saveBtn').hide();
+    //$('#saveKuWeiBtn').hide();
     //$('#appidSpan').hide();
 };
 
@@ -352,7 +359,7 @@ function deleteKuWeiInfo(data) {
         url: '/kuWeiGuanLi/delete',
         dataType: "json",
         contentType: "application/json",
-        data: JSON.stringify(data),
+        data:JSON.stringify(data),
         async: false,
         error: function () {
             layer.msg('请求失败', {

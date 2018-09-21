@@ -12,9 +12,9 @@ platform.controller('errorhuizong', ['$scope', '$rootScope', '$http', '$window',
         $scope.isCaches = [{id: 0, name: '不缓存'}, {id: 1, name: '缓存'}];
 
         /*点击查询按钮*/
-        $scope.toSearch = function () {
+        $scope.toSearchErrorHuiZong = function () {
         	var opt = {
-        	        url: $rootScope.apiHome + '/info',
+        	        url: $rootScope.apiHome + '/errorcollect',
         	        silent: true,
         	        query:{
         	        	 orderdate:$("#datetext").val()
@@ -68,8 +68,7 @@ platform.controller('errorhuizong', ['$scope', '$rootScope', '$http', '$window',
             queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
                 return {
                 	pageSize:params.pageSize,
-                    pageNumber:params.pageNumber,
-                    orderdate:$("#datetext").val(),                 
+                    pageNumber:params.pageNumber,               
                 };
             	
             },
@@ -115,21 +114,21 @@ platform.controller('errorhuizong', ['$scope', '$rootScope', '$http', '$window',
                     align: 'center',
                     valign: 'middle',
                 },{
-                    field: 'styleid',
+                    field: 'status',
                     title: '交易状态',          
                     align: 'center',
                     valign: 'middle',
                     formatter: function (value, row, index){ // 单元格格式化函数
                         var text = '-';
-                        if (value == 1) {
+                        if (value=="1") {
                             text = "交易成功";
-                        } else if (value == 0) {
+                        } else if (value=="0") {
                             text = "交易失败";
                         } 
                         return text;
                     }
                 }, {
-                	field: 'stylename',
+                	field: 'number',
                     title: '订单数',  
                     align: 'center',
                     valign: 'middle',

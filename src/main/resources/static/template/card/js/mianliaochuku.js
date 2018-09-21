@@ -1,21 +1,11 @@
 platform.controller('mianliaochuku', ['$scope', '$rootScope', '$http', '$window',
     function ($scope, $rootScope, $http, $window) {
         $window.scroll(0, 0);
-
-       // $scope.cardInfoTemp = {};//定义临时修改变量值
-        $scope.serviceInfoTemp = {};//定义临时修改变量值
-        $scope.ckmanagertmp = {};//定义临时修改变量值
-        //var idx = -1;//定义index for list
-
+        
         /*下拉列表数据初始化*/
         $scope.serviceTypes = [{id: 1, name: 'webservice服务'}, {id: 2, name: 'rest服务'}];
         $scope.serviceModes = [{id: 0, name: '穿透模式'}, {id: 1, name: '代理模式'}];
         $scope.isCaches = [{id: 0, name: '不缓存'}, {id: 1, name: '缓存'}];
-
-        
-        //加载进来子界面隐藏
-       /* $("#addKuwei").modal({show:false});
-        $("#delChuKuTiShi").modal({show:false});*/
 
         //先销毁表格  
         $('#tb_report').bootstrapTable('destroy'); 
@@ -145,6 +135,7 @@ function initChuKuInfo(index) {
 	$('#chuhuocangku').val((null == index || -1 == index) ? null:rowdata.chuhuocangku);
 	$('#chukufangshi').val((null == index || -1 == index) ? null:rowdata.chukufangshi);
 	$('#beizhu').val((null == index || -1 == index) ? null:rowdata.beizhu);
+	$('#ChuKuuuid').val((null == index || -1 == index) ? null:rowdata.uuid);
 
 };
 
@@ -160,7 +151,7 @@ function deleteChuku(index) {
 	    });
 	checkids=[];
 	var rowdata= $('#tb_report').bootstrapTable('getData')[index];
-	checkids= rowdata.uuids;
+	checkids[0]= rowdata.uuid;
 };
 
 //点击提示删除框的确认按钮
@@ -179,7 +170,7 @@ function deleteChuKus (){
 	 checkids=[];
 	 var rows = $("#tb_report").bootstrapTable('getSelections');
      for (var i = 0; i < rows.length; i++) {
-   	  checkids[i]= rows[i].uuids;
+   	  checkids[i]= rows[i].uuid;
      }
      
 	if(checkids.length<=0){
@@ -212,7 +203,7 @@ function saveOrUpdataChuKu(index) {
        $("#addChuKu").modal({show:true});
        $("#chuKuTitle").text("添加面料出库");
        $("#saveBtn").show();
-       //initServiceInfo($scope, index);
+       initChuKuInfo(index);
        idxChuKu = -1;
        return;
     }
@@ -229,11 +220,11 @@ function submitChuKu () {
     // 先收集数据
     var data =
         {
-            "chukudanhao": $("#chukudanhao").val(),
+            "chukudanhao": parseInt($("#chukudanhao").val()),
             "chuhuocangku": $("#chuhuocangku").val(),
             "chukufangshi": $("#chukufangshi").val(),
             "beizhu": $("#beizhu").val(),
-            
+            "uuid": parseInt($('#ChuKuuuid').val()),
 
         };
     if (null == idxChuKu || idxChuKu == -1) {
@@ -264,7 +255,7 @@ function submitChuKu () {
 function saveChuKuInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/mianLiaoChuKu/select',
+        url: '/mianLiaoChuKu/add',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -297,7 +288,7 @@ function saveChuKuInfo(data) {
 function updateChuKuInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/mianLiaoChuKu/select',
+        url: '/mianLiaoChuKu/update',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -332,7 +323,7 @@ function updateChuKuInfo(data) {
 function deleteChuKuInfo(data) {
     $.ajax({
         type: "POST",
-        url: '/mianLiaoChuKu/select',
+        url: '/mianLiaoChuKu/delete',
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(data),
