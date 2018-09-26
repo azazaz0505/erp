@@ -1,27 +1,37 @@
 package com.nt.erp.model;
 
+import java.util.Date;
+
 public class GongYingShangWangLai {
     private Integer uuid;
 
+    private String fukuanleixing;
+
     private String gongyingshangmingcheng;
 
-    private String gongyingshanbianma;
+    private String shiyou;
+
+    private String zhifufangshi;
+
+    private String fapiaoxinxi;
+
+    private String fapiaoshuilv;
 
     private Double hetongzongjine;
 
-    private Double yikaipiaojine;
-
-    private Double weikaipiaojine;
-
-    private Double yufukuan;
-
     private Double yifukuanjine;
+
+    private Date fukuanriqi;
 
     private Double rukuzongjine;
 
-    private String fukuan;
+    private String zhuangtai;
 
-    private String baobiao;
+    private Date shenqingriqi;
+
+    private String bumen;
+
+    private String jingbanren;
 
     public Integer getUuid() {
         return uuid;
@@ -29,6 +39,14 @@ public class GongYingShangWangLai {
 
     public void setUuid(Integer uuid) {
         this.uuid = uuid;
+    }
+
+    public String getFukuanleixing() {
+        return fukuanleixing;
+    }
+
+    public void setFukuanleixing(String fukuanleixing) {
+        this.fukuanleixing = fukuanleixing == null ? null : fukuanleixing.trim();
     }
 
     public String getGongyingshangmingcheng() {
@@ -39,12 +57,36 @@ public class GongYingShangWangLai {
         this.gongyingshangmingcheng = gongyingshangmingcheng == null ? null : gongyingshangmingcheng.trim();
     }
 
-    public String getGongyingshanbianma() {
-        return gongyingshanbianma;
+    public String getShiyou() {
+        return shiyou;
     }
 
-    public void setGongyingshanbianma(String gongyingshanbianma) {
-        this.gongyingshanbianma = gongyingshanbianma == null ? null : gongyingshanbianma.trim();
+    public void setShiyou(String shiyou) {
+        this.shiyou = shiyou == null ? null : shiyou.trim();
+    }
+
+    public String getZhifufangshi() {
+        return zhifufangshi;
+    }
+
+    public void setZhifufangshi(String zhifufangshi) {
+        this.zhifufangshi = zhifufangshi == null ? null : zhifufangshi.trim();
+    }
+
+    public String getFapiaoxinxi() {
+        return fapiaoxinxi;
+    }
+
+    public void setFapiaoxinxi(String fapiaoxinxi) {
+        this.fapiaoxinxi = fapiaoxinxi == null ? null : fapiaoxinxi.trim();
+    }
+
+    public String getFapiaoshuilv() {
+        return fapiaoshuilv;
+    }
+
+    public void setFapiaoshuilv(String fapiaoshuilv) {
+        this.fapiaoshuilv = fapiaoshuilv == null ? null : fapiaoshuilv.trim();
     }
 
     public Double getHetongzongjine() {
@@ -55,36 +97,20 @@ public class GongYingShangWangLai {
         this.hetongzongjine = hetongzongjine;
     }
 
-    public Double getYikaipiaojine() {
-        return yikaipiaojine;
-    }
-
-    public void setYikaipiaojine(Double yikaipiaojine) {
-        this.yikaipiaojine = yikaipiaojine;
-    }
-
-    public Double getWeikaipiaojine() {
-        return weikaipiaojine;
-    }
-
-    public void setWeikaipiaojine(Double weikaipiaojine) {
-        this.weikaipiaojine = weikaipiaojine;
-    }
-
-    public Double getYufukuan() {
-        return yufukuan;
-    }
-
-    public void setYufukuan(Double yufukuan) {
-        this.yufukuan = yufukuan;
-    }
-
     public Double getYifukuanjine() {
         return yifukuanjine;
     }
 
     public void setYifukuanjine(Double yifukuanjine) {
         this.yifukuanjine = yifukuanjine;
+    }
+
+    public Date getFukuanriqi() {
+        return fukuanriqi;
+    }
+
+    public void setFukuanriqi(Date fukuanriqi) {
+        this.fukuanriqi = fukuanriqi;
     }
 
     public Double getRukuzongjine() {
@@ -95,20 +121,36 @@ public class GongYingShangWangLai {
         this.rukuzongjine = rukuzongjine;
     }
 
-    public String getFukuan() {
-        return fukuan;
+    public String getZhuangtai() {
+        return zhuangtai;
     }
 
-    public void setFukuan(String fukuan) {
-        this.fukuan = fukuan == null ? null : fukuan.trim();
+    public void setZhuangtai(String zhuangtai) {
+        this.zhuangtai = zhuangtai == null ? null : zhuangtai.trim();
     }
 
-    public String getBaobiao() {
-        return baobiao;
+    public Date getShenqingriqi() {
+        return shenqingriqi;
     }
 
-    public void setBaobiao(String baobiao) {
-        this.baobiao = baobiao == null ? null : baobiao.trim();
+    public void setShenqingriqi(Date shenqingriqi) {
+        this.shenqingriqi = shenqingriqi;
+    }
+
+    public String getBumen() {
+        return bumen;
+    }
+
+    public void setBumen(String bumen) {
+        this.bumen = bumen == null ? null : bumen.trim();
+    }
+
+    public String getJingbanren() {
+        return jingbanren;
+    }
+
+    public void setJingbanren(String jingbanren) {
+        this.jingbanren = jingbanren == null ? null : jingbanren.trim();
     }
 
     @Override
@@ -118,16 +160,20 @@ public class GongYingShangWangLai {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", uuid=").append(uuid);
+        sb.append(", fukuanleixing=").append(fukuanleixing);
         sb.append(", gongyingshangmingcheng=").append(gongyingshangmingcheng);
-        sb.append(", gongyingshanbianma=").append(gongyingshanbianma);
+        sb.append(", shiyou=").append(shiyou);
+        sb.append(", zhifufangshi=").append(zhifufangshi);
+        sb.append(", fapiaoxinxi=").append(fapiaoxinxi);
+        sb.append(", fapiaoshuilv=").append(fapiaoshuilv);
         sb.append(", hetongzongjine=").append(hetongzongjine);
-        sb.append(", yikaipiaojine=").append(yikaipiaojine);
-        sb.append(", weikaipiaojine=").append(weikaipiaojine);
-        sb.append(", yufukuan=").append(yufukuan);
         sb.append(", yifukuanjine=").append(yifukuanjine);
+        sb.append(", fukuanriqi=").append(fukuanriqi);
         sb.append(", rukuzongjine=").append(rukuzongjine);
-        sb.append(", fukuan=").append(fukuan);
-        sb.append(", baobiao=").append(baobiao);
+        sb.append(", zhuangtai=").append(zhuangtai);
+        sb.append(", shenqingriqi=").append(shenqingriqi);
+        sb.append(", bumen=").append(bumen);
+        sb.append(", jingbanren=").append(jingbanren);
         sb.append("]");
         return sb.toString();
     }
@@ -179,6 +225,18 @@ public class GongYingShangWangLai {
          * @mbg.generated
          * @author hewei
          */
+        public Builder fukuanleixing(String fukuanleixing) {
+            obj.fukuanleixing = fukuanleixing;
+            return this;
+        }
+
+        /**
+         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
+         * This method corresponds to the database table gongyingshangwanglai
+         *
+         * @mbg.generated
+         * @author hewei
+         */
         public Builder gongyingshangmingcheng(String gongyingshangmingcheng) {
             obj.gongyingshangmingcheng = gongyingshangmingcheng;
             return this;
@@ -191,8 +249,44 @@ public class GongYingShangWangLai {
          * @mbg.generated
          * @author hewei
          */
-        public Builder gongyingshanbianma(String gongyingshanbianma) {
-            obj.gongyingshanbianma = gongyingshanbianma;
+        public Builder shiyou(String shiyou) {
+            obj.shiyou = shiyou;
+            return this;
+        }
+
+        /**
+         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
+         * This method corresponds to the database table gongyingshangwanglai
+         *
+         * @mbg.generated
+         * @author hewei
+         */
+        public Builder zhifufangshi(String zhifufangshi) {
+            obj.zhifufangshi = zhifufangshi;
+            return this;
+        }
+
+        /**
+         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
+         * This method corresponds to the database table gongyingshangwanglai
+         *
+         * @mbg.generated
+         * @author hewei
+         */
+        public Builder fapiaoxinxi(String fapiaoxinxi) {
+            obj.fapiaoxinxi = fapiaoxinxi;
+            return this;
+        }
+
+        /**
+         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
+         * This method corresponds to the database table gongyingshangwanglai
+         *
+         * @mbg.generated
+         * @author hewei
+         */
+        public Builder fapiaoshuilv(String fapiaoshuilv) {
+            obj.fapiaoshuilv = fapiaoshuilv;
             return this;
         }
 
@@ -215,44 +309,20 @@ public class GongYingShangWangLai {
          * @mbg.generated
          * @author hewei
          */
-        public Builder yikaipiaojine(Double yikaipiaojine) {
-            obj.yikaipiaojine = yikaipiaojine;
-            return this;
-        }
-
-        /**
-         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
-         * This method corresponds to the database table gongyingshangwanglai
-         *
-         * @mbg.generated
-         * @author hewei
-         */
-        public Builder weikaipiaojine(Double weikaipiaojine) {
-            obj.weikaipiaojine = weikaipiaojine;
-            return this;
-        }
-
-        /**
-         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
-         * This method corresponds to the database table gongyingshangwanglai
-         *
-         * @mbg.generated
-         * @author hewei
-         */
-        public Builder yufukuan(Double yufukuan) {
-            obj.yufukuan = yufukuan;
-            return this;
-        }
-
-        /**
-         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
-         * This method corresponds to the database table gongyingshangwanglai
-         *
-         * @mbg.generated
-         * @author hewei
-         */
         public Builder yifukuanjine(Double yifukuanjine) {
             obj.yifukuanjine = yifukuanjine;
+            return this;
+        }
+
+        /**
+         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
+         * This method corresponds to the database table gongyingshangwanglai
+         *
+         * @mbg.generated
+         * @author hewei
+         */
+        public Builder fukuanriqi(Date fukuanriqi) {
+            obj.fukuanriqi = fukuanriqi;
             return this;
         }
 
@@ -275,8 +345,8 @@ public class GongYingShangWangLai {
          * @mbg.generated
          * @author hewei
          */
-        public Builder fukuan(String fukuan) {
-            obj.fukuan = fukuan;
+        public Builder zhuangtai(String zhuangtai) {
+            obj.zhuangtai = zhuangtai;
             return this;
         }
 
@@ -287,8 +357,32 @@ public class GongYingShangWangLai {
          * @mbg.generated
          * @author hewei
          */
-        public Builder baobiao(String baobiao) {
-            obj.baobiao = baobiao;
+        public Builder shenqingriqi(Date shenqingriqi) {
+            obj.shenqingriqi = shenqingriqi;
+            return this;
+        }
+
+        /**
+         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
+         * This method corresponds to the database table gongyingshangwanglai
+         *
+         * @mbg.generated
+         * @author hewei
+         */
+        public Builder bumen(String bumen) {
+            obj.bumen = bumen;
+            return this;
+        }
+
+        /**
+         * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
+         * This method corresponds to the database table gongyingshangwanglai
+         *
+         * @mbg.generated
+         * @author hewei
+         */
+        public Builder jingbanren(String jingbanren) {
+            obj.jingbanren = jingbanren;
             return this;
         }
 
@@ -313,16 +407,20 @@ public class GongYingShangWangLai {
      */
     public enum Column {
         uuid("uuid"),
+        fukuanleixing("fukuanleixing"),
         gongyingshangmingcheng("gongyingshangmingcheng"),
-        gongyingshanbianma("gongyingshanbianma"),
+        shiyou("shiyou"),
+        zhifufangshi("zhifufangshi"),
+        fapiaoxinxi("fapiaoxinxi"),
+        fapiaoshuilv("fapiaoshuilv"),
         hetongzongjine("hetongzongjine"),
-        yikaipiaojine("yikaipiaojine"),
-        weikaipiaojine("weikaipiaojine"),
-        yufukuan("yufukuan"),
         yifukuanjine("yifukuanjine"),
+        fukuanriqi("fukuanriqi"),
         rukuzongjine("rukuzongjine"),
-        fukuan("fukuan"),
-        baobiao("baobiao");
+        zhuangtai("zhuangtai"),
+        shenqingriqi("shenqingriqi"),
+        bumen("bumen"),
+        jingbanren("jingbanren");
 
         /**
          * 这是Mybatis Generator拓展插件生成的属性(请勿删除).
