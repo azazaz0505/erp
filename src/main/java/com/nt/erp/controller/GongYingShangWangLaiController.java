@@ -60,10 +60,13 @@ public class GongYingShangWangLaiController {
         record.setZhifufangshi((String) requestParam.get("zhifufangshi"));
         record.setFapiaoxinxi((String) requestParam.get("fapiaoxinxi"));
         record.setFapiaoshuilv((String) requestParam.get("fapiaoshuilv"));
-        record.setHetongzongjine((Double) requestParam.get("hetongzongjine"));
-        record.setYifukuanjine((Double) requestParam.get("yifukuanjine"));
+        //record.setHetongzongjine((Double) requestParam.get("hetongzongjine").toString());
+        record.setHetongzongjine(Double.parseDouble( requestParam.get("hetongzongjine").toString()));
+        //record.setYifukuanjine((Double) requestParam.get("yifukuanjine"));
+        record.setYifukuanjine(Double.parseDouble( requestParam.get("yifukuanjine").toString()));
         record.setFukuanriqi(new Date());
-        record.setRukuzongjine((Double) requestParam.get("rukuzongjine"));
+        //record.setRukuzongjine((Double) requestParam.get("rukuzongjine"));
+        record.setRukuzongjine(Double.parseDouble( requestParam.get("rukuzongjine").toString()));
         record.setZhuangtai((String) requestParam.get("zhuangtai"));
         record.setShenqingriqi(new Date());
         record.setBumen((String) requestParam.get("bumen"));
