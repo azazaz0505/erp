@@ -1,5 +1,6 @@
 package com.nt.erp.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,16 +54,20 @@ public class GongYingShangWangLaiController {
         JSONObject json = new JSONObject();
 
         GongYingShangWangLai record = new GongYingShangWangLai();
-        record.setBaobiao((String) requestParam.get("baobiao"));
-        record.setFukuan((String) requestParam.get("fukuan"));
-        record.setGongyingshanbianma((String) requestParam.get("gongyingshanbianma"));
+        record.setFukuanleixing((String) requestParam.get("fukuanleixing"));
         record.setGongyingshangmingcheng((String) requestParam.get("gongyingshangmingcheng"));
+        record.setShiyou((String) requestParam.get("shiyou"));
+        record.setZhifufangshi((String) requestParam.get("zhifufangshi"));
+        record.setFapiaoxinxi((String) requestParam.get("fapiaoxinxi"));
+        record.setFapiaoshuilv((String) requestParam.get("fapiaoshuilv"));
         record.setHetongzongjine((Double) requestParam.get("hetongzongjine"));
-        record.setRukuzongjine((Double) requestParam.get("rukuzongjine"));
-        record.setWeikaipiaojine((Double) requestParam.get("weikaipiaojine"));
         record.setYifukuanjine((Double) requestParam.get("yifukuanjine"));
-        record.setYikaipiaojine((Double) requestParam.get("yikaipiaojine"));
-        record.setYufukuan((Double) requestParam.get("yufukuan"));
+        record.setFukuanriqi(new Date());
+        record.setRukuzongjine((Double) requestParam.get("rukuzongjine"));
+        record.setZhuangtai((String) requestParam.get("zhuangtai"));
+        record.setShenqingriqi(new Date());
+        record.setBumen((String) requestParam.get("bumen"));
+        record.setJingbanren((String) requestParam.get("jingbanren"));
       
         try {
             gongYingShangWangLaiMapper.insert(record);
@@ -84,16 +89,18 @@ public class GongYingShangWangLaiController {
         JSONObject json = new JSONObject();
 
         GongYingShangWangLai record = new GongYingShangWangLai();
-        record.setBaobiao((String) requestParam.get("baobiao"));
-        record.setFukuan((String) requestParam.get("fukuan"));
-        record.setGongyingshanbianma((String) requestParam.get("gongyingshanbianma"));
+        record.setFukuanleixing((String) requestParam.get("fukuanleixing"));
         record.setGongyingshangmingcheng((String) requestParam.get("gongyingshangmingcheng"));
+        record.setShiyou((String) requestParam.get("shiyou"));
+        record.setZhifufangshi((String) requestParam.get("zhifufangshi"));
+        record.setFapiaoxinxi((String) requestParam.get("fapiaoxinxi"));
+        record.setFapiaoshuilv((String) requestParam.get("fapiaoshuilv"));
         record.setHetongzongjine((Double) requestParam.get("hetongzongjine"));
-        record.setRukuzongjine((Double) requestParam.get("rukuzongjine"));
-        record.setWeikaipiaojine((Double) requestParam.get("weikaipiaojine"));
         record.setYifukuanjine((Double) requestParam.get("yifukuanjine"));
-        record.setYikaipiaojine((Double) requestParam.get("yikaipiaojine"));
-        record.setYufukuan((Double) requestParam.get("yufukuan"));
+        record.setRukuzongjine((Double) requestParam.get("rukuzongjine"));
+        record.setZhuangtai((String) requestParam.get("zhuangtai"));
+        record.setBumen((String) requestParam.get("bumen"));
+        record.setJingbanren((String) requestParam.get("jingbanren"));
         record.setUuid((Integer) requestParam.get("uuid"));
         
         GongYingShangWangLaiExample example = new GongYingShangWangLaiExample();

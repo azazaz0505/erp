@@ -204,7 +204,7 @@
         <table tableName="zichanguanli" domainObjectName="ZiChanGuanLi"/>
         <table tableName="infos" domainObjectName="Info"/>
         <table tableName="login" domainObjectName="Login"/> -->
-        <table tableName="chucuohuizong" domainObjectName="ChuCuoHuiZong"/> 
+        <table tableName="gongyingshangwanglai" domainObjectName="GongYingShangWangLai"/> 
 
         <!--&lt;!&ndash; 参考 javaModelGenerator 的 constructorBased属性&ndash;&gt;-->
         <!--<property name="constructorBased" value="false"/>-->
