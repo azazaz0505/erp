@@ -253,7 +253,7 @@ function submitgys() {
             "bumen": $("#bumen").val(),
             "jingbanren": $("#jingbanren").val()
 
-        };
+        }; 
         //新增数据
         saveGysInfo(data);
 };
