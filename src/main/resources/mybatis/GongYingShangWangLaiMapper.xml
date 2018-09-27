@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nt.erp.dao.GongYingShangWangLaiMapper">
+  <resultMap id="BaseResultMap" type="com.nt.erp.model.GongYingShangWangLai">
+    <id column="uuid" jdbcType="INTEGER" property="uuid" />
+    <result column="fukuanleixing" jdbcType="VARCHAR" property="fukuanleixing" />
+    <result column="gongyingshangmingcheng" jdbcType="VARCHAR" property="gongyingshangmingcheng" />
+    <result column="shiyou" jdbcType="VARCHAR" property="shiyou" />
+    <result column="zhifufangshi" jdbcType="VARCHAR" property="zhifufangshi" />
+    <result column="fapiaoxinxi" jdbcType="VARCHAR" property="fapiaoxinxi" />
+    <result column="fapiaoshuilv" jdbcType="VARCHAR" property="fapiaoshuilv" />
+    <result column="hetongzongjine" jdbcType="DOUBLE" property="hetongzongjine" />
+    <result column="yifukuanjine" jdbcType="DOUBLE" property="yifukuanjine" />
+    <result column="fukuanriqi" jdbcType="DATE" property="fukuanriqi" />
+    <result column="rukuzongjine" jdbcType="DOUBLE" property="rukuzongjine" />
+    <result column="zhuangtai" jdbcType="VARCHAR" property="zhuangtai" />
+    <result column="shenqingriqi" jdbcType="DATE" property="shenqingriqi" />
+    <result column="bumen" jdbcType="VARCHAR" property="bumen" />
+    <result column="jingbanren" jdbcType="VARCHAR" property="jingbanren" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uuid, fukuanleixing, gongyingshangmingcheng, shiyou, zhifufangshi, fapiaoxinxi, fapiaoshuilv, 
+    hetongzongjine, yifukuanjine, fukuanriqi, rukuzongjine, zhuangtai, shenqingriqi, 
+    bumen, jingbanren
+  </sql>
+  <select id="selectByExample" parameterType="com.nt.erp.model.GongYingShangWangLaiExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gongyingshangwanglai
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gongyingshangwanglai
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gongyingshangwanglai
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nt.erp.model.GongYingShangWangLaiExample">
+    delete from gongyingshangwanglai
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nt.erp.model.GongYingShangWangLai">
+    insert into gongyingshangwanglai (uuid, fukuanleixing, gongyingshangmingcheng, 
+      shiyou, zhifufangshi, fapiaoxinxi, 
+      fapiaoshuilv, hetongzongjine, yifukuanjine, 
+      fukuanriqi, rukuzongjine, zhuangtai, 
+      shenqingriqi, bumen, jingbanren
+      )
+    values (#{uuid,jdbcType=INTEGER}, #{fukuanleixing,jdbcType=VARCHAR}, #{gongyingshangmingcheng,jdbcType=VARCHAR}, 
+      #{shiyou,jdbcType=VARCHAR}, #{zhifufangshi,jdbcType=VARCHAR}, #{fapiaoxinxi,jdbcType=VARCHAR}, 
+      #{fapiaoshuilv,jdbcType=VARCHAR}, #{hetongzongjine,jdbcType=DOUBLE}, #{yifukuanjine,jdbcType=DOUBLE}, 
+      #{fukuanriqi,jdbcType=DATE}, #{rukuzongjine,jdbcType=DOUBLE}, #{zhuangtai,jdbcType=VARCHAR}, 
+      #{shenqingriqi,jdbcType=DATE}, #{bumen,jdbcType=VARCHAR}, #{jingbanren,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nt.erp.model.GongYingShangWangLai">
+    insert into gongyingshangwanglai
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="fukuanleixing != null">
+        fukuanleixing,
+      </if>
+      <if test="gongyingshangmingcheng != null">
+        gongyingshangmingcheng,
+      </if>
+      <if test="shiyou != null">
+        shiyou,
+      </if>
+      <if test="zhifufangshi != null">
+        zhifufangshi,
+      </if>
+      <if test="fapiaoxinxi != null">
+        fapiaoxinxi,
+      </if>
+      <if test="fapiaoshuilv != null">
+        fapiaoshuilv,
+      </if>
+      <if test="hetongzongjine != null">
+        hetongzongjine,
+      </if>
+      <if test="yifukuanjine != null">
+        yifukuanjine,
+      </if>
+      <if test="fukuanriqi != null">
+        fukuanriqi,
+      </if>
+      <if test="rukuzongjine != null">
+        rukuzongjine,
+      </if>
+      <if test="zhuangtai != null">
+        zhuangtai,
+      </if>
+      <if test="shenqingriqi != null">
+        shenqingriqi,
+      </if>
+      <if test="bumen != null">
+        bumen,
+      </if>
+      <if test="jingbanren != null">
+        jingbanren,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="fukuanleixing != null">
+        #{fukuanleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="gongyingshangmingcheng != null">
+        #{gongyingshangmingcheng,jdbcType=VARCHAR},
+      </if>
+      <if test="shiyou != null">
+        #{shiyou,jdbcType=VARCHAR},
+      </if>
+      <if test="zhifufangshi != null">
+        #{zhifufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="fapiaoxinxi != null">
+        #{fapiaoxinxi,jdbcType=VARCHAR},
+      </if>
+      <if test="fapiaoshuilv != null">
+        #{fapiaoshuilv,jdbcType=VARCHAR},
+      </if>
+      <if test="hetongzongjine != null">
+        #{hetongzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="yifukuanjine != null">
+        #{yifukuanjine,jdbcType=DOUBLE},
+      </if>
+      <if test="fukuanriqi != null">
+        #{fukuanriqi,jdbcType=DATE},
+      </if>
+      <if test="rukuzongjine != null">
+        #{rukuzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="zhuangtai != null">
+        #{zhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="shenqingriqi != null">
+        #{shenqingriqi,jdbcType=DATE},
+      </if>
+      <if test="bumen != null">
+        #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="jingbanren != null">
+        #{jingbanren,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nt.erp.model.GongYingShangWangLaiExample" resultType="java.lang.Long">
+    select count(*) from gongyingshangwanglai
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gongyingshangwanglai
+    <set>
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fukuanleixing != null">
+        fukuanleixing = #{record.fukuanleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gongyingshangmingcheng != null">
+        gongyingshangmingcheng = #{record.gongyingshangmingcheng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shiyou != null">
+        shiyou = #{record.shiyou,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhifufangshi != null">
+        zhifufangshi = #{record.zhifufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fapiaoxinxi != null">
+        fapiaoxinxi = #{record.fapiaoxinxi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fapiaoshuilv != null">
+        fapiaoshuilv = #{record.fapiaoshuilv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hetongzongjine != null">
+        hetongzongjine = #{record.hetongzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yifukuanjine != null">
+        yifukuanjine = #{record.yifukuanjine,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fukuanriqi != null">
+        fukuanriqi = #{record.fukuanriqi,jdbcType=DATE},
+      </if>
+      <if test="record.rukuzongjine != null">
+        rukuzongjine = #{record.rukuzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zhuangtai != null">
+        zhuangtai = #{record.zhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shenqingriqi != null">
+        shenqingriqi = #{record.shenqingriqi,jdbcType=DATE},
+      </if>
+      <if test="record.bumen != null">
+        bumen = #{record.bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jingbanren != null">
+        jingbanren = #{record.jingbanren,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gongyingshangwanglai
+    set uuid = #{record.uuid,jdbcType=INTEGER},
+      fukuanleixing = #{record.fukuanleixing,jdbcType=VARCHAR},
+      gongyingshangmingcheng = #{record.gongyingshangmingcheng,jdbcType=VARCHAR},
+      shiyou = #{record.shiyou,jdbcType=VARCHAR},
+      zhifufangshi = #{record.zhifufangshi,jdbcType=VARCHAR},
+      fapiaoxinxi = #{record.fapiaoxinxi,jdbcType=VARCHAR},
+      fapiaoshuilv = #{record.fapiaoshuilv,jdbcType=VARCHAR},
+      hetongzongjine = #{record.hetongzongjine,jdbcType=DOUBLE},
+      yifukuanjine = #{record.yifukuanjine,jdbcType=DOUBLE},
+      fukuanriqi = #{record.fukuanriqi,jdbcType=DATE},
+      rukuzongjine = #{record.rukuzongjine,jdbcType=DOUBLE},
+      zhuangtai = #{record.zhuangtai,jdbcType=VARCHAR},
+      shenqingriqi = #{record.shenqingriqi,jdbcType=DATE},
+      bumen = #{record.bumen,jdbcType=VARCHAR},
+      jingbanren = #{record.jingbanren,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nt.erp.model.GongYingShangWangLai">
+    update gongyingshangwanglai
+    <set>
+      <if test="fukuanleixing != null">
+        fukuanleixing = #{fukuanleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="gongyingshangmingcheng != null">
+        gongyingshangmingcheng = #{gongyingshangmingcheng,jdbcType=VARCHAR},
+      </if>
+      <if test="shiyou != null">
+        shiyou = #{shiyou,jdbcType=VARCHAR},
+      </if>
+      <if test="zhifufangshi != null">
+        zhifufangshi = #{zhifufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="fapiaoxinxi != null">
+        fapiaoxinxi = #{fapiaoxinxi,jdbcType=VARCHAR},
+      </if>
+      <if test="fapiaoshuilv != null">
+        fapiaoshuilv = #{fapiaoshuilv,jdbcType=VARCHAR},
+      </if>
+      <if test="hetongzongjine != null">
+        hetongzongjine = #{hetongzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="yifukuanjine != null">
+        yifukuanjine = #{yifukuanjine,jdbcType=DOUBLE},
+      </if>
+      <if test="fukuanriqi != null">
+        fukuanriqi = #{fukuanriqi,jdbcType=DATE},
+      </if>
+      <if test="rukuzongjine != null">
+        rukuzongjine = #{rukuzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="zhuangtai != null">
+        zhuangtai = #{zhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="shenqingriqi != null">
+        shenqingriqi = #{shenqingriqi,jdbcType=DATE},
+      </if>
+      <if test="bumen != null">
+        bumen = #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="jingbanren != null">
+        jingbanren = #{jingbanren,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nt.erp.model.GongYingShangWangLai">
+    update gongyingshangwanglai
+    set fukuanleixing = #{fukuanleixing,jdbcType=VARCHAR},
+      gongyingshangmingcheng = #{gongyingshangmingcheng,jdbcType=VARCHAR},
+      shiyou = #{shiyou,jdbcType=VARCHAR},
+      zhifufangshi = #{zhifufangshi,jdbcType=VARCHAR},
+      fapiaoxinxi = #{fapiaoxinxi,jdbcType=VARCHAR},
+      fapiaoshuilv = #{fapiaoshuilv,jdbcType=VARCHAR},
+      hetongzongjine = #{hetongzongjine,jdbcType=DOUBLE},
+      yifukuanjine = #{yifukuanjine,jdbcType=DOUBLE},
+      fukuanriqi = #{fukuanriqi,jdbcType=DATE},
+      rukuzongjine = #{rukuzongjine,jdbcType=DOUBLE},
+      zhuangtai = #{zhuangtai,jdbcType=VARCHAR},
+      shenqingriqi = #{shenqingriqi,jdbcType=DATE},
+      bumen = #{bumen,jdbcType=VARCHAR},
+      jingbanren = #{jingbanren,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into gongyingshangwanglai (uuid, fukuanleixing, gongyingshangmingcheng, shiyou, zhifufangshi, fapiaoxinxi, fapiaoshuilv, hetongzongjine, yifukuanjine, fukuanriqi, rukuzongjine, zhuangtai, shenqingriqi, bumen, jingbanren)
+    values
+    <foreach collection="list" item="item" separator=",">
+       (#{item.uuid,jdbcType=INTEGER}, #{item.fukuanleixing,jdbcType=VARCHAR}, #{item.gongyingshangmingcheng,jdbcType=VARCHAR}, #{item.shiyou,jdbcType=VARCHAR}, #{item.zhifufangshi,jdbcType=VARCHAR}, #{item.fapiaoxinxi,jdbcType=VARCHAR}, #{item.fapiaoshuilv,jdbcType=VARCHAR}, #{item.hetongzongjine,jdbcType=DOUBLE}, #{item.yifukuanjine,jdbcType=DOUBLE}, #{item.fukuanriqi,jdbcType=DATE}, #{item.rukuzongjine,jdbcType=DOUBLE}, #{item.zhuangtai,jdbcType=VARCHAR}, #{item.shenqingriqi,jdbcType=DATE}, #{item.bumen,jdbcType=VARCHAR}, #{item.jingbanren,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into gongyingshangwanglai (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.value}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'uuid' == column.value">
+          #{item.uuid,jdbcType=INTEGER}
+        </if>
+        <if test="'fukuanleixing' == column.value">
+          #{item.fukuanleixing,jdbcType=VARCHAR}
+        </if>
+        <if test="'gongyingshangmingcheng' == column.value">
+          #{item.gongyingshangmingcheng,jdbcType=VARCHAR}
+        </if>
+        <if test="'shiyou' == column.value">
+          #{item.shiyou,jdbcType=VARCHAR}
+        </if>
+        <if test="'zhifufangshi' == column.value">
+          #{item.zhifufangshi,jdbcType=VARCHAR}
+        </if>
+        <if test="'fapiaoxinxi' == column.value">
+          #{item.fapiaoxinxi,jdbcType=VARCHAR}
+        </if>
+        <if test="'fapiaoshuilv' == column.value">
+          #{item.fapiaoshuilv,jdbcType=VARCHAR}
+        </if>
+        <if test="'hetongzongjine' == column.value">
+          #{item.hetongzongjine,jdbcType=DOUBLE}
+        </if>
+        <if test="'yifukuanjine' == column.value">
+          #{item.yifukuanjine,jdbcType=DOUBLE}
+        </if>
+        <if test="'fukuanriqi' == column.value">
+          #{item.fukuanriqi,jdbcType=DATE}
+        </if>
+        <if test="'rukuzongjine' == column.value">
+          #{item.rukuzongjine,jdbcType=DOUBLE}
+        </if>
+        <if test="'zhuangtai' == column.value">
+          #{item.zhuangtai,jdbcType=VARCHAR}
+        </if>
+        <if test="'shenqingriqi' == column.value">
+          #{item.shenqingriqi,jdbcType=DATE}
+        </if>
+        <if test="'bumen' == column.value">
+          #{item.bumen,jdbcType=VARCHAR}
+        </if>
+        <if test="'jingbanren' == column.value">
+          #{item.jingbanren,jdbcType=VARCHAR}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+  <insert id="upsert" parameterType="com.nt.erp.model.GongYingShangWangLai">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into gongyingshangwanglai
+     (uuid, fukuanleixing, gongyingshangmingcheng, shiyou, zhifufangshi, fapiaoxinxi, fapiaoshuilv, hetongzongjine, yifukuanjine, fukuanriqi, rukuzongjine, zhuangtai, shenqingriqi, bumen, jingbanren) 
+    values
+     (#{uuid,jdbcType=INTEGER}, #{fukuanleixing,jdbcType=VARCHAR}, #{gongyingshangmingcheng,jdbcType=VARCHAR}, #{shiyou,jdbcType=VARCHAR}, #{zhifufangshi,jdbcType=VARCHAR}, #{fapiaoxinxi,jdbcType=VARCHAR}, #{fapiaoshuilv,jdbcType=VARCHAR}, #{hetongzongjine,jdbcType=DOUBLE}, #{yifukuanjine,jdbcType=DOUBLE}, #{fukuanriqi,jdbcType=DATE}, #{rukuzongjine,jdbcType=DOUBLE}, #{zhuangtai,jdbcType=VARCHAR}, #{shenqingriqi,jdbcType=DATE}, #{bumen,jdbcType=VARCHAR}, #{jingbanren,jdbcType=VARCHAR}) 
+    on duplicate key update 
+    uuid = #{uuid,jdbcType=INTEGER}, fukuanleixing = #{fukuanleixing,jdbcType=VARCHAR}, gongyingshangmingcheng = #{gongyingshangmingcheng,jdbcType=VARCHAR}, shiyou = #{shiyou,jdbcType=VARCHAR}, zhifufangshi = #{zhifufangshi,jdbcType=VARCHAR}, fapiaoxinxi = #{fapiaoxinxi,jdbcType=VARCHAR}, fapiaoshuilv = #{fapiaoshuilv,jdbcType=VARCHAR}, hetongzongjine = #{hetongzongjine,jdbcType=DOUBLE}, yifukuanjine = #{yifukuanjine,jdbcType=DOUBLE}, fukuanriqi = #{fukuanriqi,jdbcType=DATE}, rukuzongjine = #{rukuzongjine,jdbcType=DOUBLE}, zhuangtai = #{zhuangtai,jdbcType=VARCHAR}, shenqingriqi = #{shenqingriqi,jdbcType=DATE}, bumen = #{bumen,jdbcType=VARCHAR}, jingbanren = #{jingbanren,jdbcType=VARCHAR}
+  </insert>
+  <insert id="upsertSelective" parameterType="com.nt.erp.model.GongYingShangWangLai">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into gongyingshangwanglai
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="fukuanleixing != null">
+        fukuanleixing,
+      </if>
+      <if test="gongyingshangmingcheng != null">
+        gongyingshangmingcheng,
+      </if>
+      <if test="shiyou != null">
+        shiyou,
+      </if>
+      <if test="zhifufangshi != null">
+        zhifufangshi,
+      </if>
+      <if test="fapiaoxinxi != null">
+        fapiaoxinxi,
+      </if>
+      <if test="fapiaoshuilv != null">
+        fapiaoshuilv,
+      </if>
+      <if test="hetongzongjine != null">
+        hetongzongjine,
+      </if>
+      <if test="yifukuanjine != null">
+        yifukuanjine,
+      </if>
+      <if test="fukuanriqi != null">
+        fukuanriqi,
+      </if>
+      <if test="rukuzongjine != null">
+        rukuzongjine,
+      </if>
+      <if test="zhuangtai != null">
+        zhuangtai,
+      </if>
+      <if test="shenqingriqi != null">
+        shenqingriqi,
+      </if>
+      <if test="bumen != null">
+        bumen,
+      </if>
+      <if test="jingbanren != null">
+        jingbanren,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="fukuanleixing != null">
+        #{fukuanleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="gongyingshangmingcheng != null">
+        #{gongyingshangmingcheng,jdbcType=VARCHAR},
+      </if>
+      <if test="shiyou != null">
+        #{shiyou,jdbcType=VARCHAR},
+      </if>
+      <if test="zhifufangshi != null">
+        #{zhifufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="fapiaoxinxi != null">
+        #{fapiaoxinxi,jdbcType=VARCHAR},
+      </if>
+      <if test="fapiaoshuilv != null">
+        #{fapiaoshuilv,jdbcType=VARCHAR},
+      </if>
+      <if test="hetongzongjine != null">
+        #{hetongzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="yifukuanjine != null">
+        #{yifukuanjine,jdbcType=DOUBLE},
+      </if>
+      <if test="fukuanriqi != null">
+        #{fukuanriqi,jdbcType=DATE},
+      </if>
+      <if test="rukuzongjine != null">
+        #{rukuzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="zhuangtai != null">
+        #{zhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="shenqingriqi != null">
+        #{shenqingriqi,jdbcType=DATE},
+      </if>
+      <if test="bumen != null">
+        #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="jingbanren != null">
+        #{jingbanren,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="fukuanleixing != null">
+        fukuanleixing = #{fukuanleixing,jdbcType=VARCHAR},
+      </if>
+      <if test="gongyingshangmingcheng != null">
+        gongyingshangmingcheng = #{gongyingshangmingcheng,jdbcType=VARCHAR},
+      </if>
+      <if test="shiyou != null">
+        shiyou = #{shiyou,jdbcType=VARCHAR},
+      </if>
+      <if test="zhifufangshi != null">
+        zhifufangshi = #{zhifufangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="fapiaoxinxi != null">
+        fapiaoxinxi = #{fapiaoxinxi,jdbcType=VARCHAR},
+      </if>
+      <if test="fapiaoshuilv != null">
+        fapiaoshuilv = #{fapiaoshuilv,jdbcType=VARCHAR},
+      </if>
+      <if test="hetongzongjine != null">
+        hetongzongjine = #{hetongzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="yifukuanjine != null">
+        yifukuanjine = #{yifukuanjine,jdbcType=DOUBLE},
+      </if>
+      <if test="fukuanriqi != null">
+        fukuanriqi = #{fukuanriqi,jdbcType=DATE},
+      </if>
+      <if test="rukuzongjine != null">
+        rukuzongjine = #{rukuzongjine,jdbcType=DOUBLE},
+      </if>
+      <if test="zhuangtai != null">
+        zhuangtai = #{zhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="shenqingriqi != null">
+        shenqingriqi = #{shenqingriqi,jdbcType=DATE},
+      </if>
+      <if test="bumen != null">
+        bumen = #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="jingbanren != null">
+        jingbanren = #{jingbanren,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
