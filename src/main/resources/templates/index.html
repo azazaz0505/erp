@@ -43,7 +43,6 @@
     <link href="/css/settings.css" rel="stylesheet"></link><!--自定义样式设置-->
 	<link href="/lib/bootStrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet"></link><!--bootstrap样式-->
 	<link href="/lib/iconfont/iconfont.css" rel="stylesheet"></link><!--图标字体-->
-	
 
 </head>
 <body ng-controller="index">
@@ -123,7 +122,18 @@
     </aside>
     
     <main class="hx-paletteInner" ng-class="{'hx-paletteInner-t':reverse}">
-         <div ui-view=""></div>
+        <div ui-view="" >
+          
+  	                <!--  <div style="height:650px;display: table-cell;vertical-align:middle;text-align: center">
+					 -->
+					 <div>
+					 <div class="jumbotron" style="height:650px;display: flex;justify-content:center;
+					 	align-items:center;">
+						<h1>欢迎登陆!</h1>
+	  	             </div>
+	  	             </div>
+  		  
+  		</div>
     </main>
 </div>
 
