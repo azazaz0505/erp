@@ -177,8 +177,8 @@ li a:hover {
 /*右边窗体的样式，注意控制high，避免浏览器出现滚动条*/
 .hx-paletteInner {
 	position: absolute;
-	left: 208px;
-	top: 62px;
+	left: 200px;
+	top: 65px;
 	height: 850px;
 	width: 88%; /* 1593px */
 	
