@@ -1,11 +1,11 @@
-/*主要定义公共样式*/
+﻿/*主要定义公共样式*/
 body {
 	margin: 0;
 	font-family: "Microsoft YaHei";
 }
 
 .hx-mainBody {
-	position: relative; 
+	position: relative;  
 	/* width: 1800px; */
 	/* height: 700px; */
 	margin: 0 auto;
